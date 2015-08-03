@@ -1,0 +1,6 @@
+autoload -U compinit
+
+# don't check the completion dumpfile!
+compinit -C
+
+zstyle ':completion:*' menu select
