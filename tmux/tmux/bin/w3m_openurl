@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# TODO: get TAB_KEY and URL_KEY via config?!
+
+TAB_KEY="T";
+URL_KEY="o";
+
+URL=${1:?"Missing argument"}
+
+if tmux findw -N w3m; then
+   tmux send-keys ^c; # leave input-mode (or other modes as well)
+   tmux send-keys -R "$TAB_KEY$URL_KEY$URL";
+   tmux send-keys Enter;
+else
+   tmux neww "w3m '$URL'"
+fi

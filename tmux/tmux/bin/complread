@@ -1,0 +1,22 @@
+#!/bin/zsh
+
+autoload -U compinit
+compinit -C
+zstyle ':completion:*' menu select
+
+zmodload zsh/parameter
+autoload +X _complete
+functions[_original_complete]=$functions[_complete]
+_complete () {
+     unset 'compstate[vared]'
+          _original_complete "$@"
+}
+
+REPLY=""
+vared -p "$1: " REPLY
+
+if [[ -n "$REPLY" ]] ; then
+   echo "$REPLY"
+else
+   exit 1
+fi
