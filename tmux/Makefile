@@ -18,4 +18,6 @@ all:
 
 install:
 	cp .tmux.conf $(DEST)
-	cp -r tmux $(DEST)/.tmux
+	
+	mkdir -p $(DEST)/.tmux/bin
+	cp -r tmux/bin/* $(DEST)/.tmux/bin
