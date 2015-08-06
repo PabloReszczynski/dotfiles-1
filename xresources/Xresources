@@ -1,0 +1,35 @@
+! Scrollbar
+URxvt.scrollBar: false
+URxvt.saveLines: 0
+
+URxvt*.font: xft:DejaVu Sans Mono:pixelsize=12 
+
+! Colors
+URxvt.color0:   Black
+URxvt.color1:   Red3
+URxvt.color2:   #51A006
+URxvt.color3:   Yellow3
+URxvt.color4:   #3669AB
+URxvt.color5:   Magenta3
+URxvt.color6:   Cyan3
+URxvt.color7:   AntiqueWhite
+URxvt.color8:   Grey25
+URxvt.color9:   Red
+URxvt.color10:  #90EB36
+URxvt.color11:  Yellow
+URxvt.color12:  #77A6D8
+URxvt.color13:  Magenta
+URxvt.color14:  Cyan
+URxvt.color15:  White
+
+URxvt.background: Black
+URxvt.foreground: White
+
+! Cursor
+URxvt.cursorColor: Red
+URxvt.cursorBlink: true
+URxvt.cursorUnderline: true
+
+! Title+Icon
+URxvt.title: Terminal
+URxvt.iconFile: /usr/share/icons/Clarity/scalable/apps/terminal.svg
