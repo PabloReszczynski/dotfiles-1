@@ -1,0 +1,49 @@
+#!/bin/bash
+# using bin bash for syntax highlighting 
+
+# Right Side of my Keyboard [Order:UP-DOWN]
+"firefox"
+ XF86Favorites
+
+"firefox"
+ XF86HomePage
+
+"thunderbird"
+ XF86Mail
+
+"firefox"
+ XF86Search
+
+"nvidia-settings"
+ XF86Explorer
+
+"terminator -e bc"
+ XF86Calculator
+
+# Left Side of my Keyboard...
+# Upper Left Corner:
+"true"
+ XF86Tools
+
+# Music stuff
+"mpc toggle"
+ XF86AudioPlay
+
+"mpc prev"
+ XF86AudioPrev
+
+"mpc next"
+ XF86AudioNext
+
+"mpc stop"
+ XF86AudioStop
+
+# Audio Stuff
+"amixer -c 0 set Master 5+"
+ XF86AudioRaiseVolume
+
+"amixer -c 0 set Master 5-"
+ XF86AudioLowerVolume
+
+"amixer -c 0 set Master toggle"
+ XF86AudioMute
