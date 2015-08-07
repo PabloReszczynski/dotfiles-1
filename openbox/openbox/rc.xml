@@ -290,6 +290,12 @@
           <action name="BreakChroot"/>
         </keybind>
 
+        <!-- Toggle decorations -->
+        <keybind key="d">
+          <action name="ToggleDecorations" />
+          <action name="BreakChroot"/>
+        </keybind>
+
         <!-- Resize mode -->
         <keybind key="r" chroot="true">
           <keybind key="S-j">
@@ -487,6 +493,33 @@
       </keybind>
 
       <!-- Switch windows -->
+      <!-- VI-HJKL -->
+<!-- doesnt work as expected :(
+      <keybind key="s-h">
+        <action name="DirectionalCycleWindows">
+          <direction>west</direction>
+        </action>
+      </keybind>
+
+      <keybind key="s-j">
+        <action name="DirectionalCycleWindows">
+          <direction>south</direction>
+        </action>
+      </keybind>
+
+      <keybind key="s-k">
+        <action name="DirectionalCycleWindows">
+          <direction>north</direction>
+        </action>
+      </keybind>
+
+      <keybind key="s-l">
+        <action name="DirectionalCycleWindows">
+          <direction>east</direction>
+        </action>
+      </keybind>
+-->
+
       <keybind key="j">
         <action name="NextWindow">
           <linear>yes</linear>

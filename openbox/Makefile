@@ -10,15 +10,13 @@ PP_KC = \#>
 
 PP_MODULES =
 
-PP_DEFINES = \
-	-DLANGUAGE=$(LANGUAGE) \
-	-DSLOW_SYSTEM=$(SLOW_SYSTEM)
+PP_DEFINES = 
 # </filepp>
 
 all:
-	filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) openbox/rc.xml -o rc.xml
+#filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) openbox/rc.xml -o rc.xml
 
 install:
 	mkdir -p $(DEST)/.config/openbox
-	cp rc.xml $(DEST)/.config/openbox
+	cp openbox/rc.xml $(DEST)/.config/openbox
 	which openbox && openbox --reconfigure
