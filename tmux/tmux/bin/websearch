@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SEARCH="https://startpage.com/do/search?q="
+SEARCH="https://startpage.com/do/mypage.pl?prf=b4fb53c129e9e6988a3ebf45df3d8b34&q="
 
 ESCAPED=$(echo "$1" | sed 's/ /%20/g')
 
