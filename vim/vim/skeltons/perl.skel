@@ -2,6 +2,6 @@
 
 use strict;
 use warnings;
-use feature 'say':
-use Data::Dump wq(dump);
+use feature 'say';
+use Data::Dump qw(dump);
 
