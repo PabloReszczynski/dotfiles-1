@@ -1,19 +1,6 @@
-DEST = $(HOME)
+include ../makefiles/std.mk
 
-# <parameters>
-# </parameters>
+DEST_SUFFIX = .config/dunst
 
-# <filepp>
-PP_KC = \#>
-
-PP_MODULES =
-
-PP_DEFINES =
-# </filepp>
-
-all:
-#filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) zshrc -o .zshrc
-
-install:
-	mkdir -p $(DEST)/.config/dunst
-	cp dunstrc $(DEST)/.config/dunst
+#+defines
+#-defines
