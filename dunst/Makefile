@@ -1,6 +1,7 @@
 include ../makefiles/std.mk
 
-DEST_SUFFIX = .config/dunst
+ODIR_SUBDIR = .config/dunst
+RESULT_FILE_PREFIX =
 
 #+defines
 #-defines
