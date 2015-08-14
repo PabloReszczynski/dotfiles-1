@@ -1,19 +1,7 @@
-DEST = $(HOME)
+ODIR_SUBDIR = .mplayer
+NO_DOT_PREFIX = 1
 
-# <parameters>
-# </parameters>
+#+defines
+#-defines
 
-# <filepp>
-PP_KC = \#>
-
-PP_MODULES =
-
-PP_DEFINES =
-# </filepp>
-
-all:
-#filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) zshrc -o .zshrc
-
-install:
-	mkdir -p $(DEST)/.mplayer
-	cp config $(DEST)/.mplayer
+include ../makefiles/std.mk
