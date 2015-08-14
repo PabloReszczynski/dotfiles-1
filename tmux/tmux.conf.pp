@@ -87,3 +87,5 @@ bind 's' neww "bash -c 'C=$(~/.tmux/bin/read srch) && ~/.tmux/bin/websearch \"\$
 bind 'n' neww "bash -c 'C=$(~/.tmux/bin/complread cmd) && tmux neww \"\$C\"'"
 # run a command in background; discard stderr/stdout and always return true
 bind 'r' neww "bash -c 'C=$(~/.tmux/bin/complread cmd) && tmux run-shell -b \"\$C 2>/dev/null >/dev/null;:\"'"
+
+# vim: set filetype=tmux.conf:
