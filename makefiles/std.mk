@@ -87,13 +87,13 @@ build:: clean outdir defines $(INSTALL_DIRS) $(INSTALL_FILES) $(INSTALL_PP_FILES
 post_build:: FORCE
 
 $(INSTALL_DIRS): FORCE
-	@echo mkdir -p "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$@"
+	mkdir -p "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$@"
 
 $(INSTALL_FILES): FORCE
-	@echo cp "$@" "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$@"
+	cp "$@" "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$@"
 
 $(INSTALL_PP_FILES): FORCE
-	@echo $(PP) $(PP_DEFINES) $(PP_MODULES) -kc "$(PP_KC)" "$@" -o "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$(subst .pp,,$@)"
+	$(PP) $(PP_DEFINES) $(PP_MODULES) -kc "$(PP_KC)" "$@" -o "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$(subst .pp,,$@)"
 
 install:
 	(\
