@@ -1,18 +1,4 @@
-DEST = $(HOME)
+#+defines
+#-defines
 
-# <parameters>
-# </parameters>
-
-# <filepp>
-PP_KC = \#>
-
-PP_MODULES =
-
-PP_DEFINES =
-# </filepp>
-
-all:
-	filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) Xmodmap -o .Xmodmap
-
-install:
-	cp .Xmodmap $(DEST)
+include ../makefiles/std.mk
