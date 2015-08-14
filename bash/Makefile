@@ -1,4 +1,4 @@
-include ../makefiles/std.mk
-
 #+defines
 #-defines
+
+include ../makefiles/std.mk
