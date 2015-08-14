@@ -1,21 +1,9 @@
-DEST = $(HOME)
-
-# <parameters>
-SLOW_SYSTEM = 0
-# </parameters>
-
-# <filepp>
 PP_KC = \">
 
-PP_MODULES =
+#+defines
+SLOW_SYSTEM = 0
+#-defines
 
-PP_DEFINES = \
-	-DSLOW_SYSTEM=$(SLOW_SYSTEM)
-# </filepp>
+INSTALL_DIRS = vim/view
 
-all:
-	filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) vimrc -o .vimrc
-
-install:
-	cp .vimrc $(DEST)
-	cp -r vim $(DEST)/.vim
+include ../makefiles/std.mk
