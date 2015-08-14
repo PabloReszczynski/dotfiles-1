@@ -1,26 +1,10 @@
-DEST = $(HOME)
-
-# <parameters>
+#+defines
 COLOR = blue
-# </parameters>
+#-defines
 
-# <filepp>
-PP_KC = \#>
+ODIR_SUBDIR = .ncmpcpp
+NO_DOT_PREFIX = 1
 
-PP_MODULES =
+IGNORE_FILES = makeDummyBindings.sh
 
-PP_DEFINES = \
-	-DCOLOR=$(COLOR)
-# </filepp>
-
-all:
-	filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) config.pp -o config
-	filepp -kc '$(PP_KC)' $(PP_MODULES) $(PP_DEFINES) bindings.pp -o bindings
-
-	@echo "Adding dummy bindings"
-	./makeDummyBindings.sh >> bindings
-
-install:
-	mkdir -p $(DEST)/.ncmpcpp
-	cp config $(DEST)/.ncmpcpp
-	cp bindings $(DEST)/.ncmpcpp
+include ../makefiles/std.mk
