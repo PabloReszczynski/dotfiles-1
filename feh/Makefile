@@ -1,7 +1,7 @@
-include ../makefiles/std.mk
-
 ODIR_SUBDIR = .config/feh
-RESULT_FILE_PREFIX =
+NO_DOT_PREFIX = 1
 
 #+defines
 #-defines
+
+include ../makefiles/std.mk
