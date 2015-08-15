@@ -1,4 +1,4 @@
-#foreach APP xterm, URxvt
+#> foreach APP xterm,URxvt
 
 ! Scrollbar
 APP.scrollBar: false
@@ -36,4 +36,4 @@ APP.cursorUnderline: true
 APP.title: Terminal
 APP.iconFile: /usr/share/icons/Clarity/scalable/apps/terminal.svg
 
-#endforeach
+#> endforeach
