@@ -37,7 +37,7 @@ endef
 ###
 
 # we NEVER want these files
-FORCE_IGNORE := $(MAKEFILE_LIST) $(ODIR)
+FORCE_IGNORE := $(MAKEFILE_LIST) $(ODIR) $(ODIR)/%
 
 # auto generate file list
 # if neither INSTALL_FILES nor INSTALL_PP_FILES given
