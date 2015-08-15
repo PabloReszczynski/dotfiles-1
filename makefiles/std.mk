@@ -23,6 +23,12 @@ endif
 PP ?= filepp
 PP_KC ?= \#>
 PP_MODULES ?=
+PP_INCLUDE ?=
+
+###
+# create PP_INCLUDE
+###
+PP_INCLUDE := $(foreach I, $(PP_INCLUDE), -I"$I")
 
 ###
 # collect the DEFINES in Makefile, create a list of -Ddefines
@@ -95,7 +101,7 @@ $(INSTALL_FILES): FORCE
 	cp "$@" "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$@"
 
 $(INSTALL_PP_FILES): FORCE
-	$(PP) $(PP_DEFINES) $(PP_MODULES) -kc "$(PP_KC)" "$@" -o "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$(subst .pp,,$@)"
+	$(PP) $(PP_DEFINES) $(PP_INCLUDE) $(PP_MODULES) -kc "$(PP_KC)" "$@" -o "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$(subst .pp,,$@)"
 
 install:
 	(\
