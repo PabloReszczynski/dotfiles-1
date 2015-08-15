@@ -1,39 +1,27 @@
-#> foreach APP xterm,URxvt
+#> include COLOR_THEME
+
+#> foreach TERM xterm,URxvt
+
+TERM*utf8:      2
+TERM*eightBitInput: true
+TERM*VT100.geomentry: 120x50
 
 ! Scrollbar
-APP.scrollBar: false
-APP.saveLines: 0
+TERM*scrollBar: false
+TERM*saveLines: 0
 
-APP*.font: xft:DejaVu Sans Mono:pixelsize=12 
+!TERM*.font:    xft:DejaVu Sans Mono:pixelsize=12 
+TERM*faceName:  Terminus:style=Regular:size=14
 
-! Colors
-APP.color0:   Black
-APP.color1:   Red3
-APP.color2:   #51A006
-APP.color3:   Yellow3
-APP.color4:   #3669AB
-APP.color5:   Magenta3
-APP.color6:   Cyan3
-APP.color7:   AntiqueWhite
-APP.color8:   Grey25
-APP.color9:   Red
-APP.color10:  #90EB36
-APP.color11:  Yellow
-APP.color12:  #77A6D8
-APP.color13:  Magenta
-APP.color14:  Cyan
-APP.color15:  White
-
-APP.background: Black
-APP.foreground: White
+! Background/Foreground
+TERM*background: rgb:00/00/00
+TERM*foreground: rgb:7f/7f/7f
 
 ! Cursor
-APP.cursorColor: Red
-APP.cursorBlink: true
-APP.cursorUnderline: true
+TERM*cursorColor: Red
+TERM*cursorBlink: true
 
-! Title+Icon
-APP.title: Terminal
-APP.iconFile: /usr/share/icons/Clarity/scalable/apps/terminal.svg
+! Title
+TERM*title: Terminal
 
 #> endforeach
