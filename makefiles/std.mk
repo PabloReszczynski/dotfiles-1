@@ -86,6 +86,8 @@ build:: clean outdir defines $(INSTALL_DIRS) $(INSTALL_FILES) $(INSTALL_PP_FILES
 
 post_build:: FORCE
 
+post_install:: FORCE
+
 $(INSTALL_DIRS): FORCE
 	mkdir -p "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$@"
 
@@ -95,7 +97,7 @@ $(INSTALL_FILES): FORCE
 $(INSTALL_PP_FILES): FORCE
 	$(PP) $(PP_DEFINES) $(PP_MODULES) -kc "$(PP_KC)" "$@" -o "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$(subst .pp,,$@)"
 
-install:
+install: post_install
 	(\
 	 cd "$(ODIR)"; \
 	 find . -mindepth 1 -type d -exec mkdir -p "$(DEST)/{}" \;; \
