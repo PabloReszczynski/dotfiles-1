@@ -6,7 +6,7 @@ PASSWORD = insert_pw_here
 PORT = 5222
 #-defines
 
-PP_MODULES = -M ../filepp_modules -m ord.pm -m maths.pm
+PP_MODULES = -m maths.pm
 
 IGNORE_FILES = extractDefaultKeymap.sh mcabber/keymap mcabber/theme
 INSTALL_DIRS = mcabber/history mcabber/otr

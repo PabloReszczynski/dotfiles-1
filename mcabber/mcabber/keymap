@@ -1,11 +1,8 @@
-#> ifndef ord
-#>  error "Macro ord() not found"
-#> endif
-
 #> ifndef sub
 #>  error "Macro sub() not found"
 #> endif
 
+#> function ord CORE::ord
 #> define KEY(k) ord(k)
 #> define ALT(k) M ## ord(k)
 #> define CTRL(k) sub(ord(k), 96)
