@@ -97,12 +97,14 @@ $(INSTALL_FILES): FORCE
 $(INSTALL_PP_FILES): FORCE
 	$(PP) $(PP_DEFINES) $(PP_MODULES) -kc "$(PP_KC)" "$@" -o "$(ODIR)/$(ODIR_SUBDIR)/$(RESULT_FILE_PREFIX)$(subst .pp,,$@)"
 
-install: post_install
+install:
 	(\
 	 cd "$(ODIR)"; \
 	 find . -mindepth 1 -type d -exec mkdir -p "$(DEST)/{}" \;; \
 	 find . -mindepth 1 -type f -exec cp {} "$(DEST)/{}" \; \
 	)
+
+	$(MAKE) post_install
 
 defines:
 	$(call setup_defines)
