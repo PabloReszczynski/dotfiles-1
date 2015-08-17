@@ -172,11 +172,15 @@ def_key "j"
 #
 def_key "page_up"
   page_up
+def_key "ctrl_u"
+   page_up
 def_key "K"
   page_up
 #
 def_key "page_down"
   page_down
+def_key "ctrl_d"
+   page_down
 def_key "J"
   page_down
 #
