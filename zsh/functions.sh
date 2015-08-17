@@ -19,3 +19,7 @@ uri_unescape() {
 escapeshellarg() {
    printf '%q' "$@"
 }
+
+vimake() {
+   vim +"set noexpandtab" "${@:-Makefile}"
+}

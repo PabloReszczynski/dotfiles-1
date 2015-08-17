@@ -7,10 +7,10 @@ build::
 
 post_build:: 
 	@echo "Removing comments"
-	sed -i '/^#/d' .zshrc
+	sed -i '/^#/d' out/.zshrc
 	
 	@echo "Removing empty lines"
-	sed -i '/^$$/d' .zshrc
+	sed -i '/^$$/d' out/.zshrc
 
 INSTALL_PP_FILES = zshrc
 

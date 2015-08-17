@@ -37,7 +37,6 @@ alias -- -="$CD_COMMAND"
 
 # vi aliases ##################################################################
 alias vi='vim'
-alias vimake='vim +"set noexpandtab" Makefile'
 
 # misc aliases ################################################################
 alias less='less -iM'
