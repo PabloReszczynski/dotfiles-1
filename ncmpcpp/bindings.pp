@@ -530,3 +530,5 @@ def_key "ctrl_l"
 def_key "q"
   quit
 #
+def_key "y"
+   run_external_command "mpd_music_upload"
