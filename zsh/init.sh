@@ -5,6 +5,8 @@ date
 echo
 
 #> if "SLOW_SYSTEM" == 0
+#> if "USE_FORTUNE" == 1
 fortune 2>/dev/null || :
 echo
+#> endif
 #> endif

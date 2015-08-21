@@ -1,6 +1,8 @@
 #+defines
 LANGUAGE = en_US.UTF-8
 SLOW_SYSTEM = 0
+PROMPT_STYLE = MOSTLY_RIGHT
+USE_FORTUNE = 0
 #-defines
 
 build::

@@ -1,8 +1,12 @@
-#PROMPT="\
-#%F{white}%K{black} %n %f%k\
-#%F{white}%K{blue} %m %f%k\
-# %3~ \
-#%(#.%F{red}#.%F{green}$)%f "
+#> if "PROMPT_STYLE" eq "PROMPT_1"
+
+PROMPT="\
+%F{white}%K{black} %n %f%k\
+%F{white}%K{blue} %m %f%k\
+ %3~ \
+%(#.%F{red}#.%F{green}$)%f "
+
+#> elif "PROMPT_STYLE" eq "PROMPT_2"
 
 PROMPT="\
 %F{white}%K{blue} %n %F{blue}%K{black}%f%k\
@@ -14,6 +18,16 @@ RPROMPT="\
  [%*]\
  [%(?.%F{green}.%F{red})%?%k%f]\
  [%l]"
+
+#> elif "PROMPT_STYLE" eq "MOSTLY_RIGHT"
+
+PROMPT=' %3~ > '                                                        
+RPROMPT='%F{white}%U%n@%m%u%f [%*] [%(?.%F{green}.%F{red})%?%k%f] [%l]'
+
+#> else
+#> error "Unknown parameter for PROMPT_STYLE"
+#> endif
+
 
 TITLE_PROMPT="%n@%m %~ %(#.#.$)"
 
