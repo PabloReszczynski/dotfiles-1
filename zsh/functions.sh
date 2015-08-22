@@ -38,3 +38,9 @@ hdplayer()
       -framedrop \
       "$@"
 }
+
+getip()
+{
+   curl 'http://ifconfig.me/ip'
+}
+
