@@ -23,3 +23,18 @@ escapeshellarg() {
 vimake() {
    vim +"set noexpandtab" "${@:-Makefile}"
 }
+
+mysql_date()
+{
+   date "+%Y-%m-%d %H:%M:%S" "$@"
+}
+
+hdplayer()
+{
+   nice -n 0 -- \
+   mplayer \
+      -vfm ffmpeg \
+      -lavdopts lowres=0:fast:skiploopfilter=all:threads=8 \
+      -framedrop \
+      "$@"
+}
