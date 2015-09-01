@@ -1,2 +1,2 @@
-XDG_DESKTOP_DIR="$HOME/"
-XDG_DOWNLOAD_DIR="/tmp/$HOME/downloads/"
+XDG_DESKTOP_DIR="/tmp"
+XDG_DOWNLOAD_DIR="/tmp/downloads"
