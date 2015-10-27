@@ -51,10 +51,22 @@ lndir()
       return 1
    fi
 
-   if [[ "$1" == "-p" ]]; then
-      shift;
-      mkdir -p "$2";
+   if (( $# < 2 )); then
+      echo "Missing destination";
+      return 1;
    fi
 
-   command lndir "$@"
+   dest=${@[$#]}
+   set -- ${@:1:-1}
+
+   local file;
+   for file; do
+      basename="$(basename "$file")";
+      if ! mkdir "$dest/$basename"; then
+         echo "Error"
+         return 2;
+      fi
+
+      command lndir "$file" "$dest/$basename"
+   done
 }
