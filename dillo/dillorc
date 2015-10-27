@@ -163,14 +163,14 @@ search_url="dd DuckDuckGo (https) https://duckduckgo.com/lite/?kp=-1&q=%s"
 search_url="w Wikipedia http://www.wikipedia.org/w/index.php?search=%s&go=Go"
 search_url="d Free Dictionary http://www.thefreedictionary.com/%s"
 search_url="s Startpage (https) https://www.startpage.com/do/search?query=%s"
-search_url="g Google http://www.google.com/search?ie=UTF-8&oe=UTF-8&q=%s"
+search_url="g Google http://www.google.de/search?ie=UTF-8&oe=UTF-8&q=%s"
 
 # If set, dillo will ask web servers to send pages in this language.
 # This setting does NOT change dillo's user interface.
 # Format explained: www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.4
 # Language-REGION values: www.iana.org/assignments/language-subtag-registry
 # (by default, no Accept-Language header is sent)
-# http_language="de"
+http_language="de"
 # http_language="pt-BR"
 # http_language="en-US,en;q=0.5"
 
