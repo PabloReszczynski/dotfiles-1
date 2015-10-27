@@ -431,8 +431,8 @@ def_key "l"
 #def_key "V"
 #  remove_selection
 #
-#def_key "B"
-#  select_album
+def_key "A"
+  select_album
 #
 #def_key "a"
 #  add_selected_items
