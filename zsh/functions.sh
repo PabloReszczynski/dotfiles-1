@@ -51,11 +51,9 @@ lndir()
       return 1
    fi
 
-   if (( $# > 2 )); then
-      if [[ "$1" == "-p" ]]; then
-         mkdir -p "$2";
-         shift 2;
-      fi
+   if [[ "$1" == "-p" ]]; then
+      shift;
+      mkdir -p "$2";
    fi
 
    command lndir "$@"
