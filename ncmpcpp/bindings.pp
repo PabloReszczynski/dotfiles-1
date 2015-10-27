@@ -200,8 +200,8 @@ def_key "space"
 def_key "enter"
   press_enter
 #
-#def_key "delete"
-#  delete_playlist_items
+def_key "D"
+  delete_playlist_items
 #
 #def_key "delete"
 #  delete_browser_items
