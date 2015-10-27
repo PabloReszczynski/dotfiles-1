@@ -44,3 +44,19 @@ getip()
    curl 'http://ifconfig.me/ip'
 }
 
+lndir()
+{
+   if ! which lndir &>/dev/null; then
+      echo "No 'lndir' executable found"
+      return 1
+   fi
+
+   if (( $# > 2 )); then
+      if [[ "$1" == "-p" ]]; then
+         mkdir -p "$2";
+         shift 2;
+      fi
+   fi
+
+   command lndir "$@"
+}
