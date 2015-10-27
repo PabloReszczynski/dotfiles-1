@@ -57,6 +57,12 @@ bind -r 'M-j' resize-pane -D
 bind -r 'M-k' resize-pane -U
 bind -r 'M-l' resize-pane -R
 
+# pane selection
+bind -r 'H' select-pane -L
+bind -r 'J' select-pane -D
+bind -r 'K' select-pane -U
+bind -r 'L' select-pane -R
+
 # window selection
 bind '`' select-window -t :0
 bind '1' select-window -t :1
