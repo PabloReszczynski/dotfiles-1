@@ -62,9 +62,9 @@ disable_secret_security_check 0
 passwd_file ~/.w3m/passwd
 use_lessopen 0
 bgextviewer 1
-extbrowser3 _w3m_external_browser
-extbrowser2 _w3m_external_browser
-extbrowser _w3m_external_browser
+extbrowser3 ~/.w3m/w3m_external_browser
+extbrowser2 ~/.w3m/w3m_external_browser
+extbrowser ~/.w3m/w3m_external_browser
 mailer /usr/bin/mail
 mailto_options 1
 editor /usr/bin/vim
