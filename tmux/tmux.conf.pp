@@ -89,10 +89,9 @@ bind 'k' next-window
 
 # window creation and command execution
 bind 'c' new-window
-bind 'o' neww "bash -c 'C=$(~/.tmux/bin/read url) && ~/.tmux/bin/w3m_openurl \"\$C\"'"
-bind 's' neww "bash -c 'C=$(~/.tmux/bin/read srch) && ~/.tmux/bin/websearch \"\$C\"'"
-bind 'n' neww "bash -c 'C=$(~/.tmux/bin/complread cmd) && tmux neww \"\$C\"'"
-# run a command in background; discard stderr/stdout and always return true
-bind 'r' neww "bash -c 'C=$(~/.tmux/bin/complread cmd) && tmux run-shell -b \"\$C 2>/dev/null >/dev/null;:\"'"
+bind 'o' neww '~/.tmux/bin/complread -c "$HOME/.tmux/bin/w3m_openurl" -P url'
+bind 's' neww '~/.tmux/bin/complread -c "$HOME/.tmux/bin/websearch" -P srch'
+bind 'n' neww "~/.tmux/bin/complread -s -P cmd"
+bind 'r' neww "~/.tmux/bin/complread -b -P cmd"
 
 # vim: set filetype=tmux.conf:
