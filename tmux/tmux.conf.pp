@@ -78,6 +78,7 @@ bind '0' select-window -t :10
 bind '-' select-window -t :11
 bind '=' select-window -t :12
 bind 'BSpace' select-window -t :13
+bind 'Home' select-window -t :14
 
 bind '/' command-prompt "find-window -TN %%"
 bind 'R' move-window -r
