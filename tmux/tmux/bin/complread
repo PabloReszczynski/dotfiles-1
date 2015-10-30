@@ -18,7 +18,7 @@ while getopts ":H:p:P:sbc:" opt; do
       ;;
 
       P) PROMPT="$OPTARG: "
-         HISTFILE="$HOME/.tmux/$OPTARG"
+         HISTFILE="$HOME/.tmux/${OPTARG}_history"
       ;;
 
       s) SHELL_EXEC=1

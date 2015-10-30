@@ -89,8 +89,8 @@ bind 'k' next-window
 
 # window creation and command execution
 bind 'c' new-window
-bind 'o' neww '~/.tmux/bin/complread -c "$HOME/.tmux/bin/w3m_openurl" -P url'
-bind 's' neww '~/.tmux/bin/complread -c "$HOME/.tmux/bin/websearch" -P srch'
+bind 'o' neww '~/.tmux/bin/complread -s -c "$HOME/.tmux/bin/w3m_openurl" -P url'
+bind 's' neww '~/.tmux/bin/complread -s -c "$HOME/.tmux/bin/websearch" -P srch'
 bind 'n' neww "~/.tmux/bin/complread -s -P cmd"
 bind 'r' neww "~/.tmux/bin/complread -b -P cmd"
 
