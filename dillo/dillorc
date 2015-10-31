@@ -13,6 +13,7 @@
 # Set the desired initial browser size
 # geometry=650x545+0+20
 #geometry=780x580
+geometry=900x900+20+20
 
 # Change this (and the following option) if you want to have text-only browsing
 # from the start. (While browsing, this can be changed from the tools/settings
@@ -69,9 +70,11 @@
 
 # Maximum font size in pixels
 #font_max_size=100
+font_max_size=30
 
 # Minimum font size in pixels
 #font_min_size=6
+font_min_size=16
 
 # Show tooltip popups for HTML title attributes
 #show_tooltip=YES
@@ -151,7 +154,6 @@ start_page="http://blog.fefe.de"
 # Set the home location
 # home="file:/home/jcid/HomePage/Home.html"
 #home="http://www.dillo.org/"
-home="http://blog.fefe.de"
 
 # Set the URLs used by the web search dialog.
 # "%s" is replaced with the search keywords separated by '+'.
@@ -202,6 +204,7 @@ http_language="de"
 # host  : Send the requested URI's hostname.
 # path  : Send the requested URI's host and path.
 #http_referer=host
+http_referer=none
 
 # Set the HTTP User-Agent header.
 # This can be useful for privacy and for working around servers who think
@@ -252,6 +255,7 @@ http_language="de"
 #theme=none
 # theme=gtk+
 # theme=plastic
+theme=gtk+
 
 # UI colors
 # The first four colors map to concepts in the underlying FLTK toolkit. Note
@@ -283,14 +287,14 @@ http_language="de"
 #
 # Gray theme (traditional)
 #
-ui_fg_color=black
-ui_main_bg_color=#c6c6c6
-ui_text_bg_color=#bfdabf
-ui_selection_color=#191970
-ui_button_highlight_color=#a9a9a9
-ui_tab_active_bg_color=#87aca7
-ui_tab_active_fg_color=black
-ui_tab_bg_color=#b7beb7
+#ui_fg_color=black
+#ui_main_bg_color=#c6c6c6
+#ui_text_bg_color=#bfdabf
+#ui_selection_color=#191970
+#ui_button_highlight_color=#a9a9a9
+#ui_tab_active_bg_color=#87aca7
+#ui_tab_active_fg_color=black
+#ui_tab_bg_color=#b7beb7
 
 #
 # Earthly theme:
@@ -323,25 +327,25 @@ ui_tab_bg_color=#b7beb7
 # panel_size=tiny
 # panel_size=small
 #panel_size=medium
+panel_size=small
 
 #small_icons=NO
 
 # Here you can choose to hide some widgets of the dillo panel...
 #show_back=YES
 #show_forw=YES
-#show_home=YES
+show_home=NO
 #show_reload=YES
 #show_save=YES
-#show_stop=YES
+show_stop=NO
 #show_bookmarks=YES
 #show_tools=YES
 #show_filemenu=YES
-#show_clear_url=YES
-#show_url=YES
-#show_search=YES
-#show_help=YES
+#show_clear_url=NO
+show_url=YES
+show_search=NO
 show_help=NO
-#show_progress_box=YES
+show_progress_box=NO
 
 # Show tooltip popups for the UI
 #show_ui_tooltip=YES
@@ -371,6 +375,7 @@ show_help=NO
 # Focus follows new Tabs.
 # You can hold SHIFT to temporarily revert this behaviour.
 #focus_new_tab=YES
+focus_new_tab=NO
 
 # Ask before quitting Dillo with more than one window or tab open.
 #show_quit_dialog=YES
@@ -384,6 +389,7 @@ show_help=NO
 # Generic messages (mainly for debugging specific parts)
 # Change this to disable them.
 #show_msg=YES
+show_msg=NO
 
 
 #-------------------------------------------------------------------------
