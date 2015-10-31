@@ -39,3 +39,6 @@ export EDITOR=vim
 
 # Yaourt: build PKGBUILDS on arm devices ######################################
 export MAKEPKG=makepkg_pre.sh
+
+# rlwrap: here are the histfiles stored #######################################
+export RLWRAP_HOME=~/.rlwrap
