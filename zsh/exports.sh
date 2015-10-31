@@ -36,3 +36,6 @@ fi
 
 # Set default editor ##########################################################
 export EDITOR=vim
+
+# Yaourt: build PKGBUILDS on arm devices ######################################
+export MAKEPKG=makepkg_pre.sh
