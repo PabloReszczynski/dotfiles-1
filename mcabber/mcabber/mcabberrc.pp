@@ -11,7 +11,7 @@ set password = PASSWORD
 set nickname = NICK
 set port = PORT
 set disable_random_ressource = 1
-set ressource = mcabber
+set ressource = mcabber-HOST
 set priority = 42
 set priority_away = 23
 set tls = 1
@@ -44,6 +44,7 @@ set url_regex = "(((http|ftp)s?://)|www[.][-a-z0-9.]+|(mailto:|news:))(%[0-9A-F]
 # Modules ######################################################################
 #module load tune
 #module load mpd
+module load urlregex
 
 # History ######################################################################
 set logging = 1
