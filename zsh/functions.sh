@@ -75,3 +75,8 @@ md()
 {
    mkdir -p "$1" && cd "$1"
 }
+
+freetop()
+{
+   ps -e -o pid,vsz,comm= | sort -n -k 2
+}
