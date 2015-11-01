@@ -59,6 +59,8 @@ has() {
    has synergyc && run synergyc 10.0.0.10
 #> endif
 
+   has dunst && run dunst
+
 } &
 
 exec $WindowManager
