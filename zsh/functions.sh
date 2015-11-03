@@ -39,10 +39,10 @@ hdplayer()
       "$@"
 }
 
-getip()
-{
-   curl 'http://ifconfig.me/ip'
-}
+# getip()
+# {
+#    curl 'http://ifconfig.me/ip'
+# }
 
 lndir()
 {
