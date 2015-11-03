@@ -51,7 +51,7 @@
 ##      picked by ncmpcpp upon next call to readKey function.
 ##      Accepted values: mouse, up, down, page_up, page_down,
 ##      home, end, space, enter, insert, delete, left, right,
-##      tab, shift_tab, ctrl_a, ctrl_b, ..., ctrl_z, f1, f2,
+##      tab, shift_tab, ctrl-a, ctrl-b, ..., ctrl-z, f1, f2,
 ##      ..., f12, backspace, backspace_2.
 ##
 ##    - push_characters "string" - pushes given string into
@@ -172,14 +172,14 @@ def_key "j"
 #
 def_key "page_up"
   page_up
-def_key "ctrl_u"
+def_key "ctrl-u"
    page_up
 def_key "K"
   page_up
 #
 def_key "page_down"
   page_down
-def_key "ctrl_d"
+def_key "ctrl-d"
    page_down
 def_key "J"
   page_down
@@ -195,7 +195,9 @@ def_key "G"
   move_end
 #
 def_key "space"
-  press_space
+  add_item_to_playlist
+def_key "space"
+  toggle_visualization_type
 #
 def_key "enter"
   press_enter
@@ -296,10 +298,10 @@ def_key ">"
 def_key "<"
   previous
 #
-#def_key "ctrl_h"
+#def_key "ctrl-h"
 #  jump_to_parent_directory
 #
-#def_key "ctrl_h"
+#def_key "ctrl-h"
 #  replay_song
 #
 #def_key "backspace"
@@ -365,13 +367,13 @@ def_key "#"
 #def_key "u"
 #  update_database
 #
-#def_key "ctrl_v"
+#def_key "ctrl-v"
 #  sort_playlist
 #
-#def_key "ctrl_r"
+#def_key "ctrl-r"
 #  reverse_playlist
 #
-#def_key "ctrl_f"
+#def_key "ctrl-f"
 #  apply_filter
 #
 def_key "/"
@@ -416,8 +418,8 @@ def_key "N"
 def_key "i"
   show_song_info
 #
-#def_key "I"
-#  show_artist_info
+def_key "I"
+  show_artist_info
 #
 def_key "g"
   jump_to_position_in_song
@@ -488,8 +490,8 @@ def_key "o"
 #def_key "~"
 #  jump_to_media_library
 #
-#def_key "E"
-#  jump_to_tag_editor
+def_key "E"
+  jump_to_tag_editor
 #
 #def_key "U"
 #  toggle_playing_song_centering
@@ -509,7 +511,7 @@ def_key "L"
 #def_key "F"
 #  toggle_fetching_lyrics_in_background
 #
-def_key "ctrl_l"
+def_key "ctrl-l"
   toggle_screen_lock
 #
 #def_key "`"
@@ -524,7 +526,7 @@ def_key "ctrl_l"
 #def_key "`"
 #  add_random_items
 #
-#def_key "ctrl_p"
+#def_key "ctrl-p"
 #  set_selected_items_priority
 #
 def_key "q"
