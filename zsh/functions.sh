@@ -80,3 +80,13 @@ freetop()
 {
    ps -e -o pid,vsz,comm= | sort -n -k 2
 }
+
+gclone()
+{
+   git clone gitolite@braph.mooo.com:$1
+}
+
+gcommit()
+{
+   git add "$1" && git commit -m "$1"
+}
