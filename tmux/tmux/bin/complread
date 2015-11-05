@@ -1,6 +1,6 @@
 #!/bin/zsh --login
 
-HISTFILE=/dev/null
+#HISTFILE=/dev/null
 PROMPT=""
 SHELL_EXEC=0
 BACKGROUND=0

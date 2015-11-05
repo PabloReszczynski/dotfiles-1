@@ -89,9 +89,9 @@ bind 'k' next-window
 
 # window creation and command execution
 bind 'c' new-window
-bind 'o' neww '~/.tmux/bin/complread -s -c "$HOME/.tmux/bin/w3m_openurl" -P url'
-bind 's' neww '~/.tmux/bin/complread -s -c "$HOME/.tmux/bin/websearch" -P srch'
-bind 'n' neww "~/.tmux/bin/complread -s -P cmd"
-bind 'r' neww "~/.tmux/bin/complread -b -P cmd"
+bind 'o' neww 'runner -H ~/.tmux/url_hist  -C -t "$HOME/.tmux/bin/w3m_openurl" -P url'
+bind 's' neww 'runner -H ~/.tmux/srch_hist -C -t "$HOME/.tmux/bin/websearch" -P srch'
+bind 'n' neww "runner -H ~/.tmux/cmd_hist -P cmd"
+bind 'r' neww "runner -H ~/.tmux/cmd_hist -b -q -P cmd"
 
 # vim: set filetype=tmux.conf:
