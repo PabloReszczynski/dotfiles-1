@@ -45,6 +45,9 @@ has() {
       terminal_init="bash"
    fi
 
+   # TODO
+   # evilvte -g 1280x1024
+
    if has evilvte; then
       evilvte -e $terminal_init
    elif has xterm; then
