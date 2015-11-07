@@ -186,7 +186,7 @@ http_language="de"
 #          http://www.gnu.org/software/wget/manual/html_node/Proxies.html
 # http_proxy="http://localhost:8080/"
 #(by default, no proxy is used)
-http_proxy="http://localhost:8118"
+http_proxy="http://10.0.0.10:8118"
 
 # If you need to provide a  user/password pair for the proxy,
 # set the proxy user name here and Dillo will ask for the password later.
