@@ -64,6 +64,7 @@ bind -r 'K' select-pane -U
 bind -r 'L' select-pane -R
 
 # window selection
+bind '"' choose-window
 bind '`' run -b '~/.tmux/bin/approx_window_switch.pl 0'
 bind '1' run -b '~/.tmux/bin/approx_window_switch.pl 1'
 bind '2' run -b '~/.tmux/bin/approx_window_switch.pl 2'
@@ -85,8 +86,8 @@ bind '/' command-prompt "find-window -TN %%"
 bind 'R' move-window -r
 
 bind '^a' last-window
-bind 'j' previous-window
-bind 'k' next-window
+bind 'j'  previous-window
+bind 'k'  next-window
 
 # window creation and command execution
 bind 'c' new-window
