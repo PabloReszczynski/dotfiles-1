@@ -64,21 +64,22 @@ bind -r 'K' select-pane -U
 bind -r 'L' select-pane -R
 
 # window selection
-bind '`' select-window -t :0
-bind '1' select-window -t :1
-bind '2' select-window -t :2
-bind '3' select-window -t :3
-bind '4' select-window -t :4
-bind '5' select-window -t :5
-bind '6' select-window -t :6
-bind '7' select-window -t :7
-bind '8' select-window -t :8
-bind '9' select-window -t :9
-bind '0' select-window -t :10
-bind '-' select-window -t :11
-bind '=' select-window -t :12
-bind 'BSpace' select-window -t :13
-bind 'Home' select-window -t :14
+bind '`' run -b '~/.tmux/bin/approx_window_switch.pl 0'
+bind '1' run -b '~/.tmux/bin/approx_window_switch.pl 1'
+bind '2' run -b '~/.tmux/bin/approx_window_switch.pl 2'
+bind '3' run -b '~/.tmux/bin/approx_window_switch.pl 3'
+bind '4' run -b '~/.tmux/bin/approx_window_switch.pl 4'
+bind '5' run -b '~/.tmux/bin/approx_window_switch.pl 5'
+bind '6' run -b '~/.tmux/bin/approx_window_switch.pl 6'
+bind '7' run -b '~/.tmux/bin/approx_window_switch.pl 7'
+bind '8' run -b '~/.tmux/bin/approx_window_switch.pl 8'
+bind '9' run -b '~/.tmux/bin/approx_window_switch.pl 9'
+bind '0' run -b '~/.tmux/bin/approx_window_switch.pl 10'
+bind '-' run -b '~/.tmux/bin/approx_window_switch.pl 11'
+bind '=' run -b '~/.tmux/bin/approx_window_switch.pl 12'
+bind 'BSpace' run -b '~/.tmux/bin/approx_window_switch.pl 13'
+bind 'Home'   run -b '~/.tmux/bin/approx_window_switch.pl 14'
+bind 'End'    run -b '~/.tmux/bin/approx_window_switch.pl 15'
 
 bind '/' command-prompt "find-window -TN %%"
 bind 'R' move-window -r
