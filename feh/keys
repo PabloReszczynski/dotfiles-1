@@ -24,7 +24,7 @@ toggle_menu m
 
 next_img j
 prev_img k
-jump_random ?
+jump_random question
 
 toggle_pointer
 
