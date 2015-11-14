@@ -51,7 +51,7 @@
 ##      picked by ncmpcpp upon next call to readKey function.
 ##      Accepted values: mouse, up, down, page_up, page_down,
 ##      home, end, space, enter, insert, delete, left, right,
-##      tab, shift_tab, ctrl-a, ctrl-b, ..., ctrl-z, f1, f2,
+##      tab, shift-tab, ctrl-a, ctrl-b, ..., ctrl-z, f1, f2,
 ##      ..., f12, backspace, backspace_2.
 ##
 ##    - push_characters "string" - pushes given string into
@@ -200,7 +200,16 @@ def_key "space"
   toggle_visualization_type
 #
 def_key "enter"
-  press_enter
+  enter_directory
+#
+def_key "enter"
+  toggle_output
+#
+def_key "enter"
+  run_action
+#
+def_key "enter"
+  play_item
 #
 def_key "D"
   delete_playlist_items
@@ -241,7 +250,7 @@ def_key ":"
 def_key "tab"
   next_screen
 #
-def_key "shift_tab"
+def_key "shift-tab"
   previous_screen
 #
 def_key "f1"
