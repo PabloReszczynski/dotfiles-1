@@ -186,7 +186,7 @@ http_language="de"
 #          http://www.gnu.org/software/wget/manual/html_node/Proxies.html
 # http_proxy="http://localhost:8080/"
 #(by default, no proxy is used)
-http_proxy="http://10.0.0.10:8118"
+#http_proxy="http://10.0.0.1:8118"
 
 # If you need to provide a  user/password pair for the proxy,
 # set the proxy user name here and Dillo will ask for the password later.
@@ -367,6 +367,7 @@ show_progress_box=NO
 # A mouse's middle click over a tab closes the Tab.
 # With mousewheel mouses, right click feels way better (set to YES).
 #right_click_closes_tab=NO
+right_click_closes_tab=YES
 
 # Mouse middle click by default drives drag-scrolling.
 # To paste an URL into the window instead of scrolling, set it to NO.
