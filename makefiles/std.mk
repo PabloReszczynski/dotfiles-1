@@ -39,6 +39,18 @@ $(eval PP_DEFINES := $(foreach D, $(DEFINES), -D$D="$($D)"))
 endef
 
 ###
+# Special DEFINES
+###
+ifndef HOST
+HOST := $(shell hostname)
+endif
+
+ifeq ($(HOST), auto)
+HOST := $(shell hostname)
+endif
+
+
+###
 # file-selection logic starts here
 ###
 
