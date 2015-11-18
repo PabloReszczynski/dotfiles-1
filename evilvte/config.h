@@ -48,8 +48,8 @@
 // #define COMMAND_DOCK_MODE      TRUE  /* -d option, run as a dock           */
 #define    COMMAND_EXEC_PROGRAM   TRUE  /* -e option, execute program         */
 #define    COMMAND_FULLSCREEN     TRUE  /* -f option, init in fullscreen mode */
-#define    COMMAND_FONT           TRUE  /* -fn option, to assign font & size  */
-#define    COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
+// #define    COMMAND_FONT           TRUE  /* -fn option, to assign font & size  */
+// #define    COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
 // #define COMMAND_LOGIN_SHELL    TRUE  /* -ls option, to enable login shell  */
 // #define COMMAND_SET_TITLE      TRUE  /* -T or -title to set program title  */
 #define    COMMAND_SHOW_HELP      TRUE  /* -h option, show help               */
@@ -64,7 +64,7 @@
 // #define DEFAULT_TERMINAL_SIZE  80x24
 // #define EXPORT_WINDOWID        TRUE
 #define    FONT                   "Hack 12" /* Monospace 12 */
-#define    FONT_ANTI_ALIAS        TRUE
+// #define    FONT_ANTI_ALIAS        TRUE
 // #define FONT_ENABLE_BOLD_TEXT  TRUE
 // #define MOUSE_CTRL_SATURATION  TRUE  /* Scroll left or right to adjust it  */
 // #define MOUSE_CURSOR_AUTOHIDE  TRUE
