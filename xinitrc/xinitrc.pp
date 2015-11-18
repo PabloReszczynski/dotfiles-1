@@ -71,6 +71,9 @@ has() {
    ### Our notification daemon
    has dunst && run dunst
 
+   ### Remap Mousebuttons
+   has imwheel && imwheel
+
 } &
 
 exec $WindowManager
