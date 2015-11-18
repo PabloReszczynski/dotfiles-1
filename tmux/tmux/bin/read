@@ -1,6 +1,0 @@
-#!/bin/bash
-
-HISTFILE="$(dirname "$0")/../${1}_history"
-SIMPLEREAD="$(dirname "$0")/simpleread"
-
-"$SIMPLEREAD" -p "$1: " -h "$HISTFILE"
