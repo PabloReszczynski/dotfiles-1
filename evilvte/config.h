@@ -79,7 +79,7 @@
 // #define SCROLL_ON_OUTPUT       TRUE
 // #define    SCROLLBAR              OFF_L /* Options: LEFT, RIGHT, OFF_L, OFF_R */
 #define SHOW_WINDOW_BORDER     FALSE
-// #define SHOW_WINDOW_DECORATED  TRUE
+#define SHOW_WINDOW_DECORATED  FALSE
 #define    SHOW_WINDOW_ICON       FALSE
 // #define    STATUS_BAR             TRUE
 // #define WINDOW_TITLE_DYNAMIC   TRUE  /* for xterm escape sequences         */
