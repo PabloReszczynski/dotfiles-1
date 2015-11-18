@@ -71,34 +71,34 @@ endif
 IGNORE_FILES ?=
 
 ifeq ($(INSTALL_FILES), auto)
-$(info Generating INSTALL_FILES list)
+#$(info Generating INSTALL_FILES list)
 INSTALL_FILES := $(shell find . -mindepth 1 -type f -not -name '*.pp')
-$(info > $(INSTALL_FILES))
+#$(info > $(INSTALL_FILES))
 endif
 
 ifeq ($(INSTALL_PP_FILES), auto)
-$(info Generating INSTALL_PP_FILES list)
+#$(info Generating INSTALL_PP_FILES list)
 INSTALL_PP_FILES := $(shell find . -mindepth 1 -type f -name '*.pp')
-$(info > $(INSTALL_PP_FILES))
+#$(info > $(INSTALL_PP_FILES))
 endif
 
 # "repair" paths
-$(info Repairing pathnames)
+#$(info Repairing pathnames)
 INSTALL_FILES := $(subst $(PWD)/,, $(realpath $(INSTALL_FILES)))
 INSTALL_PP_FILES := $(subst $(PWD)/,, $(realpath $(INSTALL_PP_FILES)))
-$(info > $(INSTALL_FILES) $(INSTALL_PP_FILES))
+#$(info > $(INSTALL_FILES) $(INSTALL_PP_FILES))
 
 # remove ignored files
-$(info Removing ignored files)
+#$(info Removing ignored files)
 INSTALL_FILES := $(filter-out $(FORCE_IGNORE) $(IGNORE_FILES), $(INSTALL_FILES))
 INSTALL_PP_FILES := $(filter-out $(FORCE_IGNORE) $(IGNORE_FILES), $(INSTALL_PP_FILES))
-$(info > $(INSTALL_FILES) $(INSTALL_PP_FILES))
+#$(info > $(INSTALL_FILES) $(INSTALL_PP_FILES))
 
 # get the directory-list (we need them to be created at first)
-$(info Adding directories to INSTALL_DIRS)
+#$(info Adding directories to INSTALL_DIRS)
 INSTALL_DIRS += $(subst ./,, $(dir $(INSTALL_FILES) $(INSTALL_PP_FILES)))
 INSTALL_DIRS := $(sort $(INSTALL_DIRS))
-$(info > $(INSTALL_DIRS))
+#$(info > $(INSTALL_DIRS))
 
 build:: clean outdir defines $(INSTALL_DIRS) $(INSTALL_FILES) $(INSTALL_PP_FILES) post_build
 
