@@ -41,17 +41,17 @@
 // #define COLOR_TEXT_BOLD        "red"
 // #define COLOR_TEXT_DIM         "#FFFF00"
 // #define COLOR_TEXT_HIGHLIGHTED "green"
-// #define COMMAND_AT_ROOT_WINDOW TRUE  /* -r option, run in root window      */
+#define COMMAND_AT_ROOT_WINDOW TRUE  /* -r option, run in root window      */
 // #define COMMAND_COLOR_FG       TRUE  /* -fg option, foreground color       */
 // #define COMMAND_COLOR_BG       TRUE  /* -bg option, background color       */
 // #define COMMAND_SATURATION     TRUE  /* -sa option, saturation level       */
 // #define COMMAND_DOCK_MODE      TRUE  /* -d option, run as a dock           */
 #define    COMMAND_EXEC_PROGRAM   TRUE  /* -e option, execute program         */
 #define    COMMAND_FULLSCREEN     TRUE  /* -f option, init in fullscreen mode */
-// #define    COMMAND_FONT           TRUE  /* -fn option, to assign font & size  */
-// #define    COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
+#define    COMMAND_FONT           TRUE  /* -fn option, to assign font & size  */
+#define    COMMAND_GEOMETRY       TRUE  /* -g +X+Y option, to assign geometry */
 // #define COMMAND_LOGIN_SHELL    TRUE  /* -ls option, to enable login shell  */
-// #define COMMAND_SET_TITLE      TRUE  /* -T or -title to set program title  */
+#define    COMMAND_SET_TITLE      TRUE  /* -T or -title to set program title  */
 #define    COMMAND_SHOW_HELP      TRUE  /* -h option, show help               */
 #define    COMMAND_SHOW_OPTIONS   TRUE  /* -o option, show build-time options */
 // #define    COMMAND_SHOW_VERSION   TRUE  /* -v option, show program version    */
@@ -67,7 +67,7 @@
 // #define    FONT_ANTI_ALIAS        TRUE
 // #define FONT_ENABLE_BOLD_TEXT  TRUE
 // #define MOUSE_CTRL_SATURATION  TRUE  /* Scroll left or right to adjust it  */
-// #define MOUSE_CURSOR_AUTOHIDE  TRUE
+#define MOUSE_CURSOR_AUTOHIDE  TRUE
 // #define PROGRAM_ALWAYS_ON_TOP  TRUE
 // #define PROGRAM_ICON           ".config/evilvte/icon.png"
 // #define PROGRAM_WM_CLASS       TRUE
