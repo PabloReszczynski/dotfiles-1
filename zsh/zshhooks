@@ -27,6 +27,8 @@ preexec()
 
 precmd()
 {
+   printf "\a";
+
    case $TERM in
       xterm*)
          print -Pn "\e]0;$TITLE_PROMPT (last command: $LAST_COMMAND)\a"
