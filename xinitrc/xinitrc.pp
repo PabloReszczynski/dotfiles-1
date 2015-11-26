@@ -1,13 +1,15 @@
 #!/bin/bash
 
 WindowManager=openbox
+LogFile="/dev/null"
+LogFile="/tmp/xinitrc.$USER.$$.$WindowManager.log"
 
 run() {
-    "$@" &>/dev/null&
+    "$@" &>>"$LogFile" &
 }
 
 has() {
-   which "$1" &>/dev/null
+   which "$1" &>>"$LogFile"
 }
 
 {
@@ -15,6 +17,7 @@ has() {
    mkdir -p "/tmp/$USER."{adobe,macromedia}
    mkdir -p "/tmp/$USER.mozilla."{develop2,norm}
    mkdir -p "/tmp/$USER.downloads"
+   mkdir -p "/tmp/$USER.cache"
 
    ### initialize X11-stuff
    [[ -e ~/.Xresources ]]  && xrdb -merge ~/.Xresources
