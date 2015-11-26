@@ -328,21 +328,21 @@ theme=gtk+
 # panel_size=tiny
 # panel_size=small
 #panel_size=medium
-panel_size=small
+panel_size=tiny
 
-#small_icons=NO
+small_icons=YES
 
 # Here you can choose to hide some widgets of the dillo panel...
 #show_back=YES
 #show_forw=YES
 show_home=NO
 #show_reload=YES
-#show_save=YES
+show_save=NO
 show_stop=NO
 #show_bookmarks=YES
 #show_tools=YES
-#show_filemenu=YES
-#show_clear_url=NO
+show_filemenu=NO
+show_clear_url=NO
 show_url=YES
 show_search=NO
 show_help=NO
