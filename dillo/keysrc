@@ -126,6 +126,7 @@ G = bottom
 h = left-tab
 l = right-tab
 o = new-tab
+D = close-tab
 
 # hist
 H = back
