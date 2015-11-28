@@ -1,4 +1,4 @@
-au BufWrite * silent! mkview
+au BufWrite           * silent! mkview
 au BufNewFile,BufRead * silent! loadview
 
 syntax on
@@ -33,6 +33,8 @@ set tabstop=3
 set shiftwidth=3
 set expandtab
 
+set mouse=n
+
 if has("autocmd")
   " When editing a file, always jump to the last known cursor position. 
   " Don't do it when the position is invalid or when inside an event handler 
@@ -44,11 +46,11 @@ if has("autocmd")
 
 endif " has("autocmd")
 
-au BufNewFile *.sh 0r ~/.vim/skeltons/bash.skel
-au BufNewFile *.php 0r ~/.vim/skeltons/php.skel
-au BufNewFile *.pl 0r ~/.vim/skeltons/perl.skel
-au BufNewFile main.cpp 0r ~/.vim/skeltons/main.cpp.skel
-au BufNewFile main.c 0r ~/.vim/skeltons/main.c.skel
+au BufNewFile *.sh      0r ~/.vim/skeltons/bash.skel
+au BufNewFile *.php     0r ~/.vim/skeltons/php.skel
+au BufNewFile *.pl      0r ~/.vim/skeltons/perl.skel
+au BufNewFile main.cpp  0r ~/.vim/skeltons/main.cpp.skel
+au BufNewFile main.c    0r ~/.vim/skeltons/main.c.skel
 
 "> if "SLOW_SYSTEM" == 1
 set noruler
