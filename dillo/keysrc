@@ -134,9 +134,13 @@ L = forward
 : = goto
 r = reload
 
+# bookmarks
+b = bookmarks
+
 # search
 / = find
 ? = find
+s = websearch
 
 #--------------------------------------------------------------------
 #               WELL-KNOWN BROWSER COMMANDS
