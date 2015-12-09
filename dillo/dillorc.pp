@@ -404,6 +404,9 @@ show_msg=NO
 # (Such as "TAB character inside <PRE>").
 #show_extra_warnings=NO
 
+#---
+#> include <dillorc_priv>
+#---
 
 # -----------------------------------------------------------------------
 # dillorc ends here.
