@@ -11,6 +11,7 @@ alias grep="grep $GREP_OPTS"
 alias fgrep="grep $GREP_OPTS -F"
 alias igrep="grep $GREP_OPTS -i"
 alias egrep="grep $GREP_OPTS -E"
+alias g="grep $GREP_OPTS"
 
 # Be Verbose/Interactive/Safe #################################################
 alias cp="cp -v -p -i" # preserve owner and rights
@@ -37,6 +38,7 @@ alias -- -="$CD_COMMAND"
 
 # vi aliases ##################################################################
 alias vi='vim'
+alias v='vim'
 
 # misc aliases ################################################################
 alias less='less -iM'

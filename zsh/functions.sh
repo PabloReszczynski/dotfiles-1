@@ -90,3 +90,9 @@ gcommit()
 {
    git add "$1" && git commit -m "$1"
 }
+
+# man()
+# {
+#    command man "$@" | col -b -x | vim -R -c 'set ft=man nonumber nomod nolist' -c 'map q :q<CR>' -c 'map <SPACE> <C-D>' -c 'map b <C-U>' -c 'nmap K :Man <C-R>=expand(\"<cword>\")<CR><CR>' -
+# 
+# }
