@@ -1,6 +1,3 @@
-au BufWrite           * silent! mkview
-au BufNewFile,BufRead * silent! loadview
-
 syntax on
 
 " Correct typos
@@ -15,6 +12,9 @@ ca qw wq
 
 ca W w
 ca Q q
+
+ca q1 q!
+ca Q1 q!
 " -------------
 
 set fdm=marker
@@ -44,13 +44,43 @@ if has("autocmd")
     \   exe "normal g`\"" |
     \ endif
 
+
+  " save view for file
+  au BufWrite           * silent! mkview
+  au BufNewFile,BufRead * silent! loadview
+
+
+  au BufNewFile   *.sh          0r ~/.vim/skeltons/bash.skel
+  au BufNewFile   *.php         0r ~/.vim/skeltons/php.skel
+  au BufNewFile   *.pl          0r ~/.vim/skeltons/perl.skel
+  au BufNewFile   main.cpp      0r ~/.vim/skeltons/main.cpp.skel
+  au BufNewFile   main.c        0r ~/.vim/skeltons/main.c.skel
+  au BufReadPost  pacman.log    set ft=pacmanlog
 endif " has("autocmd")
 
-au BufNewFile *.sh      0r ~/.vim/skeltons/bash.skel
-au BufNewFile *.php     0r ~/.vim/skeltons/php.skel
-au BufNewFile *.pl      0r ~/.vim/skeltons/perl.skel
-au BufNewFile main.cpp  0r ~/.vim/skeltons/main.cpp.skel
-au BufNewFile main.c    0r ~/.vim/skeltons/main.c.skel
+" completion
+set wildignore=*.a,*.o,*.so,*.pyc,*.jpg,
+            \*.jpeg,*.png,*.gif,*.pdf,*.git,
+            \*.swp,*.swo                    " tab completion ignores
+set wildmenu                                " better auto complete
+set wildmode=longest,list                   " bash-like auto complete
+
+" bindings
+    " Highlight last inserted text
+    nnoremap gV '[V']
+
+    " Disable annoying ex mode (Q)
+    map Q <nop>
+
+    " Buffers, preferred over tabs now with bufferline.
+    nnoremap gn :bnext<CR>
+    nnoremap gN :bprevious<CR>
+    nnoremap gD :bdelete<CR>
+    nnoremap gf <C-^>
+
+    " Treat wrapped lines as normal lines
+    nnoremap j gj
+    nnoremap k gk
 
 "> if "SLOW_SYSTEM" == 1
 set noruler
