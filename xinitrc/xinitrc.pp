@@ -63,6 +63,10 @@ has() {
    #xset dpms 0 0 $(( 60 * 10 ))
    #xscreensaver-command -lock
 
+   ### Adjust key repeat time/delay
+   xset r rate 260 50
+   ###
+
    ### Finally run some applications
 #> if "HOST" eq "pizwo"
    has mpd && run mpd
