@@ -1,8 +1,8 @@
 #!/bin/bash
 
 WindowManager=openbox
-LogFile="/dev/null"
 LogFile="/tmp/xinitrc.$USER.$$.$WindowManager.log"
+LogFile="/dev/null"
 
 run() {
     "$@" &>>"$LogFile" &
@@ -14,10 +14,12 @@ has() {
 
 {
    ### make some temporary directories
-   mkdir -p "/tmp/$USER."{adobe,macromedia}
-   mkdir -p "/tmp/$USER.mozilla."{develop2,norm}
-   mkdir -p "/tmp/$USER.downloads"
-   mkdir -p "/tmp/$USER.cache"
+   {
+      mkdir -p "/tmp/$USER."{adobe,macromedia}
+      mkdir -p "/tmp/$USER.mozilla."{develop2,norm}
+      mkdir -p "/tmp/$USER.downloads"
+      mkdir -p "/tmp/$USER.cache"
+   } &
 
    ### initialize X11-stuff
    [[ -e ~/.Xresources ]]  && xrdb -merge ~/.Xresources
@@ -31,31 +33,40 @@ has() {
    ### Set background image if available
    has nitrogen && run nitrogen --restore
 
-   ### Begin our tmux session or simply spawn a shell
+   ### Select terminal emulator
+   if has uxterm; then
+      terminal_cmd=( uxterm -fullscreen -e )
+   elif has xterm; then
+      terminal_cmd=( xterm -fullscreen -e )
+   elif has evilvte; then
+      terminal_cmd=( evilvte -f -e )
+   elif has terminator; then
+      terminal_cmd=( terminator -f -b -x )
+   fi
+
+   ### Select terminal init
    if has tmux; then
-      terminal_init="tmux attach"
+      terminal_cmd+=( tmux attach )
 
       if ! tmux has-session; then
          tmux new-session -d -s 0
-         has mcabber && tmux new-window -d mcabber
-         has ncmpcpp && tmux new-window -d ncmpcpp
-         has w3m     && tmux new-window -d w3m http://blog.fefe.de
-         has vim     && tmux new-window -d vim
-         has htop    && tmux new-window -d htop
+         #has mcabber && tmux new-window -d mcabber
+         #has ncmpcpp && tmux new-window -d ncmpcpp
       fi
    elif has zsh; then
-      terminal_init="zsh"
+      terminal_cmd+=( zsh )
    else
-      terminal_init="bash"
+      terminal_cmd+=( bash )
    fi
 
-   ### Start a terminal emulator
-   if has evilvte; then
-      evilvte -f -e $terminal_init
-   elif has xterm; then
-      xterm -fullscreen -e $terminal_init
-   elif has terminator; then
-      terminator -f -b -x $terminal_init
+   ### Start terminal emulator
+   run "${terminal_cmd[@]}"
+   timeout 5 sudo renice -n -5 -p $! &
+
+   ### Open browser
+   if has dillo; then
+      run dillo;
+      timeout 5 sudo renice -n -5 -p $! &
    fi
 
    ### Set up our screensaver
@@ -65,7 +76,6 @@ has() {
 
    ### Adjust key repeat time/delay
    xset r rate 260 50
-   ###
 
    ### Finally run some applications
 #> if "HOST" eq "pizwo"
@@ -76,10 +86,14 @@ has() {
 #> endif
 
    ### Our notification daemon
-   has dunst && run dunst
+   has dunst && run nice -n 15 dunst
 
    ### Remap Mousebuttons
    has imwheel && imwheel
+
+   ### Renice some daemons
+   pidof systemd-timesyncd && timeout 5 sudo renice -n 19 -p $(pidof systemd-timesyncd)
+   pidof haveged && timeout 5 sudo renice -n 19 -p $(pidof haveged)
 
 } &
 
