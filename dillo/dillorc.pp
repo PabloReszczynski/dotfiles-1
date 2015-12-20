@@ -230,6 +230,7 @@ http_referer=none
 # bg_color=gray
 # bg_color=0xd6d6c0
 #bg_color=0xdcd1ba
+bg_color=0xeeeeee
 
 # If your eyes suffer with white backgrounds, change this.
 #allow_white_bg=YES
@@ -404,9 +405,11 @@ show_msg=NO
 # (Such as "TAB character inside <PRE>").
 #show_extra_warnings=NO
 
-#---
-#> include <dillorc_priv>
-#---
+# --- <private>
+#> if -e "PRIVATE_INCLUDE/dillo/dillorc"
+#>    include "PRIVATE_INCLUDE/dillo/dillorc"
+#> endif
+# --- </private>
 
 # -----------------------------------------------------------------------
 # dillorc ends here.

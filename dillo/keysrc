@@ -117,25 +117,39 @@
 # screen
 j = line-down
 k = line-up
+h = left
+l = right
+
 g = top
 G = bottom
+
 <ctrl>d = screen-down
 <ctrl>u = screen-up
 
 # tabs
-h = left-tab
-l = right-tab
+<shift>h = left-tab
+<shift>l = right-tab
+<shift>d = close-tab
 o = new-tab
-D = close-tab
+t = new-tab
 
 # hist
-H = back
-L = forward
+# H = back
+# L = forward
+b = back
+f = forward
+# < back, > forward
+0x3c = back
+0x3e = forward
 : = goto
 r = reload
 
 # bookmarks
-b = bookmarks
+<shift>b = bookmarks
+
+# misc
+v = view-source
+S = save
 
 # search
 / = find
