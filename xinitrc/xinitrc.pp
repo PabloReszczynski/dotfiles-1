@@ -12,6 +12,10 @@ has() {
    which "$1" &>>"$LogFile"
 }
 
+has_run() {
+   has "$1" && run "$@"
+}
+
 {
    ### make some temporary directories
    {
@@ -21,17 +25,22 @@ has() {
       mkdir -p "/tmp/$USER.cache"
    } &
 
-   ### initialize X11-stuff
+   #--- initialize X11-stuff ---------------------------
+   #
+   # compose using Capslock
+   setxkbmap -option compose:caps
+   #
    [[ -e ~/.Xresources ]]  && xrdb -merge ~/.Xresources
    [[ -e ~/.Xmodmap ]]     && xmodmap ~/.Xmodmap
    [[ -e ~/.xbindkeysrc ]] && xbindkeys
+   #----------------------------------------------------
 
    ### Set background to something like black
    # (hack for fucking flash player)
    xsetroot -solid '#000001'
 
    ### Set background image if available
-   has nitrogen && run nitrogen --restore
+   has_run nitrogen --restore
 
    ### Select terminal emulator
    if has uxterm; then
@@ -61,13 +70,9 @@ has() {
 
    ### Start terminal emulator
    run "${terminal_cmd[@]}"
-   timeout 5 sudo renice -n -5 -p $! &
 
    ### Open browser
-   if has dillo; then
-      run dillo;
-      timeout 5 sudo renice -n -5 -p $! &
-   fi
+   has_run dillo;
 
    ### Set up our screensaver
    has xscreensaver && run xscreensaver -no-splash
@@ -79,21 +84,17 @@ has() {
 
    ### Finally run some applications
 #> if "HOST" eq "pizwo"
-   has mpd && run mpd
-   has synergys && run synergys
+   has_run mpd
+   has_run synergys
 #> elif "HOST" eq "samsung"
-   has synergyc && run synergyc 10.0.0.10
+   has_run synergyc 10.0.0.10
 #> endif
 
-   ### Our notification daemon
-   has dunst && run nice -n 15 dunst
+   # == Our notification daemon ===
+   has_run dunst;
 
-   ### Remap Mousebuttons
-   has imwheel && imwheel
-
-   ### Renice some daemons
-   pidof systemd-timesyncd && timeout 5 sudo renice -n 19 -p $(pidof systemd-timesyncd)
-   pidof haveged && timeout 5 sudo renice -n 19 -p $(pidof haveged)
+   # === Remap Mousebuttons ===
+   #has_run imwheel
 
 } &
 
