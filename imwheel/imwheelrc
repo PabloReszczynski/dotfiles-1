@@ -1,3 +1,6 @@
+# Consider using xbindkeys instead, if you don't need
+# per application settings
+
 ".*"
 None, Thumb2, Page_Up
 None, Thumb1, Page_Down
