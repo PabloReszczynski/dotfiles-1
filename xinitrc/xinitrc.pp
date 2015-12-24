@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/SHELL
 
 WindowManager=openbox
 LogFile="/tmp/xinitrc.$USER.$$.$WindowManager.log"
 LogFile="/dev/null"
 
 run() {
-    "$@" &>>"$LogFile" &
+   "$@" >>"$LogFile" 2>&1
 }
 
 has() {
-   which "$1" &>>"$LogFile"
+   which "$1" >>"$LogFile" 2>&1
 }
 
 has_run() {
@@ -19,8 +19,10 @@ has_run() {
 {
    ### make some temporary directories
    {
-      mkdir -p "/tmp/$USER."{adobe,macromedia}
-      mkdir -p "/tmp/$USER.mozilla."{develop2,norm}
+      mkdir -p "/tmp/$USER.adobe"
+      mkdir -p "/tmp/$USER.macromedia"
+      mkdir -p "/tmp/$USER.mozilla.develop2"
+      mkdir -p "/tmp/$USER.mozilla.norm"
       mkdir -p "/tmp/$USER.downloads"
       mkdir -p "/tmp/$USER.cache"
    } &
@@ -44,18 +46,18 @@ has_run() {
 
    ### Select terminal emulator
    if has uxterm; then
-      terminal_cmd=( uxterm -fullscreen -e )
+      terminal_cmd="uxterm -fullscreen -e"
    elif has xterm; then
-      terminal_cmd=( xterm -fullscreen -e )
+      terminal_cmd="xterm -fullscreen -e"
    elif has evilvte; then
-      terminal_cmd=( evilvte -f -e )
+      terminal_cmd="evilvte -f -e"
    elif has terminator; then
-      terminal_cmd=( terminator -f -b -x )
+      terminal_cmd="terminator -f -b -x"
    fi
 
    ### Select terminal init
    if has tmux; then
-      terminal_cmd+=( tmux attach )
+      terminal_args="tmux attach"
 
       if ! tmux has-session; then
          tmux new-session -d -s 0
@@ -63,13 +65,13 @@ has_run() {
          #has ncmpcpp && tmux new-window -d ncmpcpp
       fi
    elif has zsh; then
-      terminal_cmd+=( zsh )
+      terminal_args="zsh"
    else
-      terminal_cmd+=( bash )
+      terminal_args="bash"
    fi
 
    ### Start terminal emulator
-   run "${terminal_cmd[@]}"
+   run $terminal_cmd $terminal_args;
 
    ### Open browser
    has_run dillo;
