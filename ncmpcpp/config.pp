@@ -24,9 +24,9 @@
 #
 ##### connection settings #####
 #
-mpd_host = 10.0.0.10
+#mpd_host = 10.0.0.10
 #
-mpd_port = 6600
+#mpd_port = 6600
 #
 #mpd_connection_timeout = 5
 #
@@ -489,17 +489,17 @@ state_line_color = blue
 #
 #state_flags_color = default
 #
-main_window_color = COLOR
+main_window_color = THEME_COLOR
 #
 #color1 = white
 #
-color2 = COLOR
+color2 = THEME_COLOR
 #
 main_window_highlight_color = default
 #
 #progressbar_color = black
 #
-progressbar_elapsed_color = COLOR
+progressbar_elapsed_color = THEME_COLOR
 #
 statusbar_color = cyan
 #
@@ -507,7 +507,7 @@ alternative_ui_separator_color = white
 #
 #active_column_color = red
 #
-visualizer_color = COLOR
+visualizer_color = THEME_COLOR
 #
 #window_border_color = green
 #

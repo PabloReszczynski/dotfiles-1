@@ -1,15 +1,10 @@
-#+defines
-COLOR = blue
-#-defines
+THEME_COLOR = blue
 
-ODIR_SUBDIR = .ncmpcpp
-NO_DOT_PREFIX = 1
-
+PREFIX_DIR = .ncmpcpp
 IGNORE_FILES = makeDummyBindings.sh
 
 build::
-
 post_build::
-	./makeDummyBindings.sh >> out/.ncmpcpp/bindings
+	./makeDummyBindings.sh >> "$(_PACKAGE_BUILD_DIR)/bindings"
 
-include ../makefiles/std.mk
+include ../package.mk

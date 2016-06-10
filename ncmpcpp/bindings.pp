@@ -297,6 +297,8 @@ def_key "@"
 #
 def_key "S"
   stop
+  run_external_command "killall mpd"
+  run_external_command "mpdummy"
 #
 def_key "p"
   pause
