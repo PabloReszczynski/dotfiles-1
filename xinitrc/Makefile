@@ -1,6 +1,4 @@
-#+defines
-HOST ?= $(shell hostname)
 SHELL = dash
-#-defines
+WINDOW_MANAGER = openbox
 
-include ../makefiles/std.mk
+include ../package.mk

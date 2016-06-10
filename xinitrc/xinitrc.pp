@@ -1,15 +1,14 @@
 #!/bin/SHELL
 
-WindowManager=openbox
-LogFile="/tmp/xinitrc.$USER.$$.$WindowManager.log"
 LogFile="/dev/null"
+LogFile="/tmp/xinitrc.$USER.$$.WINDOW_MANAGER.log"
 
 run() {
-   "$@" >>"$LogFile" 2>&1
+   "$@" &
 }
 
 has() {
-   which "$1" >>"$LogFile" 2>&1
+   which "$1"
 }
 
 has_run() {
@@ -17,88 +16,112 @@ has_run() {
 }
 
 {
-   ### make some temporary directories
-   {
-      mkdir -p "/tmp/$USER.adobe"
-      mkdir -p "/tmp/$USER.macromedia"
-      mkdir -p "/tmp/$USER.mozilla.develop2"
-      mkdir -p "/tmp/$USER.mozilla.norm"
-      mkdir -p "/tmp/$USER.downloads"
-      mkdir -p "/tmp/$USER.cache"
-   } &
+   date;
 
-   #--- initialize X11-stuff ---------------------------
-   #
-   # compose using Capslock
-   setxkbmap -option compose:caps
-   #
-   [[ -e ~/.Xresources ]]  && xrdb -merge ~/.Xresources
-   [[ -e ~/.Xmodmap ]]     && xmodmap ~/.Xmodmap
-   [[ -e ~/.xbindkeysrc ]] && xbindkeys
-   #----------------------------------------------------
+   # === dirs that we want to keep in /tmp ================
+   USER_TMP_DIR="/tmp/home-temp-${USER}";
 
-   ### Set background to something like black
-   # (hack for fucking flash player)
-   xsetroot -solid '#000001'
+   #TODO? mozilla stuff?
+   for d in \
+      .adobe \
+      .macromedia \
+      .cache \
+      ; \
+   do
+      echo "Linking $d to temp";
+      rm ~/"$d" || rmdir ~/"$d"
+      mkdir -p "$USER_TMP_DIR/$d" && \
+      ln -s "$USER_TMP_DIR/$d" ~/"$d";
+   done
+   # ======================================================
 
-   ### Set background image if available
-   has_run nitrogen --restore
 
-   ### Select terminal emulator
-   if has uxterm; then
-      terminal_cmd="uxterm -fullscreen -e"
-   elif has xterm; then
-      terminal_cmd="xterm -fullscreen -e"
-   elif has evilvte; then
-      terminal_cmd="evilvte -f -e"
-   elif has terminator; then
-      terminal_cmd="terminator -f -b -x"
+   # === initialize X11 stuff =============================
+   # Set background to 'nearly black' (hack for fucking flash player)
+   has_run xsetroot -solid '#000001'
+ 
+   if has xset; then
+    # Adjust keyboard repeat time/delay
+    xset r rate 255 60
+
+    # Adjust mouse acceleration
+    xset m 4 4
    fi
 
-   ### Select terminal init
-   if has tmux; then
-      terminal_args="tmux attach"
+   # load Xresources
+   [ -e ~/.Xresources ]  && has_run xrdb ~/.Xresources
 
+   # Use capslock as compose key
+   setxkbmap -option compose:caps
+   
+   # Modify keyboard layout
+   [ -e ~/.Xmodmap ]     && has_run xmodmap ~/.Xmodmap
+  
+   # Load additional keybindings
+   [ -e ~/.xbindkeysrc ] && has_run xbindkeys
+
+   # Set background image if available
+   has_run nitrogen --restore
+
+   # Set up our screensaver
+   has_run xscreensaver -no-splash
+   #xset dpms 0 0 $(( 60 * 10 ))
+   #xscreensaver-command -lock
+   # ======================================================
+
+
+   # === Select terminal emulator =========================
+   if has uxterm; then
+      terminal_cmd='uxterm -fullscreen -e'
+   elif has xterm; then
+      terminal_cmd='xterm -fullscreen -e'
+   elif has evilvte; then
+      terminal_cmd='evilvte -f -e'
+   elif has terminator; then
+      terminal_cmd='terminator -f -b -x'
+   fi
+
+   # === Select terminal init =============================
+   if has tmux; then
       if ! tmux has-session; then
-         tmux new-session -d -s 0
+         terminal_init='tmux -2'
+      else
+         terminal_init='tmux -2 attach'
+         #run tmux new-session -d -s 0
          #has mcabber && tmux new-window -d mcabber
          #has ncmpcpp && tmux new-window -d ncmpcpp
       fi
    elif has zsh; then
-      terminal_args="zsh"
+      terminal_init='zsh'
    else
-      terminal_args="bash"
+      terminal_init='bash'
    fi
 
-   ### Start terminal emulator
-   run $terminal_cmd $terminal_args;
+   # === Start terminal emulator ==========================
+   run $terminal_cmd $terminal_init;
 
-   ### Open browser
+   # === Open browser =====================================
    has_run dillo;
+   has_run chromium;
 
-   ### Set up our screensaver
-   has xscreensaver && run xscreensaver -no-splash
-   #xset dpms 0 0 $(( 60 * 10 ))
-   #xscreensaver-command -lock
-
-   ### Adjust key repeat time/delay
-   xset r rate 260 50
-
-   ### Finally run some applications
+   # === Host based applications ==========================
 #> if "HOST" eq "pizwo"
-   has_run mpd
-   has_run synergys
+   #has_run synergys
 #> elif "HOST" eq "samsung"
-   has_run synergyc 10.0.0.10
+   #has_run synergyc 10.0.0.10
 #> endif
+#
+   # === Music Player Daemon ==============================
+   has_run mpd
 
-   # == Our notification daemon ===
+   # === Our notification daemon ===
    has_run dunst;
 
    # === Remap Mousebuttons ===
-   #has_run imwheel
+   has_run imwheel
 
-} &
+} >"$LogFile" 2>&1 &
 
-exec $WindowManager
+exec WINDOW_MANAGER
 
+# vim: set syntax=sh:
