@@ -1,7 +1,3 @@
-ODIR_SUBDIR = .config/dunst
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .config/dunst
 
-#+defines
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk
