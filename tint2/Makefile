@@ -1,7 +1,3 @@
-ODIR_SUBDIR = .config/tint2
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .config/tint2
 
-#+defines
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk
