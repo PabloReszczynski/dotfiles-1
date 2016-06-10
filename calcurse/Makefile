@@ -1,7 +1,3 @@
-ODIR_SUBDIR = .calcurse
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .calcurse
 
-#+defines
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk
