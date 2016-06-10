@@ -1,11 +1,26 @@
-build:
-	git clone https://github.com/caleb-/evilvte
-	cp config.h evilvte/src/config.h
-	sh -c 'cd evilvte && ./configure && make'
+EVILVTE_BUILD_DIR = /tmp/evilvte_build
+_PACKAGE_PATH = $(realpath .)
 
+.ONESHELL:
+build:
+	mkdir "$(EVILVTE_BUILD_DIR)"
+	cd "$(EVILVTE_BUILD_DIR)"
+	
+	# Checkout and copy config.h to src dir
+	git clone https://github.com/caleb-/evilvte
+	cp "$(_PACKAGE_PATH)/config.h" evilvte/src/config.h
+	
+	# Enter src dir an build evilvte
+	cd evilvte
+	./configure
+	make
+
+.ONESHELL:
 install:
-	sh -c 'cd evilvte; sudo make install'
+	cd "$(EVILVTE_BUILD_DIR)"
+	cd "evilvte"
+	sudo make install
 
 clean:
-	rm -rf evilvte
+	rm -rf "$(EVILVTE_BUILD_DIR)"
 	
