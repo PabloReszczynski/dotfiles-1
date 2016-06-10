@@ -1,14 +1,12 @@
-#+defines
 THEME_COLOR = blue
 NICK = braph
 JID = insert_jid_here
 PASSWORD = insert_pw_here
 PORT = 5222
-#-defines
+HOST = auto
 
-PP_MODULES = -m maths.pm
-
+FILEPP_MODULES = maths.pm testfile.pm
 IGNORE_FILES = extractDefaultKeymap.sh mcabber/keymap mcabber/theme
-INSTALL_DIRS = mcabber/history mcabber/otr
+DIRECTORIES = mcabber/history mcabber/otr
 
-include ../makefiles/std.mk
+include ../package.mk

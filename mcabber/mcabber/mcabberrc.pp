@@ -1,3 +1,7 @@
+#> if testfile(e, "PRIVATE_DIR/mcabber/login")
+#>    include "PRIVATE_DIR/mcabber/login"
+#> endif
+
 # Config #######################################################################
 set lang = de
 set time_prefix = 1
@@ -53,16 +57,22 @@ set logging_dir = ~/.mcabber/history
 set logging_ignore_status = 0
 set log_muc_conf = 1
 set load_muc_logs = 1
-set max_history_age = 7 # laod history of 1 week
+set max_history_age = 7 # load history of 1 week
 
 # state file only makes sense with history
 set statefile = ~/.mcabber/statefile
 
+# Spell Check ##################################################################
+set spell_enable = 1
+set spell_lang = en_US de_DE
+set spell_encoding = UTF-8
+
 # Events #######################################################################
-set events_command = ~/.mcabber/event.pl
+set events_command = /bin/mcabber-event.pl
 set event_log_files = 1
-set event_log_dir = /tmp
+set event_log_dir = /dev/shm
 set eventcmd_use_nickname = 1
+set beep_on_message = 1
 
 # OTR ##########################################################################
 set otr = 1
@@ -78,14 +88,14 @@ set fifo_ignore = 0
 # Aliases ######################################################################
 alias me = say /me
 
-alias join_arch = room join arch@conference.draugr.de
-alias join_debian = room join debianforum.de@chat.debianforum.de
-alias join_draugr = room join chat@conference.draugr.de
-alias join_fishmixx = room join fishmixx@conference.draugr.de
-alias join_metalheadz = room join metalheadz@conference.verdammung.org
-alias join_ubuntu = room join ubuntu@conference.ubuntu-jabber.de
-alias join_uhuc = room join chat@conference.uhuc.de
-alias join_mcabber = room join mcabber@conf.lilotux.net
+alias join_arch         = room join arch@conference.draugr.de
+alias join_debian       = room join debianforum.de@chat.debianforum.de
+alias join_draugr       = room join chat@conference.draugr.de
+alias join_fishmixx     = room join fishmixx@conference.draugr.de
+alias join_metalheadz   = room join metalheadz@conference.verdammung.org
+alias join_ubuntu       = room join ubuntu@conference.ubuntu-jabber.de
+alias join_uhuc         = room join chat@conference.uhuc.de
+alias join_mcabber      = room join mcabber@conf.lilotux.net
 
 #> include "theme"
 #> include "keymap"
