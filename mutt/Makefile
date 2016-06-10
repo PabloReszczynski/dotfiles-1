@@ -1,10 +1,9 @@
-#+defines
 HEADER_CACHE = header_cache
 REALNAME = Real Name
 EMAIL = email@example.com
-#-defines
 
-INSTALL_DIRS = mutt/$(HEADER_CACHE)
-INSTALL_PP_FILES = mutt/muttrc
+FILEPP_MODULES = testfile.pm
+PP_FILES = mutt/muttrc
+DIRECTORIES = mutt/$(HEADER_CACHE)
 
-include ../makefiles/std.mk
+include ../package.mk

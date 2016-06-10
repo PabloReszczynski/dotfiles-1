@@ -1,3 +1,7 @@
+#> if testfile(f, "PRIVATE_DIR/mutt/login")
+#>    include "PRIVATE_DIR/mutt/login"
+#> endif
+
 ### Displaying Mails
 # We're using directories, not files
 set mbox_type=Maildir
