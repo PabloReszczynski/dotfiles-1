@@ -1,4 +1,3 @@
-#+defines
-#-defines
+MUSIC_BASE = /media/data/music
 
-include ../makefiles/std.mk
+include ../package.mk

@@ -10,14 +10,14 @@
 # be disabled and audio files will only be accepted over ipc socket (using
 # file:// protocol) or streaming files over an accepted protocol.
 #
-music_directory		"/media/data/music"
+music_directory		   "MUSIC_BASE"
 #
 # This setting sets the MPD internal playlist directory. The purpose of this
 # directory is storage for playlists created by MPD. The server will use 
 # playlist files not created by the server but only if they are in the MPD
 # format. This setting defaults to playlist saving being disabled.
 #
-playlist_directory		"/media/data/music/playlists"
+playlist_directory		"MUSIC_BASE/playlists"
 #
 # This setting sets the location of the MPD database. This file is used to
 # load the database at server start up and store the database while the 
@@ -25,7 +25,7 @@ playlist_directory		"/media/data/music/playlists"
 # MPD to accept files over ipc socket (using file:// protocol) or streaming
 # files over an accepted protocol.
 #
-db_file			"/var/lib/mpd/mpd.db"
+db_file			         "MUSIC_BASE/.mpd/mpd.db"
 # 
 # These settings are the locations for the daemon log files for the daemon.
 # These logs are great for troubleshooting, depending on your log_level
@@ -34,7 +34,7 @@ db_file			"/var/lib/mpd/mpd.db"
 # The special value "syslog" makes MPD use the local syslog daemon. This
 # setting defaults to logging to syslog, otherwise logging is disabled.
 #
-log_file			"/var/log/mpd.log"
+log_file			         "/var/log/mpd.log"
 #
 # This setting sets the location of the file which stores the process ID
 # for use of mpd --kill and some init scripts. This setting is disabled by
@@ -47,7 +47,7 @@ log_file			"/var/log/mpd.log"
 # it was brought down. This setting is disabled by default and the server 
 # state will be reset on server start up.
 #
-state_file			"/var/lib/mpd/state"
+state_file			      "/var/lib/mpd/state"
 #
 # The location of the sticker database.  This is a database which
 # manages dynamic information attached to songs.
@@ -321,20 +321,20 @@ audio_output {
 #}
 #
 
-audio_output {
- 	type		"pipe"
- 	name		"FIFO Output /tmp/mpd.fifo"
- 	command  "cat > /tmp/mpd.fifo"
- 	format   "44100:16:2"
-}
+#audio_output {
+# 	type		"pipe"
+# 	name		"FIFO Output /tmp/mpd.fifo"
+# 	command  "cat > /tmp/mpd.fifo"
+# 	format   "44100:16:2"
+#}
 
 ## An example of a null output (for no audio output):
 #
-audio_output {
-	type		"null"
-	name		"NULL Output"
+#audio_output {
+#	type		"null"
+#	name		"NULL Output"
 #	mixer_type      "none"			# optional
-}
+#}
 #
 # If MPD has been compiled with libsamplerate support, this setting specifies 
 # the sample rate converter to use.  Possible values can be found in the 
