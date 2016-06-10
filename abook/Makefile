@@ -1,5 +1,3 @@
-#+defines
 THEME_COLOR = blue
-#-defines
 
-include ../makefiles/std.mk
+include ../package.mk
