@@ -1,9 +1,6 @@
-#+defines
 THEME_COLOR = blue
 THEME_BACKGROUND = default
-#-defines
 
-ODIR_SUBDIR = .aumix
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .aumix
 
-include ../makefiles/std.mk
+include ../package.mk
