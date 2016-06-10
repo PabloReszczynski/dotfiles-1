@@ -1,4 +1,1 @@
-#+defines
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk
