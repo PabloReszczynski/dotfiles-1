@@ -1,9 +1,5 @@
-ODIR_SUBDIR = .dillo
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .dillo
 
+FILEPP_MODULES = testfile.pm
 
-#+defines
-PRIVATE_INCLUDE = $(HOME)/priv
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk

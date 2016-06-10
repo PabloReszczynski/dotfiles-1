@@ -189,6 +189,7 @@ http_max_conns=10
 # http_proxy="http://localhost:8080/"
 #(by default, no proxy is used)
 #http_proxy="http://10.0.0.1:8118"
+#http_proxy="http://localhost:3128"
 
 # If you need to provide a  user/password pair for the proxy,
 # set the proxy user name here and Dillo will ask for the password later.
@@ -287,6 +288,18 @@ theme=gtk+
 # gives different results in different environments, so we played it safe
 # by defining the traditional colors.  Please choose the color theme that
 # better fits your distro.
+
+#
+# Braphs theme (based on gray theme)
+#
+#ui_fg_color=black
+#ui_main_bg_color=#DBDBDB
+#ui_text_bg_color=#FFFFFF
+#ui_selection_color=#191970
+#ui_button_highlight_color=#a9a9a9
+#ui_tab_active_bg_color=#8793AC
+#ui_tab_active_fg_color=black
+#ui_tab_bg_color=#b7beb7
 
 #
 # Gray theme (traditional)
@@ -405,11 +418,9 @@ show_msg=NO
 # (Such as "TAB character inside <PRE>").
 #show_extra_warnings=NO
 
-# --- <private>
-#> if -e "PRIVATE_INCLUDE/dillo/dillorc"
-#>    include "PRIVATE_INCLUDE/dillo/dillorc"
+#> if testfile(f, "PRIVATE_DIR/dillo/dillorc")
+#>    include "PRIVATE_DIR/dillo/dillorc"
 #> endif
-# --- </private>
 
 # -----------------------------------------------------------------------
 # dillorc ends here.
