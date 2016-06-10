@@ -1,7 +1,3 @@
-ODIR_SUBDIR = .w3m
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .w3m
 
-#+defines
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk
