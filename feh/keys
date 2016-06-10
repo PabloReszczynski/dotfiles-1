@@ -64,7 +64,7 @@ jump_back C-u
 
 # are you crazy????
 remove
-delete
+delete C-S-Delete
 
 scroll_left H
 scroll_down J
