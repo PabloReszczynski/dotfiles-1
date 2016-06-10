@@ -1,7 +1,3 @@
-ODIR_SUBDIR = .mplayer
-NO_DOT_PREFIX = 1
+PREFIX_DIR = .mplayer
 
-#+defines
-#-defines
-
-include ../makefiles/std.mk
+include ../package.mk
