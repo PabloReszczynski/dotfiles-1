@@ -1,5 +1,5 @@
 ! ======== General Terminal Settings ===========
-#> foreach TERM xterm, URxvt
+#> foreach TERM xterm
 
 ! Cursor
 TERM*cursorColor: Red
@@ -26,11 +26,13 @@ TERM*scrollBar: false
 TERM*saveLines: 0
 
 ! Font
-TERM*faceName:  Hack:size=12
-!TERM*.font:    xft:DejaVu Sans Mono:pixelsize=12 
+!TERM*faceName:  Hack:size=11
+TERM*.faceName:  xft:DejaVu Sans Mono:size=11 
+TERM*cjk_width:  true
+TERM*faceNameDoublesize:  xft:DejaVu Sans Mono:size=11
+
 
 ! === Color Scheme ===
-! Import scheme from themes/
 #> include COLOR_THEME
 ! Overwrite Background/Foreground
 TERM*background: #111111
@@ -45,6 +47,24 @@ URxvt.font: xft:Hack:size=12
 URxvt.letterSpace: -1
 URxvt*buffered: false
 ! ==============
+
+! === xterm bindings ===
+*VT100.Translations: #override \n\
+      !Ctrl                <Btn1Down>:    ignore() \n\
+      !Lock Ctrl           <Btn1Down>:    ignore() \n\
+      !Lock Ctrl @Num_Lock <Btn1Down>:    ignore() \n\
+      ! @Num_Lock Ctrl     <Btn1Down>:    ignore() \n\
+      \
+      !Ctrl                <Btn2Down>:    ignore() \n\
+      !Lock Ctrl           <Btn2Down>:    ignore() \n\
+      !Lock Ctrl @Num_Lock <Btn2Down>:    ignore() \n\
+      ! @Num_Lock Ctrl     <Btn2Down>:    ignore() \n\
+      \
+      !Ctrl                <Btn3Down>:    ignore() \n\
+      !Lock Ctrl           <Btn3Down>:    ignore() \n\
+      !Lock Ctrl @Num_Lock <Btn3Down>:    ignore() \n\
+      ! @Num_Lock Ctrl     <Btn3Down>:    ignore() \n\
+
 
 ! === Font ===
 Xft.antialias: 1
