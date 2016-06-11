@@ -1,0 +1,80 @@
+#!/bin/bash
+
+#
+# __ALIASES__
+#
+#> if "SHELL" eq "zsh"
+#>    define __ALIASES__  "${aliases[$1]:-$1}"
+#> else
+#>    define __ALIASES__ "${BASH_ALIASES[$1]:-$1}"   
+#> endif
+
+get_alias() {
+   echo __ALIASES__
+}
+
+uri_escape() {
+   perl -MURI::Escape=uri_escape -ne 'print uri_escape($_)';
+}
+
+uri_unescape() {
+   perl -MURI::Escape=uri_unescape -ne 'print uri_unescape($_)';
+}
+
+escapeshellarg() {
+   printf '%q' "$@"
+}
+
+vimake() {
+   vim +"set noexpandtab" "${@:-Makefile}"
+}
+
+mysql_date()
+{
+   date "+%Y-%m-%d %H:%M:%S" "$@"
+}
+
+hdplayer()
+{
+   nice -n 0 -- \
+   mplayer \
+      -vfm ffmpeg \
+      -lavdopts lowres=0:fast:skiploopfilter=all:threads=8 \
+      -framedrop \
+      "$@"
+}
+
+md()
+{
+   mkdir -p "$1" && cd "$1"
+}
+
+# TODO: mv-to-dir
+
+freetop()
+{
+   ps -e -o pid,vsz,comm= | sort -n -k 2
+}
+
+gclone()
+{
+   git clone gitolite@braph.mooo.com:$1
+}
+
+gcommit()
+{
+   git add "$1" && git commit -m "$1"
+}
+
+# getip()
+# {
+#    curl 'http://ifconfig.me/ip'
+# }
+
+# man()
+# {
+#    command man "$@" | col -b -x | vim -R -c 'set ft=man nonumber nomod nolist' -c 'map q :q<CR>' -c 'map <SPACE> <C-D>' -c 'map b <C-U>' -c 'nmap K :Man <C-R>=expand(\"<cword>\")<CR><CR>' -
+# 
+# }
+
+# vim: ft=sh

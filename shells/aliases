@@ -1,0 +1,79 @@
+#!/bin/bash
+
+# ls ##########################################################################
+#> define LS_OPTS --color=auto
+alias -- \
+    l='ls LS_OPTS -la'  \
+   ls='ls LS_OPTS'      \
+   ll='ls LS_OPTS -l'   \
+   la='ls LS_OPTS -A'
+
+# grep ########################################################################
+#> define GREP_OPTS --color=auto
+alias -- \
+       g='grep GREP_OPTS'     \
+    grep='grep GREP_OPTS'     \
+   fgrep='grep GREP_OPTS -F'  \
+   igrep='grep GREP_OPTS -i'  \
+   egrep='grep GREP_OPTS -E'
+
+# cd-aliases ##################################################################
+#> define CD_COMMAND pushd
+alias -- \
+        -='CD_COMMAND'                    \
+       ..='CD_COMMAND ..'                 \
+      ...='CD_COMMAND ../..'              \
+     ....='CD_COMMAND ../../..'           \
+    .....='CD_COMMAND ../../../..'        \
+   ......='CD_COMMAND ../../../../..'     \
+  .......='CD_COMMAND ../../../../../..'
+
+# "Core Utils" ################################################################
+# Be Verbose/Interactive/Safe #################################################
+alias -- \
+   cp='cp -v -p -i'                 \
+   rm='rm -v --preserve-root'       \
+   mv='mv -v -i'                    \
+   mkdir='mkdir -v'                 \
+   rmdir='rmdir -v'                 \
+   chmod='chmod -v --preserve-root' \
+   chown='chown -v --preserve-root' \
+   ln='ln -v -i'
+
+# Don't create the annoying ~/.xsel.log file ##################################
+alias xsel='xsel -l /dev/null'
+
+# vi aliases ##################################################################
+alias \
+    v='vim' \
+   vi='vim'
+
+# misc aliases ################################################################
+alias more='less'
+alias info='info --vi-keys'
+alias man="man -r ' Manual page \$MAN_PN line %lt?L/%L.:byte %bB?s/%s..? (END):?pB %pB\\%.. '"
+
+alias openports='netstat --all --numeric --programs --inet'
+alias killflash='pkill -f flash'
+alias dis='bg;disown'
+
+alias pass='vim -S ~/.vim/pass.vim'
+
+#for c in ls mv rm cp cat grep; do
+#   colorize_remark $c
+#done
+
+# if which grc; then
+# for f in /usr/share/grc/*; do
+# f=${f##*/};
+# f=${f##conf.};
+# 
+# case "$f" in
+# ls) continue;;
+# esac
+# 
+# alias $f="grc $(getAlias $f)"
+# done
+# fi
+
+# vim: ft=sh
