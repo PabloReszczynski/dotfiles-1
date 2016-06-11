@@ -60,8 +60,6 @@ endif
 
 # Additional variables that should be passed to preprocessor
 _ADDITIONAL_VARS = HOST PRIVATE_DIR _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
-# Variables that should not be passed to preprocessor
-_INTERNAL_VARS = FILEPP% FILE_PREFIX PREFIX_DIR FILES PP_FILES DIRECTORIES
 
 _PACKAGE_PATH := $(realpath .)
 _PACKAGE_NAME := $(notdir $(_PACKAGE_PATH))
@@ -70,7 +68,6 @@ _PACKAGE_BUILD_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)
 # Collect the defines in Makefile, create a list of -Ddefines
 _DEFINED_VARS := $(shell sed -nr 's/^([a-zA-Z0-9_]+)[[:space:]]*:?=.*/\1/p' 'Makefile')
 _DEFINED_VARS := $(sort $(_DEFINED_VARS))
-_DEFINED_VARS := $(filter-out $(_INTERNAL_VARS), $(_DEFINED_VARS))
 _DEFINED_VARS += $(_ADDITIONAL_VARS)
 _FILEPP_DEFINES := $(foreach V, $(_DEFINED_VARS), "-D$V=$($V)")
 
