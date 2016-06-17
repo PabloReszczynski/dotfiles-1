@@ -39,8 +39,8 @@ set nick_colors = red brightred brightgreen yellow brightyellow magenta brightma
 color muc * on
 
 # Hooks
-#set hook-post-connect = status online Online
-#set hook-pre-disconnect = status offline Byebye
+set hook-post-connect = source ~/.mcabber/hook-post-connect
+set hook-pre-disconnect = source ~/.mcabber/hook-pre-disconnect
 
 # URL-Regex
 set url_regex = "(((http|ftp)s?://)|www[.][-a-z0-9.]+|(mailto:|news:))(%[0-9A-F]{2}|[-_.!~*';/?:@&=+$,#[:alnum:]])+"
@@ -49,6 +49,7 @@ set url_regex = "(((http|ftp)s?://)|www[.][-a-z0-9.]+|(mailto:|news:))(%[0-9A-F]
 #module load tune
 #module load mpd
 module load urlregex
+module load fifo
 
 # History ######################################################################
 set logging = 1
