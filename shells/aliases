@@ -2,15 +2,15 @@
 
 # ls ##########################################################################
 #> define LS_OPTS --color=auto
-alias -- \
-    l='ls LS_OPTS -la'  \
-   ls='ls LS_OPTS'      \
-   ll='ls LS_OPTS -l'   \
+alias \
+    l='ls LS_OPTS -la' \
+   ls='ls LS_OPTS'     \
+   ll='ls LS_OPTS -l'  \
    la='ls LS_OPTS -A'
 
 # grep ########################################################################
 #> define GREP_OPTS --color=auto
-alias -- \
+alias \
        g='grep GREP_OPTS'     \
     grep='grep GREP_OPTS'     \
    fgrep='grep GREP_OPTS -F'  \
@@ -20,33 +20,31 @@ alias -- \
 # cd-aliases ##################################################################
 #> define CD_COMMAND pushd
 alias -- \
-        -='CD_COMMAND'                    \
-       ..='CD_COMMAND ..'                 \
-      ...='CD_COMMAND ../..'              \
-     ....='CD_COMMAND ../../..'           \
-    .....='CD_COMMAND ../../../..'        \
-   ......='CD_COMMAND ../../../../..'     \
+        -='CD_COMMAND -' \
+       ..='CD_COMMAND ..' \
+      ...='CD_COMMAND ../..' \
+     ....='CD_COMMAND ../../..' \
+    .....='CD_COMMAND ../../../..' \
+   ......='CD_COMMAND ../../../../..' \
   .......='CD_COMMAND ../../../../../..'
 
 # "Core Utils" ################################################################
 # Be Verbose/Interactive/Safe #################################################
-alias -- \
-   cp='cp -v -p -i'                 \
-   rm='rm -v --preserve-root'       \
-   mv='mv -v -i'                    \
-   mkdir='mkdir -v'                 \
-   rmdir='rmdir -v'                 \
-   chmod='chmod -v --preserve-root' \
-   chown='chown -v --preserve-root' \
-   ln='ln -v -i'
+alias cp='cp -v -p -i'
+alias rm='rm -v --preserve-root'
+alias mv='mv -v -i'
+alias mkdir='mkdir -v'
+alias rmdir='rmdir -v'
+alias chmod='chmod -v --preserve-root'
+alias chown='chown -v --preserve-root'
+alias ln='ln -v -i'
 
 # Don't create the annoying ~/.xsel.log file ##################################
 alias xsel='xsel -l /dev/null'
 
 # vi aliases ##################################################################
-alias \
-    v='vim' \
-   vi='vim'
+alias  v='vim'
+alias vi='vim'
 
 # misc aliases ################################################################
 alias more='less'

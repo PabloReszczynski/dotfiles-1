@@ -6,6 +6,14 @@ SHELL = bash
 
 build::
 
+.ONESHELL:
+vt_palette:
+	cd "$(_TEMP_DIR)"
+	git clone "https://github.com/braph/conpalette"
+	./conpalette/bin/conpalette --shell blah-light > "$(_PACKAGE_BUILD_DIR)/vt_palette"
+
+pre_build:: vt_palette
+
 post_build:: 
 	@echo "Removing comments"
 	sed -i '/^#/d' "$(_PACKAGE_BUILD_DIR)/bashrc"
@@ -14,5 +22,6 @@ post_build::
 	sed -i '/^$$/d' "$(_PACKAGE_BUILD_DIR)/bashrc"
 
 PP_FILES = bashrc
+FILEPP_INCLUDE = . ..
 
 include ../../package.mk
