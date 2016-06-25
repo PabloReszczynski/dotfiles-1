@@ -2,9 +2,16 @@
 # Dotfile Makefile
 # ================
 
-# !! Variables that should not be used outside this Makefile should be
-# !! prefixed with an underscore. (Underscored variables don't show up
-# !! in shell completion)
+#! Variables that should not be used outside this Makefile should be
+#! prefixed with an underscore. (Underscored variables don't show up
+#! in shell completion)
+#!
+#! This Makefile uses an own special commenting syntax for generating
+#! it's documentation.
+#!
+#!   #$: Variable starts (replaced with =item)
+#!   #(: Group starts (replaced with =head1, =over, =back)
+#!   #>: Plain text for documentation
 
 # Parameters for building an dotfile package
 # ==========================================
@@ -26,6 +33,7 @@ FILE_PREFIX :=
 endif
 
 # Filepp defaults
+# ===============
 FILEPP 			?= filepp
 FILEPP_PREFIX 	?= \#>
 FILEPP_MODULES ?=
@@ -59,22 +67,38 @@ endif
 # ============================================================
 
 # Additional variables that should be passed to preprocessor
-_ADDITIONAL_VARS = HOST PRIVATE_DIR _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
+_ADDITIONAL_DEFINES = HOST PRIVATE_DIR _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR _TEMP_DIR
 
 _PACKAGE_PATH := $(realpath .)
 _PACKAGE_NAME := $(notdir $(_PACKAGE_PATH))
 _PACKAGE_BUILD_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)
 
+# A directory that can be used for temp files in the build process
+_TEMP_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)-temp
+
 # Collect the defines in Makefile, create a list of -Ddefines
 _DEFINED_VARS := $(shell sed -nr 's/^([a-zA-Z0-9_]+)[[:space:]]*:?=.*/\1/p' 'Makefile')
 _DEFINED_VARS := $(sort $(_DEFINED_VARS))
-_DEFINED_VARS += $(_ADDITIONAL_VARS)
+_DEFINED_VARS += $(_ADDITIONAL_DEFINES)
+
 _FILEPP_DEFINES := $(foreach V, $(_DEFINED_VARS), "-D$V=$($V)")
-
-_FILEPP_INCLUDE := $(addprefix -I, $(FILEPP_INCLUDE))
 _FILEPP_MODULES := $(addprefix -m , $(FILEPP_MODULES))
-#_FILEPP_MODULES := $(foreach M, $(FILEPP_MODULES), -m $M)
 
+# Important: _PACKAGE_BUILD_DIR precedes other include dirs
+_FILEPP_INCLUDE := -I$(_PACKAGE_BUILD_DIR)
+_FILEPP_INCLUDE += $(addprefix -I, $(FILEPP_INCLUDE))
+
+
+# We export these variables for calling shell scripts
+# ===================================================
+export ROOT_DIR BUILD_DIR PRIVATE_DIR PREFIX_DIR FILE_PREFIX
+export _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
+
+export FILEPP FILEPP_PREFIX FILEPP_INCLUDE FILEPP_MODULES FILEPP_FLAGS
+export _FILEPP_MODULES _FILEPP_INCLUDE _FILEPP_DEFINES
+
+export FILES PP_FILES DIRECTORIES IGNORE_FILES
+export $(_DEFINED_VARS)
 
 
 # File-selection logic starts here
@@ -115,7 +139,7 @@ _DIRECTORIES := $(sort $(_DIRECTORIES))
 # Makefile rules start here
 # =========================
 
-build:: clean $(_PACKAGE_BUILD_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build
+build:: clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build clean-temp
 
 pre_build:: 	.force
 post_build:: 	.force
@@ -123,6 +147,10 @@ post_install:: .force
 
 # Create the build directory for package
 $(_PACKAGE_BUILD_DIR):
+	mkdir -p "$@"
+
+# Create the temp directory
+$(_TEMP_DIR):
 	mkdir -p "$@"
 
 # Create directories
@@ -184,6 +212,7 @@ update: $(_PACKAGE_BUILD_DIR)/.diff
 		cp -v -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F";
 	done < "$(_PACKAGE_BUILD_DIR)/.diff"
 
+
 help:
 	@cat << EOF
 	Usage: make clean|build|install|update|diff|rediff|template
@@ -207,5 +236,8 @@ clean-diff:
 
 clean-build-dir:
 	rmdir "$(BUILD_DIR)"
+
+clean-temp:
+	rm -rf "$(_TEMP_DIR)"
 
 .force: # we use this to force building a target
