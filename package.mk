@@ -119,7 +119,7 @@ else
 _FILES := $(FILES)
 endif
 
-# Repair paths TODO: (what does this doooo?)
+# Repair paths
 _FILES := $(subst $(_PACKAGE_PATH)/,, $(realpath $(_FILES)))
 _PP_FILES := $(subst $(_PACKAGE_PATH)/,, $(realpath $(_PP_FILES)))
 
@@ -139,8 +139,12 @@ _DIRECTORIES := $(sort $(_DIRECTORIES))
 # Makefile rules start here
 # =========================
 
-build:: clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build clean-temp
+# This target must not be overriden, but it should preceed each makefile that
+# overrides other targets (pre_build, post_build).
+build:: clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build 
+# TODO: clean-temp ???
 
+# These targets can be overriden
 pre_build:: 	.force
 post_build:: 	.force
 post_install:: .force
@@ -167,7 +171,7 @@ $(_PP_FILES): .force
 
 # Finally copy files from build-dir to root-dir
 .ONESHELL:
-install:
+install::
 	cd "$(_PACKAGE_BUILD_DIR)"
 	mkdir -p "$(ROOT_DIR)/$(PREFIX_DIR)"
 	find . -mindepth 1 -type d | sed 's|^./||g' | while read -r D; do
