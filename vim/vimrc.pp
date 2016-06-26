@@ -1,6 +1,11 @@
-syntax on
+" === Plugin Manager
+"> include vundle.vim
+" ==================
 
-" Correct typos
+syntax on
+set hidden
+
+" === Correct typos
 ca WQ wq
 ca wQ wq
 ca Wq wq
@@ -15,11 +20,18 @@ ca Q q
 
 ca q1 q!
 ca Q1 q!
-" -------------
+" =================
+
+" Store viminfo in a sane place
+set viminfo+=n~/.vim/viminfo
 
 set fdm=marker
 set foldmarker={{{,}}}
 
+set smartcase
+set ignorecase
+
+set norelativenumber
 set number
 set showmatch
 
@@ -65,26 +77,35 @@ set wildignore=*.a,*.o,*.so,*.pyc,*.jpg,
 set wildmenu                                " better auto complete
 set wildmode=longest,list                   " bash-like auto complete
 
-" bindings
-    " Highlight last inserted text
-    nnoremap gV '[V']
+" don't include other files while completing
+set complete-=i
 
-    " Disable annoying ex mode (Q)
-    map Q <nop>
+" === bindings
+ " Highlight last inserted text
+ nnoremap gV '[V']
 
-    " Buffers, preferred over tabs now with bufferline.
-    nnoremap gn :bnext<CR>
-    nnoremap gN :bprevious<CR>
-    nnoremap gD :bdelete<CR>
-    nnoremap gf <C-^>
+ " Disable annoying ex mode (Q)
+ map Q <nop>
 
-    " Treat wrapped lines as normal lines
-    nnoremap j gj
-    nnoremap k gk
+ " Buffers, preferred over tabs now with bufferline.
+ nnoremap gn :bnext<CR>
+ nnoremap gN :bprevious<CR>
+ nnoremap gD :bdelete<CR>
+ nnoremap gf <C-^>
+
+ " Treat wrapped lines as normal lines
+ nnoremap j gj
+ nnoremap k gk
+
+ " SelectBuf Plugin
+ nnoremap <Leader>sb :SelectBuf<ENTER>
+ nnoremap g"         :SelectBuf<ENTER>
+" ============
 
 "> if "SLOW_SYSTEM" == 1
 set noruler
 set nocursorline
+set lazyredraw
 set scrolljump=10
 "> else
 set ruler

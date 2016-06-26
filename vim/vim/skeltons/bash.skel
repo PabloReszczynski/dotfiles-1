@@ -1,5 +1,4 @@
 #!/bin/bash
 
 unset CDPATH
-set -u
-set +o histexpand
+set -u +o histexpand

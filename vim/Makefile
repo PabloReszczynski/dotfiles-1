@@ -1,9 +1,6 @@
-PP_KC = \">
-
-#+defines
 SLOW_SYSTEM = 0
-#-defines
 
-INSTALL_DIRS = vim/view
+FILEPP_PREFIX = \">
+DIRECTORIES = vim/view
 
-include ../makefiles/std.mk
+include ../package.mk
