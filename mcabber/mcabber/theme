@@ -14,3 +14,7 @@ set color_rostersel     = white
 set color_bgrostersel   = THEME_COLOR
 set color_rosterselmsg  = brightwhite
 set color_rosternewmsg  = BRIGHT(THEME_COLOR)
+set color_log           = white
+
+set color_timestamp     = BRIGHT(THEME_COLOR)
+set color_readmark      = red
