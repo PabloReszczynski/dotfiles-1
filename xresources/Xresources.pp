@@ -1,5 +1,5 @@
 ! ======== General Terminal Settings ===========
-#> foreach TERM xterm
+#> foreach TERM xterm, UXTerm
 
 ! Cursor
 TERM*cursorColor: Red
