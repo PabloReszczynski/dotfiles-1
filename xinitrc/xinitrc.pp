@@ -15,8 +15,17 @@ has_run() {
    has "$1" && run "$@"
 }
 
+run_as_script() {
+   echo "#!/bin/SHELL" > "/tmp/$1"
+   cat >> "/tmp/$1"
+   chmod +x "/tmp/$1"
+   "/tmp/$1" &
+   rm "/tmp/$1"
+}
+
 {
-   date;
+   date; # date for for log file
+   sleep 3; # race conditions???
 
    # === dirs that we want to keep in /tmp ================
    USER_TMP_DIR="/tmp/home-temp-${USER}";
@@ -40,19 +49,22 @@ has_run() {
    # Set background to 'nearly black' (hack for fucking flash player)
    has_run xsetroot -solid '#000001'
  
-   if has xset; then
-    # Adjust keyboard repeat time/delay
-    xset r rate 255 60
+   # Repeat those commands, in case the keyboard/mouse gets unplugged
+   while :; do
+     # Adjust keyboard repeat time/delay
+     xset r rate 255 60
 
-    # Adjust mouse acceleration
-    xset m 4 4
-   fi
+     # Adjust mouse acceleration
+     xset m 4 4
+
+     # Use capslock as compose key
+     setxkbmap -option compose:caps
+
+     sleep 60
+   done &
 
    # load Xresources
    [ -e ~/.Xresources ]  && has_run xrdb ~/.Xresources
-
-   # Use capslock as compose key
-   setxkbmap -option compose:caps
    
    # Modify keyboard layout
    [ -e ~/.Xmodmap ]     && has_run xmodmap ~/.Xmodmap
