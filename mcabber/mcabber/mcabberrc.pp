@@ -20,12 +20,14 @@ set priority = 42
 set priority_away = 23
 set tls = 1
 
-set iq_version_hide_os = 0
+set iq_version_hide_os = 1
+set iq_version_hide_version = 1
+set iq_time_hide = 1
 set iq_last_disable = 1
 
 # Autoaway
-#set autoaway = 3600
-#set message_autoaway = "Ich bin nicht da!"
+set autoaway = 3600
+set message_autoaway = "idle"
 
 # Style
 set log_win_height =  1
@@ -33,6 +35,7 @@ set roster_width = 20
 set log_win_on_top = 1
 set roster_win_on_right = 0
 set roster_display_filter = ofdna
+set roster_no_leading_space = 1
 
 # Muc-Colors
 set nick_colors = red brightred brightgreen yellow brightyellow magenta brightmagenta cyan brightcyan brightblue
@@ -59,6 +62,9 @@ set logging_ignore_status = 0
 set log_muc_conf = 1
 set load_muc_logs = 1
 set max_history_age = 7 # load history of 1 week
+
+# lock on scrolling up, unlock on scrolling down
+set buffer_smart_scrolling = 1
 
 # state file only makes sense with history
 set statefile = ~/.mcabber/statefile

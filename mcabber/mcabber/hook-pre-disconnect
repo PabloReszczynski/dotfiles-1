@@ -1,0 +1,7 @@
+roster search debianforum@chat.debianforum.de
+room nick B
+room nick Y
+room nick E
+room leave B Y E
+
+status message > Offline
