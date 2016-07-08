@@ -10,7 +10,7 @@ build::
 vt_palette:
 	cd "$(_TEMP_DIR)"
 	git clone "https://github.com/braph/conpalette"
-	./conpalette/bin/conpalette --shell blah-light > "$(_PACKAGE_BUILD_DIR)/vt_palette"
+	./conpalette/bin/conpalette --shell --oneline blah-light > "$(_PACKAGE_BUILD_DIR)/vt_palette"
 
 
 pre_build:: vt_palette
