@@ -69,6 +69,8 @@ set -g window-status-bell-style 'bg=black,fg=red'
 
 set -g default-terminal "screen-256color"
 
+set -g display-time 3000
+
 # don't resize all the windows to the smallest
 # session, resize only the active window in the small session.
 set -g aggressive-resize on
