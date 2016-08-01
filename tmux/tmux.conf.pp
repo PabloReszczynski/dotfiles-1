@@ -198,10 +198,10 @@ bind '?'  list-keys
 bind -n 'F1' set -g mouse '' 
 
 # clipboard actions
-bind   'C' run -b 'tmux show-buffer | xsel -i -p'
-bind 'C-C' run -b 'tmux show-buffer | xsel -i -b'
-bind   'V' run -b 'xsel -o -p | tmux load-buffer -b primary -; tmux paste-buffer -b primary'
-bind 'C-V' run -b 'xsel -o -b | tmux load-buffer -b clipboard -; tmux paste-buffer -b clipboard'
+bind   'C' run -b 'timeout 2   tmux show-buffer | xsel -i -p'
+bind 'C-C' run -b 'timeout 2   tmux show-buffer | xsel -i -b'
+bind   'V' run -b 'timeout 2   xsel -o -p | tmux load-buffer -b primary -; tmux paste-buffer -b primary'
+bind 'C-V' run -b 'timeout 2   xsel -o -b | tmux load-buffer -b clipboard -; tmux paste-buffer -b clipboard'
 
 # pane control
 bind -r 'M-h'  resize-pane -L
