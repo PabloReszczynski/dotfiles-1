@@ -1,5 +1,5 @@
 DWM_URL = http://dwm.suckless.org/patches
-DWM_PATCHES = dwm-6.0-stacker.diff
+DWM_PATCHES = dwm-stacker-6.0.diff
 
 build::
 
@@ -7,7 +7,7 @@ install::
 	cd "$(_TEMP_DIR)/dwm" && sudo make install
 
 dwm-src:
-	cd "$(_TEMP_DIR)" && git clone "http://git.suckless.org/dwm"
+	cd "$(_TEMP_DIR)" && { [[ -d "dwm" ]] || git clone "http://git.suckless.org/dwm"; }
 
 config.h:
 	cp "$(_PACKAGE_PATH)/config.h" "$(_TEMP_DIR)/dwm/"
