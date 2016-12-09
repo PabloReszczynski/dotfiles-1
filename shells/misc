@@ -11,6 +11,6 @@ set +H
 trap 'eval $(resize)' WINCH
 
 # Disable ^S/^Q ################################################################
-stty start ''; stty stop '';
+stty start '' stop ''
 
 # vim: ft=sh

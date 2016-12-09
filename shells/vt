@@ -1,19 +1,20 @@
 #!/bin/bash
 
-if tty | grep -qF 'tty'; then
+# ( {} & )
+# Run command in background and supress "[<JOB>] $PID ... [<JOB>]+ Done" output
+### ({
+###    if tty | grep -qF 'tty'; then
+###       if [ "$TERM" = "linux" ]; then
+###           #> include <vt_palette>
+###           clear #for background artifacting
+###       fi
+### 
+###       setfont Lat2-Terminus16.psfu.gz &>/dev/null
+###    fi
+### }&)
 
-   # () supresses [<JOB>] $PID ... [<JOB>]+ Done output
-   (
-      {
-         if [ "$TERM" = "linux" ]; then
-             #> include <vt_palette>
-             clear #for background artifacting
-         fi
-
-         setfont Lat2-Terminus16.psfu.gz &>/dev/null
-      } &
-   )
-
-fi
+#> include <vt_palette>
+setfont Lat2-Terminus16.psfu.gz &>/dev/null
+clear
 
 # vim: ft=sh

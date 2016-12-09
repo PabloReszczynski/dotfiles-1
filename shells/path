@@ -2,11 +2,11 @@
 
 #> define IF_DIR(_IF_, _THEN_) [[ -d "_IF_" ]] && _THEN_
 
-#> define PREPEND_PATH(_DIR_) PATH="_DIR_:$PATH"
-#> define APPEND_PATH(_DIR_)  PATH+="_DIR_"
+#> define PATH_PREPEND(_DIR_) PATH="_DIR_:$PATH"
+#> define PATH_APPEND(_DIR_)  PATH+="_DIR_"
 
-#> define IF_PREPEND(_DIR_) IF_DIR(_DIR_, PREPEND_PATH(_DIR_))
-#> define IF_APPEND(_DIR_)  IF_DIR(_DIR_, APPEND_PATH(_DIR_))
+#> define PREPEND_IF(_DIR_) IF_DIR(_DIR_, PATH_PREPEND(_DIR_))
+#> define APPEND_IF(_DIR_)  IF_DIR(_DIR_, PATH_APPEND(_DIR_))
 
 # TODO: export path by checking OS name
 
@@ -16,10 +16,9 @@
 # arch linux
 export PATH='/bin:/usr/local/bin:/usr/local/sbin:/opt'
 
-IF_PREPEND($HOME/bin)
-IF_PREPEND($HOME/scripts)
-IF_PREPEND(/usr/bin/core_perl)
-IF_PREPEND(/usr/bin/vendor_perl)
-IF_APPEND(/opt/vc/bin)
+PATH_PREPEND($HOME/bin)
+PATH_PREPEND($HOME/scripts)
+PATH_PREPEND(/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl)
+PATH_APPEND(/opt/vc/bin)
 
 # vim: ft=sh

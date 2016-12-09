@@ -10,14 +10,14 @@ set_title() {
 
 
 # === chpwd() hook =============================================================
-chpwd()
-{
+chpwd() {
 	ls --color=auto
 }
+# ==============================================================================
 
+# === emulate chpwd() on BASH ==================================================
 #> if "SHELL" eq "bash"
-function cd() 
-{
+cd() {
    builtin CD_COMMAND "${@:-$HOME}" || return;
    chpwd
 }
@@ -25,8 +25,7 @@ function cd()
 # ==============================================================================
 
 # === preexec() hook ===========================================================
-preexec()
-{
+preexec() {
    LAST_COMMAND="$1"
 
 	case $TERM in
@@ -66,8 +65,7 @@ trap 'preexec_bash_trap' DEBUG
 # {
 # }
 
-precmd()
-{
+precmd() {
    printf "\a";
 
    case $TERM in
