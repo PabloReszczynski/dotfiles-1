@@ -10,7 +10,7 @@ build::
 vt_palette:
 	cd "$(_TEMP_DIR)"
 	git clone "https://github.com/braph/conpalette"
-	./conpalette/bin/conpalette --shell --oneline blah-light > "$(_PACKAGE_BUILD_DIR)/vt_palette"
+	./conpalette/bin/conpalette --shell --oneline blah-light > "$(_TEMP_DIR)/vt_palette"
 
 
 pre_build:: vt_palette
@@ -24,6 +24,10 @@ post_build::
 	
 	@echo "Removing empty lines"
 	sed -i '/^$$/d' "$(_PACKAGE_BUILD_DIR)/zshrc"
+	
+	@echo "Inserting color palette"
+	cat "$(_PACKAGE_BUILD_DIR)/zshrc" >> "$(_TEMP_DIR)/vt_palette"
+	mv "$(_TEMP_DIR)/vt_palette" "$(_PACKAGE_BUILD_DIR)/zshrc"
 
 PP_FILES = zshrc
 FILEPP_INCLUDE = . ..
