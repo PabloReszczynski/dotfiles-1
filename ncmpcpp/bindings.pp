@@ -441,8 +441,8 @@ def_key "l"
 #def_key "v"
 #  reverse_selection
 #
-#def_key "V"
-#  remove_selection
+def_key "V"
+  remove_selection
 #
 def_key "A"
   select_album
@@ -483,8 +483,8 @@ def_key "c"
 #def_key "M"
 #  move_selected_items_to
 #
-#def_key "A"
-#  add
+def_key "O"
+  add
 #
 def_key "S"
   save_playlist
