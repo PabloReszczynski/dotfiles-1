@@ -142,7 +142,6 @@ _DIRECTORIES := $(sort $(_DIRECTORIES))
 # This target must not be overriden, but it should preceed each makefile that
 # overrides other targets (pre_build, post_build).
 build:: clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build 
-# TODO: clean-temp ???
 
 # These targets can be overriden
 pre_build:: 	.force
@@ -198,16 +197,17 @@ $(_PACKAGE_BUILD_DIR)/.diff:
 rediff: clean-diff $(_PACKAGE_BUILD_DIR)/.diff
 
 # Call 'diff' on files that would be modified
-_DIFF = diff
+_DIFF_PROGRAM = diff
 .ONESHELL:
 diff: $(_PACKAGE_BUILD_DIR)/.diff
-	while read -r F; do
-		$(_DIFF) -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F";
-	done < "$(_PACKAGE_BUILD_DIR)/.diff"
+	exec 3<"$(_PACKAGE_BUILD_DIR)/.diff"
+	while read -u 3 -r F; do
+		$(_DIFF_PROGRAM) -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F";
+	done
+	exec 3<&-
 
-# TODO: fixme
 vimdiff:
-	$(MAKE) _DIFF=vimdiff diff
+	$(MAKE) _DIFF_PROGRAM=vimdiff diff
 
 # Update only new files
 .ONESHELL:
@@ -232,7 +232,7 @@ template:
 	include ../makefiles/std.mk
 	EOF
 
-clean:
+clean: clean-temp
 	rm -rf "$(_PACKAGE_BUILD_DIR)"
 
 clean-diff:
