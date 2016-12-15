@@ -11,17 +11,16 @@
 #
 #> define RELOAD source-file ~/.tmux.conf
 
-#TODO:
 ### Our "perl-tmux-daemon"
 #
-#> define TMUX_DAEMON_BIN ~/.tmux/bin/tmux_daemon.pl
+#> define TMUX_DAEMON_BIN tmux_daemon.pl
+#> define TMUX_DAEMON_BIN_DIR ~/.tmux/bin
 #> define TMUX_DAEMON_FIFO /dev/shm/$USER-tmux-daemon.fifo
 #> define TMUX_DAEMON(_ACTION_) run -b 'echo _ACTION_ > TMUX_DAEMON_FIFO ;:'
 #
 # Also ensure that our demon is running:
-#if 'killall -0 -u $USER TMUX_DAEMON_BIN' '' 'run -b "TMUX_DAEMON_BIN TMUX_DAEMON_FIFO"'
-run 'killall -u $USER TMUX_DAEMON_BIN &>/dev/null;:'
-run -b "TMUX_DAEMON_BIN TMUX_DAEMON_FIFO &>/dev/null;:"
+run 'pkill -U $USER -f TMUX_DAEMON_BIN &>/dev/null;:'
+run -b "TMUX_DAEMON_BIN_DIR/TMUX_DAEMON_BIN TMUX_DAEMON_FIFO &>/dev/null;:"
 
 
 
@@ -243,6 +242,18 @@ bind '='       TMUX_DAEMON(select-window 12)
 bind 'BSpace'  TMUX_DAEMON(select-window 13)
 bind 'Home'    TMUX_DAEMON(select-window 14)
 bind 'End'     TMUX_DAEMON(select-window 15)
+bind 'F1'      TMUX_DAEMON(select-window 11)
+bind 'F2'      TMUX_DAEMON(select-window 12)
+bind 'F3'      TMUX_DAEMON(select-window 13)
+bind 'F4'      TMUX_DAEMON(select-window 14)
+bind 'F5'      TMUX_DAEMON(select-window 15)
+bind 'F6'      TMUX_DAEMON(select-window 16)
+bind 'F7'      TMUX_DAEMON(select-window 17)
+bind 'F8'      TMUX_DAEMON(select-window 18)
+bind 'F9'      TMUX_DAEMON(select-window 19)
+bind 'F10'     TMUX_DAEMON(select-window 20)
+bind 'F11'     TMUX_DAEMON(select-window 21)
+bind 'F12'     TMUX_DAEMON(select-window 22)
 
 bind '/'       command-prompt "find-window -TN %%"
 bind 'R'       move-window -r
