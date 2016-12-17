@@ -3,18 +3,18 @@
 # ls ##########################################################################
 #> define LS_OPTS --color=auto
 alias \
+ls='ls LS_OPTS' \
  l='ls LS_OPTS -la' \
-ls='ls LS_OPTS'     \
-ll='ls LS_OPTS -l'  \
+ll='ls LS_OPTS -l' \
 la='ls LS_OPTS -A'
 
 # grep ########################################################################
 #> define GREP_OPTS --color=auto
 alias \
-    g='grep GREP_OPTS'     \
- grep='grep GREP_OPTS'     \
-fgrep='grep GREP_OPTS -F'  \
-igrep='grep GREP_OPTS -i'  \
+    g='grep GREP_OPTS' \
+ grep='grep GREP_OPTS' \
+fgrep='grep GREP_OPTS -F' \
+igrep='grep GREP_OPTS -i' \
 egrep='grep GREP_OPTS -E'
 
 # cd-aliases ##################################################################

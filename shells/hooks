@@ -70,11 +70,13 @@ precmd() {
 
    case $TERM in
       xterm*)
-         print -Pn "\e]0;$TITLE_PROMPT (last command: $LAST_COMMAND)\a"
+         #print -Pn "\e]0;$TITLE_PROMPT (last command: $LAST_COMMAND)\a"
+         set_title "$TITLE_PROMPT $1 (last command: $LAST_COMMAND)"
       ;;
 
       screen*)
-         print -Pn "\e]0;$TITLE_PROMPT $1 (last command: $LAST_COMMAND)\a"
+         #print -Pn "\e]0;$TITLE_PROMPT $1 (last command: $LAST_COMMAND)\a"
+         set_title "$TITLE_PROMPT $1 (last command: $LAST_COMMAND)"
          #screen -S "$SCREEN_SESSION" -X title "$(print -Pn "$TITLE_PROMPT")"
          #screen -S "$SCREEN_SESSION" -X caption string "$(print -Pn "$TITLE_PROMPT")"
       ;;

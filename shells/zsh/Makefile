@@ -25,11 +25,7 @@ post_build::
 	@echo "Removing empty lines"
 	sed -i '/^$$/d' "$(_PACKAGE_BUILD_DIR)/zshrc"
 	
-	@echo "Inserting color palette"
-	cat "$(_PACKAGE_BUILD_DIR)/zshrc" >> "$(_TEMP_DIR)/vt_palette"
-	mv "$(_TEMP_DIR)/vt_palette" "$(_PACKAGE_BUILD_DIR)/zshrc"
-
 PP_FILES = zshrc
-FILEPP_INCLUDE = . ..
+FILEPP_INCLUDE = . .. $(_TEMP_DIR)
 
 include ../../package.mk

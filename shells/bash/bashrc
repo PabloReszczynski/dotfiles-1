@@ -3,6 +3,7 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+#> include <vt_palette>
 #> include "../vt"
 #> include "../colors"
 #> include "../path"
@@ -12,8 +13,6 @@
 #> include "../aliases"
 #> include "bashoptions"
 #> include "bashprompt"
-##> include "zshcompletion"
-##> include "zshparam"
 #> include "bashinput"
 #> include "../misc"
 #> include "../hooks"

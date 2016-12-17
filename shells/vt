@@ -13,7 +13,6 @@
 ###    fi
 ### }&)
 
-#> include <vt_palette>
 setfont Lat2-Terminus16.psfu.gz &>/dev/null
 clear
 
