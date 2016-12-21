@@ -141,11 +141,12 @@ _DIRECTORIES := $(sort $(_DIRECTORIES))
 
 # This target must not be overriden, but it should preceed each makefile that
 # overrides other targets (pre_build, post_build).
-build:: clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build 
+build:: check_dependencies clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) pre_build $(_DIRECTORIES) $(_FILES) $(_PP_FILES) post_build 
 
 # These targets can be overriden
 pre_build:: 	.force
 post_build:: 	.force
+pre_install:: 	.force
 post_install:: .force
 
 # Create the build directory for package
@@ -153,8 +154,9 @@ $(_PACKAGE_BUILD_DIR):
 	mkdir -p "$@"
 
 # Create the temp directory
-$(_TEMP_DIR):
+$(_TEMP_DIR): # $(_PACKAGE_BUILD_DIR)
 	mkdir -p "$@"
+	# [[ -d "$(_PACKAGE_BUILD_DIR)/.temp" ]] && ln -s "$@" "$(_PACKAGE_BUILD_DIR)/.temp"
 
 # Create directories
 $(_DIRECTORIES): .force
@@ -168,9 +170,14 @@ $(_FILES): .force
 $(_PP_FILES): .force
 	$(FILEPP) $(_FILEPP_DEFINES) $(_FILEPP_MODULES) $(_FILEPP_INCLUDE) -kc "$(FILEPP_PREFIX)" $(FILEPP_FLAGS) "$@" -o "$(_PACKAGE_BUILD_DIR)/$(subst .pp,,$@)"
 
+# Check if all dependencies are installed
+check_dependencies::
+	@ echo -n "Checking for filepp ... "
+	@ which filepp
+
 # Finally copy files from build-dir to root-dir
 .ONESHELL:
-install::
+install:: pre_install
 	cd "$(_PACKAGE_BUILD_DIR)"
 	mkdir -p "$(ROOT_DIR)/$(PREFIX_DIR)"
 	find . -mindepth 1 -type d | sed 's|^./||g' | while read -r D; do
