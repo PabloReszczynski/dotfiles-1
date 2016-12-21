@@ -174,6 +174,8 @@ $(_PP_FILES): .force
 check_dependencies::
 	@ echo -n "Checking for filepp ... "
 	@ which filepp
+	@ echo -n "Checking for filepp module 'testfile' ... "
+	@ filepp -m testfile.pm /dev/null
 
 # Finally copy files from build-dir to root-dir
 .ONESHELL:
