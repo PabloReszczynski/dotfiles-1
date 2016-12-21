@@ -1,6 +1,12 @@
 EVILVTE_BUILD_DIR = /tmp/evilvte_build
 _PACKAGE_PATH = $(realpath .)
 
+check_dependencies:
+	@ echo -n "Checking for git ... "
+	@ which git
+	@ echo -n "Checking for sudo ... "
+	@ which sudo
+
 .ONESHELL:
 build:
 	mkdir "$(EVILVTE_BUILD_DIR)"
