@@ -39,6 +39,8 @@ FILES = $(notdir $(realpath $(wildcard */)))
 LOG = /tmp/$(USER)-mk.log
 VARIABLES ?= 
 
+check_dependencies: $(addsuffix .check_dependencies, $(FILES))
+
 build: $(addsuffix .build, $(FILES))
 
 diff: $(addsuffix .diff, $(FILES))
@@ -50,6 +52,18 @@ clean: clean-status $(addsuffix .clean, $(FILES))
 clean-status:
 	rm -f *.build 
 	rm -f *.install
+
+clean-log:
+	rm -f $(LOG)
+
+show-log:
+	less $(LOG)
+
+%.check_dependencies: clean-log
+	@ echo -n "$* ... "
+	@ ( cd $* && make check_dependencies ) >> $(LOG)
+	@ echo "done"
+
 
 %.build:
 	( cd $* && make build $(VARIABLES) ) && touch $*.build || echo "Failed $*" >> $(LOG)
