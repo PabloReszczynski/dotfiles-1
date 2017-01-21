@@ -1,0 +1,15 @@
+IRB.conf[:SAVE_HISTORY] = 999999
+IRB.conf[:HISTORY_FILE] = "#{ENV['HOME']}/.irb_history"
+
+require 'rubygems'
+require 'irb/completion'
+
+#require 'wirble'
+#Wirble.init
+#Wirble.colorize
+
+#require 'hirb'
+#Hirb.enable
+
+#require 'bond'
+#Bond.start
