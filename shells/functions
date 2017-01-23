@@ -58,7 +58,8 @@ freetop() {
 }
 
 gclone() {
-   git clone https://github.com/braph/$1
+   local repo=$1; shift
+   git clone https://github.com/braph/$repo "$@"
 }
 
 gcommit() {
