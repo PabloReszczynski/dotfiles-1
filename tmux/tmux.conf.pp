@@ -1,12 +1,3 @@
-### Fixing prelling mouse/keys
-#
-# BIND: the first part of the bind-command ("bind key", "bind -n MouseDown")
-# A:    the action that should be lauched
-#
-# Example: FIX_DOUBLE(bind -n MouseDown1Status, select-window -t =)
-#
-#> define FIX_DOUBLE(BIND,ACTION) BIND unBIND \; ACTION \; run 'sleep 0.1; tmux source ~/.tmux.conf'
-
 ### Reload Tmux-Source
 #
 #> define RELOAD source-file ~/.tmux.conf
@@ -134,8 +125,6 @@ set -g aggressive-resize on
  bind -n 'C-WheelUpPane'        send-keys Up
  bind -n 'C-WheelDownPane'      send-keys Down
 
- bind -t vi-copy C-MouseDown1Pane rectangle-toggle
-
 ### Left Click: selects pane and clicks
 # bind -n   'MouseDown1Pane'     select-pane -t= \; send-keys -M
 ### Left Drag:  enters selection mode
@@ -189,7 +178,6 @@ bind 'PageUp'   copy-mode -u
 bind 'PageDown' copy-mode
 bind 'v' copy-mode
 bind 'p' paste-buffer
-bind -t vi-copy 'y' copy-selection
 
 
 bind 'D' detach
@@ -224,7 +212,11 @@ bind 'L'       select-pane -R
 bind '_'       split-window
 bind '|'       split-window -h
 
+# window moving
+bind 'm'       TMUX_DAEMON(move-window-interactive)
+
 # window selection
+bind ' '       choose-tree -u
 bind '"'       choose-window
 bind '`'       TMUX_DAEMON(select-window 0)
 bind '1'       TMUX_DAEMON(select-window 1)
@@ -255,6 +247,23 @@ bind 'F10'     TMUX_DAEMON(select-window 20)
 bind 'F11'     TMUX_DAEMON(select-window 21)
 bind 'F12'     TMUX_DAEMON(select-window 22)
 
+# session selection
+bind -T SeSe '`'     TMUX_DAEMON(select-session 0)
+bind -T SeSe '1'     TMUX_DAEMON(select-session 1)
+bind -T SeSe '2'     TMUX_DAEMON(select-session 2)
+bind -T SeSe '3'     TMUX_DAEMON(select-session 3)
+bind -T SeSe '4'     TMUX_DAEMON(select-session 4)
+bind -T SeSe '5'     TMUX_DAEMON(select-session 5)
+bind -T SeSe '6'     TMUX_DAEMON(select-session 6)
+bind -T SeSe '7'     TMUX_DAEMON(select-session 7)
+bind -T SeSe '8'     TMUX_DAEMON(select-session 8)
+bind -T SeSe '9'     TMUX_DAEMON(select-session 9)
+bind -T SeSe '0'     TMUX_DAEMON(select-session 10)
+bind -T SeSe 'j'     TMUX_DAEMON(select-session -n)
+bind -T SeSe 'k'     TMUX_DAEMON(select-session -p)
+bind -T SeSe 'S'     choose-session
+bind 'S'       switch-client -T SeSe
+
 bind '/'       command-prompt "find-window -TN %%"
 bind 'R'       move-window -r
 
@@ -267,10 +276,10 @@ bind 'l'       next-window
 
 # window creation and command execution
 bind 'c'       neww
-bind 'o'       neww 'runner -H ~/.tmux/url_hist  -C -t "$HOME/.tmux/bin/w3m_openurl" -P url'
-bind 's'       neww 'runner -H ~/.tmux/srch_hist -C -t "$HOME/.tmux/bin/websearch" -P srch'
-bind 'n'       neww "runner -H ~/.tmux/cmd_hist -P cmd"
-bind 'r'       neww "runner -H ~/.tmux/cmd_hist -b -q -P cmd"
+#bind 'o'       neww 'runner -H ~/.tmux/url_hist  -C -t "$HOME/.tmux/bin/w3m_openurl" -P url'
+#bind 's'       neww 'runner -H ~/.tmux/srch_hist -C -t "$HOME/.tmux/bin/websearch" -P srch'
+#bind 'n'       neww "runner -H ~/.tmux/cmd_hist -P cmd"
+#bind 'r'       neww "runner -H ~/.tmux/cmd_hist -b -q -P cmd"
 
 # vim: set filetype=tmux.conf:
 
