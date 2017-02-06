@@ -13,6 +13,7 @@ has() {
 
 has_run() {
    has "$1" && run "$@"
+   return 0
 }
 
 {
@@ -29,9 +30,9 @@ has_run() {
       ; \
    do
       echo "Linking $d to temp";
-      rm ~/"$d" || rmdir ~/"$d"
-      mkdir -p "$USER_TMP_DIR/$d" && \
-      chmod 0755 "$USER_TMP_DIR/$d" && \
+      rmdir ~/"$d" || rm -f ~/"$d" || continue;
+      mkdir -p "$USER_TMP_DIR/$d"   &&
+      chmod 0755 "$USER_TMP_DIR/$d" &&
       ln -s "$USER_TMP_DIR/$d" ~/"$d";
    done
    # ======================================================
@@ -40,21 +41,28 @@ has_run() {
    has_run mpd;
 
    # === Our notification daemon ===
-   #has_run dunst;
+   has_run dunst;
 
    # === Remap Mousebuttons ===
-   #has_run imwheel;
+   has_run imwheel;
+
+   # === Disable touchpad while typing ===
+   has_run syndaemon -i 0.5 -t -K -R
 
    # === Open browser =====================================
-   has_run dillo blog.fefe.de;
-   has_run inox;
+   #> define STARTPAGE "blog.fefe.de"
+   has_run inox      STARTPAGE ||
+   has_run chromium  STARTPAGE ||
+   has_run palemoon  STARTPAGE ||
+   has_run firefox   STARTPAGE ||
+   has_run dillo     STARTPAGE
 
    # === Host based applications ==========================
-#> if "HOST" eq "pizwo"
-   #has_run synergys
-#> elif "HOST" eq "samsung"
-   #has_run synergyc 10.0.0.10
-#> endif
+   #> if "HOST" eq "pizwo"
+      # has_run synergys
+   #> elif "HOST" eq "samsung"
+      # has_run synergyc 10.0.0.10
+   #> endif
 
    # === Select terminal emulator =========================
    if has uxterm; then
@@ -73,12 +81,9 @@ has_run() {
       tmux has-session -t 'main' || tmux new-session -d -s 'main'
       tmux has-session -t 'bg'   || tmux new-session -d -s 'bg'
 
-      has ncmpcpp && tmux new-window -t 'main:' ncmpcpp
-      if has finch; then
-         tmux new-window -t 'main:' finch
-      elif has mcabber; then
-         tmux new-window -t 'main:' mcabber
-      fi
+      has ncmpcpp && tmux new-window -t 'main:' 'ncmpcpp'
+      { has finch   && tmux new-window -t 'main:' 'finch';   } ||
+      { has mcabber && tmux new-window -t 'main:' 'mcabber'; } 
 
       terminal_init='tmux -2 attach -t main'
    elif has zsh; then
@@ -89,10 +94,12 @@ has_run() {
    # ======================================================
 
    # === Wait for window manager ==========================
-   sleep 3;
+   # sleep 2;
    # ======================================================
 
    # === initialize X11 stuff =============================
+   # Disable beep
+   xset -b
 
    # load Xresources
    [ -e ~/.Xresources ]  && has_run xrdb ~/.Xresources
@@ -118,9 +125,8 @@ has_run() {
    #xscreensaver-command -lock
    # ======================================================
 
-   sleep 1;
-
    # === Start terminal emulator ==========================
+   sleep 1; 
    run $terminal_cmd $terminal_init;
 
 } >LOG_FILE 2>&1 &
