@@ -176,7 +176,6 @@ bind 'g'  set status
 
 bind 'PageUp'   copy-mode -u
 bind 'PageDown' copy-mode
-bind 'v' copy-mode
 bind 'p' paste-buffer
 
 
@@ -185,10 +184,27 @@ bind '?'  list-keys
 bind -n 'F1' set -g mouse '' 
 
 # clipboard actions
-bind   'C' run -b 'timeout 2   tmux show-buffer | xsel -i -p'
-bind 'C-C' run -b 'timeout 2   tmux show-buffer | xsel -i -b'
-bind   'V' run -b 'timeout 2   xsel -o -p | tmux load-buffer -b primary -; tmux paste-buffer -b primary'
-bind 'C-V' run -b 'timeout 2   xsel -o -b | tmux load-buffer -b clipboard -; tmux paste-buffer -b clipboard'
+#> define XSEL xsel -l /dev/null
+#> define TIMEOUT timeout -k 1 2 
+#> define BUF_FILE "/tmp/.tmuxbuf"
+bind   'C' run -b 'tmux show-buffer | TIMEOUT XSEL -i -p ;:'
+bind 'C-C' run -b 'tmux show-buffer | TIMEOUT XSEL -i -b ;:'
+bind   'v' paste-buffer
+
+# paste from X11 clipboard, preserve old buffer in BUF_FILE
+bind   'V' save-buffer BUF_FILE \;\
+           delete-buffer \;\
+           run 'TIMEOUT XSEL -o -p | tmux load-buffer -b primary - ;:' \;\
+           paste-buffer -r -d -b primary \;\
+           load-buffer BUF_FILE
+bind 'C-V' save-buffer BUF_FILE \;\
+           delete-buffer \;\
+           run 'TIMEOUT XSEL -o -b | tmux load-buffer -b clipboard - ;:' \;\
+           paste-buffer -r -d -b clipboard \;\
+           load-buffer BUF_FILE
+
+# 'V'/'C-V' will fail on 'save-buffer' if there is no buffer present.
+set-buffer ''
 
 # pane control
 bind -r 'M-h'  resize-pane -L
