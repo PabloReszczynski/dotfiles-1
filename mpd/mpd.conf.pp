@@ -208,6 +208,7 @@ input {
 audio_output {
 	type		"alsa"
 	name		"Alsa Output"
+   enabled  "yes"
 ##	device		"hw:0,0"	# optional
 ##	mixer_type      "hardware"	# optional
 ##	mixer_device	"default"	# optional
@@ -275,16 +276,18 @@ audio_output {
 #	format		"44100:16:1"
 	format		"44100:16:2"
 	max_clients	"0"			# optional 0=no limit
+   enabled     "no"
 }
 
 # An example of a pulseaudio output (streaming to a remote pulseaudio server)
 #
-#audio_output {
-#	type		"pulse"
-#	name		"My Pulse Output"
-##	server		"remote_server"		# optional
-##	sink		"remote_server_sink"	# optional
-#}
+audio_output {
+	type		"pulse"
+	name		"My Pulse Output"
+   enabled  "no"
+#	server		"remote_server"		# optional
+#	sink		"remote_server_sink"	# optional
+}
 #
 # An example of a winmm output (Windows multimedia API).
 #
