@@ -122,7 +122,7 @@
 #
 ## Defines how long messages are supposed to be visible.
 ##
-#message_delay_time = 5
+message_delay_time = 2
 #
 ##### song format #####
 ##
@@ -176,7 +176,6 @@
 ##
 ## Note: colors can be nested.
 ##
-#TODO
 #song_list_format = {%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
 #
 #song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
@@ -214,9 +213,9 @@
 ## with reversed colors.
 ##
 #
-#alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
+alternative_header_first_line_format = $1$aqqu$/a$9 $4{%t}|{%f} $1$atqq$/a$9
 #
-#alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
+alternative_header_second_line_format = {{$5%a$9}{$8 - $2%b$9}{ ($4%y$9)}}|{%D}
 #
 ##
 ## Note: below variables also support text attributes listed above.
@@ -273,7 +272,6 @@
 ##   tag and then composer and performer if previous ones are
 ##   not available.
 ##
-#TODO
 #song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
 song_columns_list_format = (5f)[magenta]{nE:#} (20)[blue]{a} (20)[red]{b} (50)[yellow]{t|f:Title} (7f)[green]{lr}
 #
@@ -299,9 +297,9 @@ song_columns_list_format = (5f)[magenta]{nE:#} (20)[blue]{a} (20)[red]{b} (50)[y
 ##
 playlist_display_mode = columns
 #
-#browser_display_mode = classic
+browser_display_mode = classic
 #
-#search_engine_display_mode = classic
+search_engine_display_mode = columns
 #
 #playlist_editor_display_mode = classic
 #
@@ -321,9 +319,7 @@ seek_time = 5
 ## Note: You can specify third character which will
 ## be used to build 'empty' part of progressbar.
 ##
-#progressbar_look = =>
-#
-progressbar_boldness = no
+progressbar_look = "─╼─"
 #
 ## Available values: database, playlist.
 ##
@@ -353,12 +349,11 @@ header_visibility = no
 #
 statusbar_visibility = no
 #
-#titles_visibility = yes
 titles_visibility = no
 #
-#header_text_scrolling = yes
+header_text_scrolling = no
 #
-#cyclic_scrolling = no
+cyclic_scrolling = no
 #
 #lines_scrolled = 2
 #
@@ -368,7 +363,7 @@ titles_visibility = no
 #
 #store_lyrics_in_song_dir = no
 #
-#generate_win32_compatible_filenames = yes
+generate_win32_compatible_filenames = no
 #
 allow_for_physical_item_deletion = no
 #
@@ -412,7 +407,7 @@ allow_for_physical_item_deletion = no
 #
 #locked_screen_width_part = 50
 #
-#ask_for_locked_screen_width_part = yes
+ask_for_locked_screen_width_part = no
 #
 #jump_to_now_playing_song_at_start = yes
 #
@@ -473,15 +468,15 @@ empty_tag_marker = []
 #
 ## Note: set to yes if external editor is a console application.
 ##
-#use_console_editor = yes
+use_console_editor = yes
 #
 ##### colors definitions #####
 #
 colors_enabled = yes
 #
-empty_tag_color = cyan
+empty_tag_color = blue
 #
-header_window_color = cyan
+header_window_color = blue
 #
 #volume_color = default
 #
@@ -501,9 +496,9 @@ main_window_highlight_color = default
 #
 progressbar_elapsed_color = THEME_COLOR
 #
-statusbar_color = cyan
+statusbar_color = blue
 #
-alternative_ui_separator_color = white
+alternative_ui_separator_color = black
 #
 #active_column_color = red
 #
