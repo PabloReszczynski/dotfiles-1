@@ -1,5 +1,33 @@
 #!/bin/bash
 
+# ALIASES_ARRAY
+# Macro for getting the accurate array for aliases
+#
+#> if "SHELL" eq "zsh"
+#>    define ALIASES_ARRAY aliases
+#> else
+#>    define ALIASES_ARRAY BASH_ALIASES
+#> endif
+
+# GET_ALIAS
+# Macro for expanding an alias
+#
+#> define GET_ALIAS(al) "${ALIASES_ARRAY[al]:-al}"
+
+getAlias() {
+   echo GET_ALIAS($1)
+}
+
+getAliasArgs() {
+   local al=GET_ALIAS($1)
+   local args=${al#* }
+   if [[ "$al" == "$args" ]]; then
+      echo
+   else
+      echo "$args"
+   fi
+}
+
 # ls ##########################################################################
 #> define LS_OPTS --color=auto
 alias \
@@ -57,21 +85,93 @@ alias dis='bg;disown'
 
 alias pass='vim -S ~/.vim/pass.vim'
 
-#for c in ls mv rm cp cat grep; do
-#   colorize_remark $c
-#done
+#> define COLORIZE_EXCLUDE wget|ls|ulimit|grep
+#> define COLORIZE_ALIAS_FILE "/tmp/.$USER.zsh.coloraliases"
 
-# if which grc; then
-# for f in /usr/share/grc/*; do
-# f=${f##*/};
-# f=${f##conf.};
-# 
-# case "$f" in
-# ls) continue;;
-# esac
-# 
-# alias $f="grc $(getAlias $f)"
-# done
-# fi
+__colorize_alias() {
+   local name=$1; shift
+   if ! grep -q "^alias $name=" COLORIZE_ALIAS_FILE &>/dev/null; then
+      printf "alias %s=%q\n" "$name" "$1" >> COLORIZE_ALIAS_FILE
+   fi
+}
+
+__colorize_cope() {
+   #> define COPE_EXCLUDE cope|nocope
+
+   if which cope_path &>/dev/null; then
+      local COPE_PATH=$(cope_path)
+      if pushd "$COPE_PATH" &>/dev/null; then
+         local BIN
+         printf "%s\n" * | grep -v -E "^(COLORIZE_EXCLUDE|COPE_EXCLUDE)$" | while read -r BIN; do
+            [[ "$BIN" ]] || continue
+            __colorize_alias "$BIN" "$COPE_PATH/$BIN $(getAliasArgs $BIN)"
+         done
+
+         popd &>/dev/null
+      fi
+   fi
+}
+
+__colorize_grc() {
+   if pushd /usr/share/grc &>/dev/null; then
+      local BIN
+      printf "%s\n" * | sed 's/^conf.//g' | grep -v -E "^(COLORIZE_EXCLUDE)$" | while read -r BIN; do
+         [[ "$BIN" ]] || continue
+         __colorize_alias "$BIN" "grc $(getAlias $BIN)"
+      done
+
+      popd &>/dev/null
+   fi
+}
+
+__colorize_cw() {
+   #> define CW_EXCLUDE etc|cw-pipe|cw-test.cgi
+
+   if pushd /usr/lib/cw &>/dev/null; then
+      local BIN
+      printf "%s\n" * | grep -v -F '@' | grep -v -E "^(COLORIZE_EXCLUDE|CW_EXCLUDE)$" | while read -r BIN; do
+         [[ "$BIN" ]] || continue
+         __colorize_alias "$BIN" "/usr/lib/cw/$BIN $(getAliasArgs $BIN)"
+      done
+
+      popd &>/dev/null
+   fi
+}
+
+__colorize_commands() {
+   if ! [[ -f COLORIZE_ALIAS_FILE ]]; then
+      #> if COLORIZE_COPE == 1
+      __colorize_cope
+      #> endif
+
+      #> if COLORIZE_GRC == 1
+      __colorize_grc
+      #> endif
+
+      #> if COLORICE_CW == 1
+      __colorize_cw
+      #> endif
+   fi
+
+   source COLORIZE_ALIAS_FILE
+}
+
+__tmux_singleton_call() {
+   local name=$1; shift
+   tmux find-window -N "$name" &>/dev/null || command "$name" "$@"
+}
+
+__tmux_singleton_register() {
+   local name=$1; shift
+   eval "function $name() { __tmux_singleton_call $name \"\$@\"; }"
+}
+
+__colorize_commands
+__tmux_singleton_register htop
+__tmux_singleton_register ncmpcpp
+__tmux_singleton_register finch
+__tmux_singleton_register iotop
+__tmux_singleton_register iftop
+__tmux_singleton_register alsamixer
 
 # vim: ft=sh

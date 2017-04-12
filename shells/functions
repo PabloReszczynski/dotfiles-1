@@ -1,23 +1,5 @@
 #!/bin/bash
 
-# ALIASES_ARRAY
-# Macro for getting the accurate array for aliases
-#
-#> if "SHELL" eq "zsh"
-#>    define ALIASES_ARRAY aliases
-#> else
-#>    define ALIASES_ARRAY BASH_ALIASES
-#> endif
-
-# GET_ALIAS
-# Macro for expanding an alias
-#
-#> define GET_ALIAS(al) "${ALIASES_ARRAY[al]:-al}"
-
-get_alias() {
-   echo GET_ALIAS($1)
-}
-
 uri_escape() {
    perl -MURI::Escape=uri_escape -ne 'print uri_escape($_)';
 }

@@ -43,7 +43,10 @@ export LESS='-QiM'
 export EDITOR=vim
 
 # Yaourt: build PKGBUILDS on arm devices ######################################
-export MAKEPKG=makepkg_pre.sh
+#export MAKEPKG=makepkg_pre.sh
+
+# pacaur: use /tmp as builddir ################################################
+#export BUILDDIR=/tmp
 
 # rlwrap: here are the histfiles stored #######################################
 export RLWRAP_HOME=~/.rlwrap
