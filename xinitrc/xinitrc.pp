@@ -119,6 +119,9 @@ has_run() {
    # Set background image if available
    has_run nitrogen --restore
 
+   # Redshift
+   has_run redshift
+
    # Set up our screensaver
    has_run xscreensaver -no-splash
    #xset dpms 0 0 $(( 60 * 10 ))
