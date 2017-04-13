@@ -1,6 +1,10 @@
 SLOW_SYSTEM = 0
+BASE_DIR = ~/.vim
 
 build::
+
+pre_build::
+	cp -pr ../_shared "$(_PACKAGE_BUILD_DIR)/vim"
 
 .ONESHELL:
 post_build::
@@ -8,9 +12,10 @@ post_build::
 	git clone https://github.com/VundleVim/Vundle.vim
 
 post_install::
-	vim +PluginInstall
+	vim +PluginInstall +quitall
 
 FILEPP_PREFIX = \">
+PP_FILES = vimrc.pp
 DIRECTORIES = vim/view vim/bundle
 
-include ../package.mk
+include ../../package.mk

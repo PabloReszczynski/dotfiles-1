@@ -23,7 +23,7 @@ ca Q1 q!
 " =================
 
 " Store viminfo in a sane place
-set viminfo+=n~/.vim/viminfo
+set viminfo+=nBASE_DIR/viminfo
 
 set fdm=marker
 set foldmarker={{{,}}}
@@ -62,11 +62,11 @@ if has("autocmd")
   au BufNewFile,BufRead * silent! loadview
 
 
-  au BufNewFile   *.sh          0r ~/.vim/skeltons/bash.skel
-  au BufNewFile   *.php         0r ~/.vim/skeltons/php.skel
-  au BufNewFile   *.pl          0r ~/.vim/skeltons/perl.skel
-  au BufNewFile   main.cpp      0r ~/.vim/skeltons/main.cpp.skel
-  au BufNewFile   main.c        0r ~/.vim/skeltons/main.c.skel
+  au BufNewFile   *.sh          0r BASE_DIR/skeltons/bash.skel
+  au BufNewFile   *.php         0r BASE_DIR/skeltons/php.skel
+  au BufNewFile   *.pl          0r BASE_DIR/skeltons/perl.skel
+  au BufNewFile   main.cpp      0r BASE_DIR/skeltons/main.cpp.skel
+  au BufNewFile   main.c        0r BASE_DIR/skeltons/main.c.skel
   au BufReadPost  pacman.log    set ft=pacmanlog
 endif " has("autocmd")
 
