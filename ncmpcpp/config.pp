@@ -12,7 +12,7 @@
 ## file which defines that while launching ncmpcpp.
 ##
 #
-#ncmpcpp_directory = ~/.ncmpcpp
+ncmpcpp_directory = ~/.config/ncmpcpp
 #
 ##
 ## Directory for storing downloaded lyrics. It
