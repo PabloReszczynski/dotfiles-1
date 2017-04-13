@@ -52,7 +52,7 @@
 ## }
 ##
 #
-#visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_fifo_path = /tmp/mpd.fifo
 #
 ##
 ## Note: Below parameter is needed for ncmpcpp
@@ -62,18 +62,12 @@
 ## are some problems with it.
 ##
 #
-#visualizer_output_name = Visualizer feed
+visualizer_output_name = FIFO Mono
 #
 ##
 ## If you set format to 44100:16:2, make it 'yes'.
 ##
-#visualizer_in_stereo = yes
-#
-##
-## Multiply received samples by given value. Very
-## useful for proper visualization of quiet music.
-##
-#visualizer_sample_multipler = 1
+visualizer_in_stereo = no
 #
 ##
 ## Note: Below parameter defines how often ncmpcpp
@@ -83,18 +77,19 @@
 ## Keep in mind that sane values start with >=10.
 ##
 #
-#visualizer_sync_interval = 30
+visualizer_sync_interval = 30
 #
 ##
 ## Note: To enable spectrum frequency visualization
 ## you need to compile ncmpcpp with fftw3 support.
 ##
 #
-## Available values: spectrum, wave.
+## Available values: spectrum, wave, wave_filled, ellipse
 ##
-#visualizer_type = wave
+visualizer_type = wave
 #
-#visualizer_look = ●▮
+visualizer_look = ●▮
+#
 #
 ##### system encoding #####
 ##
@@ -339,9 +334,9 @@ user_interface = classic
 ##
 #default_find_mode = wrapped
 #
-## Available values: add, select.
+## Available values: add, select, add_remove.
 ##
-#default_space_mode = add
+space_add_mode = add_remove
 #
 #default_tag_editor_pattern = %n - %t
 #
@@ -439,7 +434,6 @@ ignore_leading_the = no
 #
 #mouse_list_scroll_whole_page = yes
 #
-#empty_tag_marker = <empty>
 empty_tag_marker = []
 #
 #tags_separator = " | "
@@ -464,7 +458,7 @@ empty_tag_marker = []
 #
 #search_engine_default_search_mode = 1
 #
-#external_editor = nano
+external_editor = vim
 #
 ## Note: set to yes if external editor is a console application.
 ##
@@ -478,33 +472,38 @@ empty_tag_color = blue
 #
 header_window_color = blue
 #
-#volume_color = default
+volume_color = default
 #
 state_line_color = blue
 #
-#state_flags_color = default
+state_flags_color = default:b
 #
 main_window_color = THEME_COLOR
 #
-#color1 = white
+color1 = white
 #
 color2 = THEME_COLOR
 #
 main_window_highlight_color = default
 #
-#progressbar_color = black
+progressbar_color = black
 #
 progressbar_elapsed_color = THEME_COLOR
 #
 statusbar_color = blue
 #
-alternative_ui_separator_color = black
+statusbar_time_color = blue
 #
-#active_column_color = red
+player_state_color = blue
 #
-visualizer_color = THEME_COLOR
+alternative_ui_separator_color = black:b
 #
-#window_border_color = green
+active_column_color = red
 #
-#active_window_border = red
+#visualizer_color = blue, cyan, green, yellow, magenta, red
+visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
+#
+window_border_color = green
+#
+active_window_border = red
 #

@@ -1,6 +1,6 @@
 THEME_COLOR = blue
 
-PREFIX_DIR = .ncmpcpp
+PREFIX_DIR = .config/ncmpcpp
 IGNORE_FILES = makeDummyBindings.sh
 
 build::
