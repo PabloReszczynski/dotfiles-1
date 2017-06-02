@@ -1,3 +1,7 @@
+#> ifndef FONTSIZE
+#> define FONTSIZE 13
+#> endif
+
 ! ======== General Terminal Settings ===========
 #> foreach TERM xterm, UXTerm
 
@@ -26,10 +30,10 @@ TERM*scrollBar: false
 TERM*saveLines: 0
 
 ! Font
-!TERM*faceName:  Hack:size=11
-TERM*.faceName:  xft:DejaVu Sans Mono:size=11 
+!TERM*faceName:  Hack:size=FONTSIZE
+TERM*.faceName:  xft:DejaVu Sans Mono:size=FONTSIZE
 TERM*cjk_width:  true
-TERM*faceNameDoublesize:  xft:DejaVu Sans Mono:size=11
+TERM*faceNameDoublesize:  xft:DejaVu Sans Mono:size=FONTSIZE
 
 
 ! === Color Scheme ===
@@ -43,7 +47,7 @@ TERM*foreground: #EEEEEE
 ! ============================================
 
 ! === URxvt ====
-URxvt.font: xft:Hack:size=12
+URxvt.font: xft:Hack:size=FONTSIZE
 URxvt.letterSpace: -1
 URxvt*buffered: false
 ! ==============
