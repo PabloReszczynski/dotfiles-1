@@ -55,8 +55,11 @@
 "firefox"
  XF86Favorites
 
-"firefox"
+"killall -CONT palemoon"
  XF86HomePage
+
+"killall -KILL plugin-container; killall -STOP palemoon"
+ Mod2 + XF86HomePage
 
 "thunderbird"
  XF86Mail
@@ -87,6 +90,11 @@
 
 "mpc stop"
  XF86AudioStop
+
+ #XF86Reload
+
+"sudo systemctl suspend"
+ Mod2 + XF86Sleep
 
 # Audio Stuff
 "amixer -c 0 set Master 5+"
