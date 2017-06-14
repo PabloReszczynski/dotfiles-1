@@ -161,11 +161,15 @@ start_page="http://blog.fefe.de"
 # You can enable multiple search_url strings at once and select from among
 # them at runtime, with the first being the default.
 # (the prefix serves to search from the Location Bar. e.g. "dd dillo image")
-search_url="k DuckDuckGo https://duckduckgo.com/lite/?kp=-1&q=%s"
-search_url="w Wikipedia  https://de.wikipedia.org/w/index.php?search=%s&go=Go"
-search_url="s Startpage  https://www.startpage.com/do/search?query=%s"
-search_url="g Google https://www.google.de/search?ie=UTF-8&oe=UTF-8&q=%s"
 search_url="d DictCC https://www.dict.cc/?s=%s"
+search_url="e Ebay https://ebay.de#%s"
+search_url="fefe Fefe http://blog.fefe.de#%s"
+search_url="g Google https://www.google.de/search?ie=UTF-8&oe=UTF-8&q=%s"
+search_url="h Heise https://heise.de#%s"
+search_url="duck DuckDuckGo https://duckduckgo.com/lite/?kp=-1&q=%s"
+search_url="kc Krautchan http://krautchan.net/%s"
+search_url="s Startpage  https://www.startpage.com/do/search?query=%s"
+search_url="w Wikipedia  https://de.wikipedia.org/w/index.php?search=%s&go=Go"
 #search_url="d Free Dictionary http://www.thefreedictionary.com/%s"
 
 # If set, dillo will ask web servers to send pages in this language.
@@ -424,3 +428,5 @@ show_msg=NO
 
 # -----------------------------------------------------------------------
 # dillorc ends here.
+
+external_program = "feh"
