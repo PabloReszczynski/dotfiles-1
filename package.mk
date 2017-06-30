@@ -1,17 +1,10 @@
-# ................
+# ================
 # Dotfile Makefile
 # ================
 
 #! Variables that should not be used outside this Makefile should be
 #! prefixed with an underscore. (Underscored variables don't show up
 #! in shell completion)
-#!
-#! This Makefile uses an own special commenting syntax for generating
-#! it's documentation.
-#!
-#!   #$: Variable starts (replaced with =item)
-#!   #(: Group starts (replaced with =head1, =over, =back)
-#!   #>: Plain text for documentation
 
 # Parameters for building an dotfile package
 # ==========================================
@@ -20,7 +13,7 @@
 ROOT_DIR ?= $(HOME)
 
 # Output destination for 'build'
-BUILD_DIR ?= /tmp/mk_dotfiles
+BUILD_DIR ?= /tmp/dotfiles-$(USER)
 
 # Directory to retrieve private information from inside preprocessor-files
 PRIVATE_DIR ?= 
@@ -195,25 +188,25 @@ install:: pre_install
 
 # Create a list of files that differ, used by diff and update
 .SILENT:
-.ONESHELL:
 $(_PACKAGE_BUILD_DIR)/.diff:
-	cd "$(_PACKAGE_BUILD_DIR)";
-	find . -mindepth 1 -type f -not -name .diff | sed 's|^./||g' | while read -r FILE; do
-		cmp --quiet "$$FILE" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" || echo "$$FILE";
+	cd "$(_PACKAGE_BUILD_DIR)"; \
+	find . -mindepth 1 -type f -not -name .diff | sed 's|^./||g' | while read -r FILE; do \
+		cmp --quiet "$$FILE" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" || echo "$$FILE"; \
 	done > "$(_PACKAGE_BUILD_DIR)/.diff"
 
 # Force to regenerate .diff-file 
 rediff: clean-diff $(_PACKAGE_BUILD_DIR)/.diff
+	#
 
 # Call 'diff' on files that would be modified
 _DIFF_PROGRAM = diff
-.ONESHELL:
-diff: $(_PACKAGE_BUILD_DIR)/.diff
-	exec 3<"$(_PACKAGE_BUILD_DIR)/.diff"
-	while read -u 3 -r F; do
-		$(_DIFF_PROGRAM) -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F";
-	done
-	exec 3<&-
+
+diff: .force $(_PACKAGE_BUILD_DIR)/.diff
+	exec 9<"$(_PACKAGE_BUILD_DIR)/.diff"; \
+	while read -u 9 -r F; do \
+		$(_DIFF_PROGRAM) -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
+	done; \
+	exec 9<&-
 
 vimdiff:
 	$(MAKE) _DIFF_PROGRAM=vimdiff diff
@@ -225,20 +218,9 @@ update: $(_PACKAGE_BUILD_DIR)/.diff
 		cp -v -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F";
 	done < "$(_PACKAGE_BUILD_DIR)/.diff"
 
-
 help:
 	@cat << EOF
 	Usage: make clean|build|install|update|diff|rediff|template
-	EOF
-
-template:
-	@cat << EOF
-	#PREFIX_DIR = .prg
-	#FILES = 
-	#PP_FILES =
-	#DIRECTORIES =
-	
-	include ../makefiles/std.mk
 	EOF
 
 clean: clean-temp
