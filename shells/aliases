@@ -95,7 +95,7 @@ alias dis='bg;disown'
 __colorize_alias() {
    local name=$1; shift
    if ! grep -q "^alias $name=" COLORIZE_ALIAS_FILE &>/dev/null; then
-      printf "alias %s=%q\n" "$name" "$1" >> COLORIZE_ALIAS_FILE
+      printf "alias %s=%q\n" "$name" "$1" | sed 's/\\ $//' >> COLORIZE_ALIAS_FILE
    fi
 }
 
