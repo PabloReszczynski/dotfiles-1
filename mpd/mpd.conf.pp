@@ -283,7 +283,7 @@ audio_output {
 #
 audio_output {
 	type		"pulse"
-	name		"My Pulse Output"
+	name		"PulseAudio Output"
    enabled  "no"
 #	server		"remote_server"		# optional
 #	sink		"remote_server_sink"	# optional
@@ -324,12 +324,13 @@ audio_output {
 #}
 #
 
-#audio_output {
-# 	type		"pipe"
-# 	name		"FIFO Output /tmp/mpd.fifo"
-# 	command  "cat > /tmp/mpd.fifo"
-# 	format   "44100:16:2"
-#}
+audio_output {
+ 	type		"fifo"
+ 	name		"FIFO Mono"
+ 	path     "/tmp/mpd.fifo"
+ 	format   "44100:16:1"
+   enabled  "no"
+}
 
 ## An example of a null output (for no audio output):
 #
@@ -408,7 +409,7 @@ audio_output {
 #
 #connection_timeout        "60"
 #max_connections        "10"
-#max_playlist_length    "1638400"
+max_playlist_length    "6553600"
 #max_command_list_size        "2048"
 #max_output_buffer_size        "8192"
 #
