@@ -20,9 +20,9 @@ set priority = 42
 set priority_away = 23
 set tls = 1
 
-set iq_version_hide_os = 1
-set iq_version_hide_version = 1
-set iq_time_hide = 1
+set iq_version_hide_os = 0
+set iq_version_hide_version = 0
+set iq_time_hide = 0
 set iq_last_disable = 1
 
 # Autoaway
@@ -85,7 +85,7 @@ set beep_on_message = 1
 set otr = 1
 set otr_dir = ~/.mcabber/otr
 # enable OTR for all contacts
-otrpolicy * opportunistic
+otrpolicy * manual
 
 # FIFO #########################################################################
 set fifo_name = ~/.mcabber/fifo
