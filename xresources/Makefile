@@ -5,6 +5,7 @@ FILEPP_INCLUDE = themes
 IGNORE_FILES = themes/%
 
 build::
+
 post_install::
 	which xrdb && xrdb ~/.Xresources
 
