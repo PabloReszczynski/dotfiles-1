@@ -102,6 +102,12 @@ set complete-=i
  nnoremap g"         :SelectBuf<ENTER>
 " ============
 
+" Disable double ESC
+set timeoutlen=1000 ttimeoutlen=0
+
+" Disable statusline
+set laststatus=0
+
 "> if "SLOW_SYSTEM" == 1
 set noruler
 set nocursorline
