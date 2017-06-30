@@ -1,18 +1,36 @@
 [general]
 mouse = 1
 shadow = 0
-#small-button = true
+small-button = true
 
 [Finch]
 color-message-sent = white; default
-color-message-received = blue; default
+color-message-received = red; default
 color-timestamp = white; default
 
+[GntTree::binding]
+j = move-down
+k = move-up
+a-j = move-down
+a-k = move-up
+
+[GntBox::binding]
+l = focus-next
+h = focus-prev
+j = focus-next
+k = focus-prev
+
+[GntWM::binding]
+a-l = window-next
+a-h = window-prev
+a-q = 
+a-J = window-scroll-down
+a-K = window-scroll-up
 
 [colorpairs]
 normal = white; default
 
-highlight = white; default
+highlight = blue; default
 highlightd = white; default
 
 title = blue; default
