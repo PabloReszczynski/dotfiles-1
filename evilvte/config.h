@@ -63,7 +63,7 @@
 // #define DEFAULT_DIRECTORY      g_get_current_dir()
 // #define DEFAULT_TERMINAL_SIZE  80x24
 // #define EXPORT_WINDOWID        TRUE
-#define    FONT                   "Hack 12" /* Monospace 12 */
+#define    FONT                   "Hack 13" /* Monospace 12 */
 // #define    FONT_ANTI_ALIAS        TRUE
 // #define FONT_ENABLE_BOLD_TEXT  TRUE
 // #define MOUSE_CTRL_SATURATION  TRUE  /* Scroll left or right to adjust it  */
