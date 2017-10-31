@@ -23,14 +23,15 @@ has_run() {
    USER_TMP_DIR="/tmp/home-temp-${USER}";
 
    #TODO? mozilla stuff?
+   #.cache \
+
    for d in \
       .adobe \
       .macromedia \
-      .cache \
       ; \
    do
       echo "Linking $d to temp";
-      rmdir ~/"$d" || rm -f ~/"$d" || continue;
+      rm -rf ~/"$d"
       mkdir -p "$USER_TMP_DIR/$d"   &&
       chmod 0755 "$USER_TMP_DIR/$d" &&
       ln -s "$USER_TMP_DIR/$d" ~/"$d";
@@ -50,12 +51,14 @@ has_run() {
    has_run syndaemon -i 0.5 -t -K -R
 
    # === Open browser =====================================
-   #> define STARTPAGE "blog.fefe.de"
-   has_run inox      STARTPAGE ||
-   has_run chromium  STARTPAGE ||
-   has_run palemoon  STARTPAGE ||
-   has_run firefox   STARTPAGE ||
-   has_run dillo     STARTPAGE
+   #> ifndef STARTPAGE
+   #>    define STARTPAGE blog.fefe.de
+   #> endif
+   has_run inox      "STARTPAGE" ||
+   has_run chromium  "STARTPAGE" ||
+   has_run palemoon  "STARTPAGE" ||
+   has_run firefox   "STARTPAGE" ||
+   has_run dillo     "STARTPAGE"
 
    # === Host based applications ==========================
    #> if "HOST" eq "pizwo"
