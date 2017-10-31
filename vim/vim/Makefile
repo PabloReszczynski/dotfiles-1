@@ -1,17 +1,15 @@
 SLOW_SYSTEM = 0
 BASE_DIR = ~/.vim
 
-build::
-
-pre_build::
+.pre_build::
 	cp -pr ../_shared "$(_PACKAGE_BUILD_DIR)/vim"
 
 .ONESHELL:
-post_build::
+.post_build::
 	cd "$(_PACKAGE_BUILD_DIR)/vim/bundle" || exit 1
 	git clone https://github.com/VundleVim/Vundle.vim
 
-post_install::
+.post_install::
 	vim +PluginInstall +quitall
 
 FILEPP_PREFIX = \">
