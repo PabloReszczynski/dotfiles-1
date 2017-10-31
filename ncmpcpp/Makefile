@@ -1,4 +1,5 @@
 THEME_COLOR = blue
+MUSIC_DIR = /media/main/music
 
 PREFIX_DIR = .config/ncmpcpp
 IGNORE_FILES = makeDummyBindings.sh
