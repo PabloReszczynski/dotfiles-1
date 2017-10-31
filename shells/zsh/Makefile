@@ -9,21 +9,19 @@ COLORIZE_CW = 1
 
 SHELL = zsh
 
-build::
-
 .ONESHELL:
-vt_palette:
+.vt_palette:
 	cd "$(_TEMP_DIR)"
 	git clone "https://github.com/braph/conpalette"
 	./conpalette/bin/conpalette --shell --oneline blah-light > "$(_TEMP_DIR)/vt_palette"
 
 
-pre_build:: vt_palette
+.pre_build:: .vt_palette
 	./tools/zsh_trim_setopts.sh zshoptions "$(_PACKAGE_BUILD_DIR)/zshoptions"
 	#./tools/zsh_trim_aliases.sh zsh
 	
 
-post_build:: 
+.post_build:: 
 	@echo "Removing comments"
 	sed -i '/^#/d' "$(_PACKAGE_BUILD_DIR)/zshrc"
 	
