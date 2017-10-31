@@ -9,17 +9,15 @@ COLORIZE_CW = 1
 
 SHELL = bash
 
-build::
-
 .ONESHELL:
-vt_palette:
+.vt_palette:
 	cd "$(_TEMP_DIR)"
 	git clone "https://github.com/braph/conpalette"
 	./conpalette/bin/conpalette --oneline --shell blah-light > vt_palette
 
-pre_build:: vt_palette
+.pre_build:: .vt_palette
 
-post_build:: 
+.post_build:: 
 	@echo "Removing comments"
 	sed -i '/^#/d' "$(_PACKAGE_BUILD_DIR)/bashrc"
 	

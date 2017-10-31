@@ -152,7 +152,7 @@ __colorize_commands() {
       __colorize_grc
       #> endif
 
-      #> if COLORICE_CW == 1
+      #> if COLORIZE_CW == 1
       __colorize_cw
       #> endif
    fi
