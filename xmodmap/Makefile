@@ -1,1 +1,1 @@
-include ../package.mk
+include ../dotfile.mk

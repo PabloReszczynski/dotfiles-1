@@ -21,4 +21,4 @@ pre_build:: dwm-src config.h $(DWM_PATCHES)
 
 IGNORE_FILES = %
 
-include ../package.mk
+include ../dotfile.mk

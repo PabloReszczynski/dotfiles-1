@@ -1,3 +1,3 @@
 PREFIX_DIR = .config/tint2
 
-include ../package.mk
+include ../dotfile.mk

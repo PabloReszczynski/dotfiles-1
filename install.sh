@@ -9,10 +9,18 @@ CURRENT_DIR=$(pwd)
 declare -a FILES=()
 declare -a FAILED=()
 
+rm -rf "$LOG_DIR"
 mkdir -p "$LOG_DIR" || {
    echo "Could not create log dir" >&2
    exit 1;
 }
+
+ACTION=$1; shift
+if [[ "$ACTION" != "diff" ]] && \
+   [[ "$ACTION" != "build" ]] && \
+   [[ "$ACTION" != "install" ]]; then
+   echo "Wrong first argument"
+fi
 
 for arg; do
    if [[ "$arg" != "${arg/=/}" ]]; then
@@ -33,22 +41,21 @@ for file in "${FILES[@]}"; do
       continue
    fi
 
-   echo "> building $file"
-   if ! make build $VARIABLES &> "$LOG_DIR/$file"; then
+   echo "> ${ACTION}ing $file"
+   if ! make $ACTION $VARIABLES &> "$LOG_DIR/$file"; then
       FAILED+=($file)
       continue
    fi
-
-   #echo "> installing $file"
-   #if ! make install $VARIABLES &> "$LOG_DIR/$file"; then
-   #   FAILED+=($file)
-   #   continue
-   #fi
 done
 
 printf "> Done\n\n"
 
 if [[ -n "${FAILED[@]}" ]]; then
-   echo "> These dotfiles failed to build: ${FAILED[@]}"
-   echo "> See logs in $LOG_DIR"
+   if [[ "$ACTION" == 'diff' ]]; then
+      echo "> These dotfiles are different: ${FAILED[@]}"
+      echo "> See logs in $LOG_DIR"
+   else
+      echo "> These dotfiles failed to $ACTION: ${FAILED[@]}"
+      echo "> See logs in $LOG_DIR"
+   fi
 fi

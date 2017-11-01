@@ -1,3 +1,3 @@
 PREFIX_DIR = .calcurse
 
-include ../package.mk
+include ../dotfile.mk

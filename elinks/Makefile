@@ -1,3 +1,3 @@
 PREFIX_DIR = .elinks
 
-include ../package.mk
+include ../dotfile.mk

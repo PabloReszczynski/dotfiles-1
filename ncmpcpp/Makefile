@@ -7,4 +7,4 @@ IGNORE_FILES = makeDummyBindings.sh
 .post_build::
 	./makeDummyBindings.sh >> "$(_PACKAGE_BUILD_DIR)/bindings"
 
-include ../package.mk
+include ../dotfile.mk

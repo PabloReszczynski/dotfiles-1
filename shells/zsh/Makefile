@@ -31,4 +31,4 @@ SHELL = zsh
 PP_FILES = zshrc
 FILEPP_INCLUDE = . .. $(_TEMP_DIR)
 
-include ../../package.mk
+include ../../dotfile.mk

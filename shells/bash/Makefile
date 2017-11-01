@@ -27,4 +27,4 @@ SHELL = bash
 PP_FILES = bashrc
 FILEPP_INCLUDE = . .. $(_TEMP_DIR)
 
-include ../../package.mk
+include ../../dotfile.mk

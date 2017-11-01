@@ -6,4 +6,4 @@ FILEPP_MODULES = bigdef.pm function.pm
 	@echo -n "Reloading tmux conf ... "
 	-tmux source ~/.tmux.conf && echo 'DONE' || echo 'FAILED'
 
-include ../package.mk
+include ../dotfile.mk

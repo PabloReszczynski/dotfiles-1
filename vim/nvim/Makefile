@@ -17,4 +17,4 @@ FILEPP_PREFIX = \">
 PP_FILES = init.vim.pp
 DIRECTORIES = view bundle
 
-include ../../package.mk
+include ../../dotfile.mk

@@ -3,4 +3,4 @@ THEME_BACKGROUND = default
 
 PREFIX_DIR = .aumix
 
-include ../package.mk
+include ../dotfile.mk

@@ -1,3 +1,3 @@
 PREFIX_DIR = .themes
 
-include ../package.mk
+include ../dotfile.mk

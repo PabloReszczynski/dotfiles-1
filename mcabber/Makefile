@@ -9,4 +9,4 @@ FILEPP_MODULES = maths.pm testfile.pm
 IGNORE_FILES = extractDefaultKeymap.sh mcabber/keymap mcabber/theme
 DIRECTORIES = mcabber/history mcabber/otr
 
-include ../package.mk
+include ../dotfile.mk

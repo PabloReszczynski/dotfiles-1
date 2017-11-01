@@ -1,3 +1,3 @@
 PREFIX_DIR = .config
 
-include ../package.mk
+include ../dotfile.mk
