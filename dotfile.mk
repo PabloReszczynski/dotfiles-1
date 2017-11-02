@@ -214,8 +214,7 @@ $(_TEMP_DIR):
 
 # Create directories
 $(_DIRECTORIES): .force
-	@echo ">> Creating dir $@ ..."
-	mkdir -p "$(_PACKAGE_BUILD_DIR)/$@"
+	mkdir -p -v "$(_PACKAGE_BUILD_DIR)/$@"
 
 # Copy files
 $(_FILES): .force
