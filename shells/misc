@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Limit number of processes ####################################################
+#> if "OPERATING_SYSTEM" !~ "Cygwin"
 ulimit -u 2000
+#> endif
 
 # Disable history expansion ####################################################
 #  "set +o histexpand" does not work, we use +H instead
