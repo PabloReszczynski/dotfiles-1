@@ -144,6 +144,8 @@ __colorize_cw() {
 
 __colorize_commands() {
    if ! [[ -f COLORIZE_ALIAS_FILE ]]; then
+      :> COLORIZE_ALIAS_FILE
+
       #> if COLORIZE_COPE == 1
       __colorize_cope
       #> endif
