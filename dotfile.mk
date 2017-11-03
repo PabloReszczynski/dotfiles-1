@@ -98,7 +98,7 @@ endif
 endif
 
 ifndef OPERATING_SYSTEM
-UNAME := $(shell uname -o)
+OPERATING_SYSTEM := $(shell uname -o)
 endif
 
 # Parameters end here, new variables below this line should be
