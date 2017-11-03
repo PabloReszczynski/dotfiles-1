@@ -97,6 +97,10 @@ HOST := $(shell hostname)
 endif
 endif
 
+ifndef OPERATING_SYSTEM
+UNAME := $(shell uname -o)
+endif
+
 # Parameters end here, new variables below this line should be
 # prefixed with an underscore.
 # ============================================================
@@ -112,7 +116,8 @@ _TEMP_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)-temp
 # ===========================================================
 
 # Additional variables that should be passed to preprocessor
-_ADDITIONAL_DEFINES = HOST PRIVATE_DIR _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR _TEMP_DIR
+_ADDITIONAL_DEFINES = HOST OPERATING_SYSTEM PRIVATE_DIR _TEMP_DIR \
+							 _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
 
 # Ignore these variables found in Makfile
 _IGNORE_VARS := FILES PP_FILES IGNORE_FILES \

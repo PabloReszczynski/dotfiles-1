@@ -78,6 +78,12 @@ config.pp   -> $ROOT_DIR/.config/ncmpcpp/config
 
 The following variables are also available in the Makefile and are exported into the environment:
 
+#### `OPERATING_SYSTEM`
+Output of `uname -o`.
+
+### `HOST`
+Hostname, retrieved with `hostname`.
+
 #### `_PACKAGE_NAME`
 This variable holds the name of the package, which is the directory name.
 
