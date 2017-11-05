@@ -33,8 +33,6 @@ md() {
    mkdir -p "$1" && cd "$1"
 }
 
-# TODO: mv-to-dir
-
 freetop() {
    ps -e -o pid,vsz,comm= | sort -n -k 2
 }
@@ -46,6 +44,10 @@ gclone() {
 
 gcommit() {
    git add . && git commit -m "$1"
+}
+
+aurclone() {
+   git clone ssh://aur@aur.archlinux.org/$1
 }
 
 # getip()
