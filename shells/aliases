@@ -164,8 +164,13 @@ __colorize_commands() {
 
 __tmux_singleton_call() {
    local name=$1; shift
+#> if "TMUX_VERSION" < "2.6"
    tmux find-window -N "$name" &>/dev/null || command "$name" "$@"
+#> else
+   command "$name" "$@"
+#> endif
 }
+
 
 __tmux_singleton_register() {
    local name=$1; shift
