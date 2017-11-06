@@ -3,7 +3,7 @@ DWM_PATCHES = dwm-stacker-6.0.diff
 
 build::
 
-install::
+.install::
 	cd "$(_TEMP_DIR)/dwm" && sudo make install
 
 dwm-src:
@@ -15,7 +15,7 @@ config.h:
 $(DWM_PATCHES):
 	cd "$(_TEMP_DIR)/dwm" && wget "$(DWM_URL)/$@" && patch -p1 < "$@"
 
-pre_build:: dwm-src config.h $(DWM_PATCHES)
+.pre_build:: dwm-src config.h $(DWM_PATCHES)
 	cd "$(_TEMP_DIR)/dwm" && make
 	
 
