@@ -30,8 +30,8 @@ TERM*scrollBar: false
 TERM*saveLines: 0
 
 ! Font
-!TERM*faceName:  Hack:size=FONTSIZE
-TERM*.faceName:  xft:DejaVu Sans Mono:size=FONTSIZE
+TERM*faceName:  Hack:size=FONTSIZE
+!TERM*.faceName:  xft:DejaVu Sans Mono:size=FONTSIZE
 TERM*cjk_width:  true
 TERM*faceNameDoublesize:  xft:DejaVu Sans Mono:size=FONTSIZE
 
