@@ -22,3 +22,5 @@ end
 #require 'bond'
 #Bond.start
 
+require 'benchmark'
+include Benchmark
