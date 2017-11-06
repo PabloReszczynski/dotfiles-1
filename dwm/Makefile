@@ -17,7 +17,6 @@ $(DWM_PATCHES):
 
 .pre_build:: dwm-src config.h $(DWM_PATCHES)
 	cd "$(_TEMP_DIR)/dwm" && make
-	
 
 IGNORE_FILES = %
 
