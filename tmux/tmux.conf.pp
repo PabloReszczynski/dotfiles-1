@@ -48,10 +48,10 @@ set -g status-left-length 0
 set -g status-right '%T'
 set -g status-right-length 10
 
-set -g window-status-format '#I:#W'
+set -g window-status-format "#I:#W"
 set -g window-status-style  'bg=black,fg=THEME_COLOR'
 
-set -g window-status-current-format '#I:#W'
+set -g window-status-current-format "#I:#W"
 set -g window-status-current-style  'bg=black,fg=white,bold'
 
 set -g window-status-last-style 'bg=black,fg=white'
@@ -175,6 +175,7 @@ bind '^l' refresh-client
 bind 'g'  set status
 
 bind 'PageUp'   copy-mode -u
+bind '^u'       copy-mode -u
 bind 'PageDown' copy-mode
 bind 'p' paste-buffer
 
@@ -264,21 +265,21 @@ bind 'F11'     TMUX_DAEMON(select-window 21)
 bind 'F12'     TMUX_DAEMON(select-window 22)
 
 # session selection
-bind -T SeSe '`'     TMUX_DAEMON(select-session 0)
-bind -T SeSe '1'     TMUX_DAEMON(select-session 1)
-bind -T SeSe '2'     TMUX_DAEMON(select-session 2)
-bind -T SeSe '3'     TMUX_DAEMON(select-session 3)
-bind -T SeSe '4'     TMUX_DAEMON(select-session 4)
-bind -T SeSe '5'     TMUX_DAEMON(select-session 5)
-bind -T SeSe '6'     TMUX_DAEMON(select-session 6)
-bind -T SeSe '7'     TMUX_DAEMON(select-session 7)
-bind -T SeSe '8'     TMUX_DAEMON(select-session 8)
-bind -T SeSe '9'     TMUX_DAEMON(select-session 9)
-bind -T SeSe '0'     TMUX_DAEMON(select-session 10)
-bind -T SeSe 'j'     TMUX_DAEMON(select-session -n)
-bind -T SeSe 'k'     TMUX_DAEMON(select-session -p)
-bind -T SeSe 'S'     choose-session
-bind 'S'       switch-client -T SeSe
+#bind -T SeSe '`'     TMUX_DAEMON(select-session 0)
+#bind -T SeSe '1'     TMUX_DAEMON(select-session 1)
+#bind -T SeSe '2'     TMUX_DAEMON(select-session 2)
+#bind -T SeSe '3'     TMUX_DAEMON(select-session 3)
+#bind -T SeSe '4'     TMUX_DAEMON(select-session 4)
+#bind -T SeSe '5'     TMUX_DAEMON(select-session 5)
+#bind -T SeSe '6'     TMUX_DAEMON(select-session 6)
+#bind -T SeSe '7'     TMUX_DAEMON(select-session 7)
+#bind -T SeSe '8'     TMUX_DAEMON(select-session 8)
+#bind -T SeSe '9'     TMUX_DAEMON(select-session 9)
+#bind -T SeSe '0'     TMUX_DAEMON(select-session 10)
+#bind -T SeSe 'j'     TMUX_DAEMON(select-session -n)
+#bind -T SeSe 'k'     TMUX_DAEMON(select-session -p)
+#bind -T SeSe 'S'     choose-session
+#bind 'S'       switch-client -T SeSe
 
 bind '/'       command-prompt "find-window -TN %%"
 bind 'R'       move-window -r
