@@ -1,3 +1,5 @@
+SHELL = bash
+
 LANGUAGE = en_US.UTF-8
 SLOW_SYSTEM = 0
 PROMPT_STYLE = MOSTLY_RIGHT
@@ -7,8 +9,6 @@ TMUX_VERSION = $(shell tmux -V | sed 's/tmux //')
 COLORIZE_COPE = 1
 COLORIZE_GRC = 1
 COLORIZE_CW = 1
-
-SHELL = bash
 
 .vt_palette:
 	if which conpalette; then \
@@ -21,14 +21,8 @@ SHELL = bash
 
 .pre_build:: .vt_palette
 
-.post_build:: 
-	@echo "Removing comments"
-	sed -i '/^#/d' "$(_PACKAGE_BUILD_DIR)/bashrc"
-	
-	@echo "Removing empty lines"
-	sed -i '/^$$/d' "$(_PACKAGE_BUILD_DIR)/bashrc"
-	
 PP_FILES = bashrc
+FILEPP_MODULES = hash-comment.pm remove-empty-lines.pm
 FILEPP_INCLUDE = . .. $(_TEMP_DIR)
 
 include ../../dotfile.mk
