@@ -20,7 +20,7 @@ getAlias() {
 
 getAliasArgs() {
    local al=GET_ALIAS($1)
-   local args=${al#* }
+   local args="${al#* }"
    if [[ "$al" == "$args" ]]; then
       echo
    else
