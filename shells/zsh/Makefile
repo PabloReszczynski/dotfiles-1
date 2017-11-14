@@ -1,3 +1,5 @@
+SHELL = zsh
+
 LANGUAGE = en_US.UTF-8
 SLOW_SYSTEM = 0
 PROMPT_STYLE = MOSTLY_RIGHT
@@ -7,8 +9,6 @@ TMUX_VERSION = $(shell tmux -V | sed 's/tmux //')
 COLORIZE_COPE = 1
 COLORIZE_GRC = 1
 COLORIZE_CW = 1
-
-SHELL = zsh
 
 .vt_palette:
 	if which conpalette; then \
@@ -23,14 +23,9 @@ SHELL = zsh
 	./tools/zsh_trim_setopts.sh zshoptions "$(_PACKAGE_BUILD_DIR)/zshoptions"
 	#./tools/zsh_trim_aliases.sh zsh
 
-.post_build:: 
-	@echo "Removing comments"
-	sed -i '/^#/d' "$(_PACKAGE_BUILD_DIR)/zshrc"
-	
-	@echo "Removing empty lines"
-	sed -i '/^$$/d' "$(_PACKAGE_BUILD_DIR)/zshrc"
-	
 PP_FILES = zshrc
+FILEPP_MODULES = hash-comment.pm remove-empty-lines.pm
 FILEPP_INCLUDE = . .. $(_TEMP_DIR)
+REMOVE_WHITESPACE_LINES = 1 # remove-empty-lines param
 
 include ../../dotfile.mk
