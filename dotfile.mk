@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# ================
+# =============================================================================
 # Dotfile Makefile
-# ================
+# =============================================================================
 
 # Variables that should not be used outside this Makefile should be
 # prefixed with an underscore. (Underscored variables don't show up
@@ -28,8 +28,8 @@
 # Documentation that can be retrieved with 'make help-commands' must
 # be prefixed with "#!".
 
-# Parameters for building an dotfile package
-# ==========================================
+# Parameters for building/installing an dotfile package
+# =============================================================================
 
 #$ ROOT_DIR
 #$  Output destination for 'make install'.
@@ -52,7 +52,7 @@ FILE_PREFIX :=
 endif
 
 # Filepp defaults
-# ===============
+# =============================================================================
 
 #$ FILEPP
 #$  Name of the 'filepp' binary
@@ -65,6 +65,10 @@ FILEPP_PREFIX 	?= \#>
 #$ FILEPP_MODULES
 #$  Modules to use in filepp
 FILEPP_MODULES ?=
+
+#$ FILEPP_MODULE_DIRS
+#$  List of directories to search for filepp modules
+FILEPP_MODULE_DIRS ?=
 
 #$ FILEPP_INCLUDE
 #$  Include directory for filepp
@@ -89,22 +93,24 @@ endif
 endif
 
 # Special defines
-ifndef HOST
+ifeq ($(HOST), )
 HOST := $(shell hostname)
-else
-ifeq ($(HOST), auto)
-HOST := $(shell hostname)
-endif
 endif
 
-ifndef OPERATING_SYSTEM
+ifeq ($(OPERATING_SYSTEM), )
 OPERATING_SYSTEM := $(shell uname -o)
+endif
+
+ifeq ($(USERNAME), )
+USERNAME := $(USER)
 endif
 
 # Parameters end here, new variables below this line should be
 # prefixed with an underscore.
-# ============================================================
+# =============================================================================
 
+_DOTFILE_MK = $(realpath $(filter %dotfile.mk, $(MAKEFILE_LIST)))
+_PACKAGES_ROOT = $(dir $(_DOTFILE_MK))
 _PACKAGE_PATH := $(realpath .)
 _PACKAGE_NAME := $(notdir $(_PACKAGE_PATH))
 _PACKAGE_BUILD_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)
@@ -112,40 +118,37 @@ _PACKAGE_BUILD_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)
 # A directory that can be used for temp files in the build process
 _TEMP_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)-temp
 
-# Collect the defines in Makefile, create a list of -Ddefines
-# ===========================================================
+# Collect the defines in Makefile, create a list of -D<defines>
+# =============================================================================
 
 # Additional variables that should be passed to preprocessor
-_ADDITIONAL_DEFINES = HOST OPERATING_SYSTEM PRIVATE_DIR _TEMP_DIR \
-							 _PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
+_ADDITIONAL_DEFINES = USERNAME HOST OPERATING_SYSTEM PRIVATE_DIR _TEMP_DIR \
+								_PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
 
 # Ignore these variables found in Makfile
 _IGNORE_VARS := FILES PP_FILES IGNORE_FILES \
 	ROOT_DIR BUILD_DIR PRIVATE_DIR PREFIX_DIR FILE_PREFIX \
 	FILEPP FILEPP_PREFIX FILEPP_MODULES FILEPP_INCLUDE FILEPP_FLAGS
-_CONFIG_VARS := $(shell sed -nr 's/^([a-zA-Z0-9][a-zA-Z0-9_]+)[[:space:]]*:?=.*/\1/p' 'Makefile')
+_CONFIG_VARS := $(shell \
+	sed -nr 's/^([a-zA-Z0-9][a-zA-Z0-9_]+)[[:space:]]*[:\+\?]?=.*/\1/p' 'Makefile')
 _CONFIG_VARS := $(sort $(_CONFIG_VARS)) # deduplicate variables
 _CONFIG_VARS := $(filter-out $(_IGNORE_VARS), $(_CONFIG_VARS))
 _DEFINED_VARS := $(_CONFIG_VARS) $(_ADDITIONAL_DEFINES)
 
 _FILEPP_DEFINES := $(foreach V, $(_DEFINED_VARS), "-D$V=$($V)")
 _FILEPP_MODULES := $(addprefix -m , $(FILEPP_MODULES))
+_FILEPP_MODULE_DIRS := \
+	$(addprefix -M, $(_PACKAGES_ROOT)/.filepp_modules $(FILEPP_MODULE_DIRS) )
 
 # Important: _PACKAGE_BUILD_DIR precedes other include dirs
 _FILEPP_INCLUDE := -I$(_PACKAGE_BUILD_DIR)
+#ifneq ($(PRIVATE_DIR), )
+#_FILEPP_INCLUDE += -I$(PRIVATE_DIR)
+#endif #XXX
 _FILEPP_INCLUDE += $(addprefix -I, $(FILEPP_INCLUDE))
 
-
-# We export these variables for calling shell scripts
-# ===================================================
-export ROOT_DIR BUILD_DIR PRIVATE_DIR PREFIX_DIR FILE_PREFIX
-export FILEPP FILEPP_PREFIX FILEPP_INCLUDE FILEPP_MODULES FILEPP_FLAGS
-export FILES PP_FILES DIRECTORIES IGNORE_FILES
-export $(_DEFINED_VARS)
-
-
 # File-selection logic starts here
-# ================================
+# =============================================================================
 
 # We NEVER want these files (BUILD_DIR could also be inside package dir)
 _FORCE_IGNORE := $(MAKEFILE_LIST) $(BUILD_DIR) $(BUILD_DIR)/%
@@ -179,59 +182,66 @@ endif
 _DIRECTORIES += $(subst ./,, $(dir $(_FILES) $(_PP_FILES)))
 _DIRECTORIES := $(sort $(_DIRECTORIES))
 
+# We export these variables for calling shell scripts
+# =============================================================================
+#export ROOT_DIR BUILD_DIR PRIVATE_DIR PREFIX_DIR FILE_PREFIX
+#export FILEPP FILEPP_PREFIX FILEPP_INCLUDE FILEPP_MODULES FILEPP_FLAGS
+#export FILES PP_FILES DIRECTORIES IGNORE_FILES
+export $(_DEFINED_VARS)
 
 # Makefile rules start here
-# =========================
+# =============================================================================
 
 .DEFAULT_GOAL := build
 
 # This target must not be overriden, but it should preceed each makefile that
 # overrides other targets (.pre_build, .post_build).
 build:: .check_dependencies clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) \
-			.pre_build .build_msg $(_DIRECTORIES) $(_FILES) $(_PP_FILES) .post_build 
+			.pre_build .build_msg $(_DIRECTORIES) $(_FILES) $(_PP_FILES) \
+			.post_build 
 .build_msg:
 	@echo '> Starting build ...'
 
 # These targets can be overriden
-.pre_build:: .force .pre_build_msg
+.pre_build:: .pre_build_msg
 .pre_build_msg:
 	@echo '> Entering pre_build hook ...'
 
-.post_build:: .force .post_build_msg
+.post_build:: .post_build_msg
 .post_build_msg:
 	@echo '> Entering post_build hook ...'
 
-.pre_install:: .force .pre_install_msg
+.pre_install:: .pre_install_msg
 .pre_install_msg:
 	@echo '> Entering pre_install hook ...'
 
-.post_install:: .force .post_install_msg
+.post_install:: .post_install_msg
 .post_install_msg:
 	@echo '> Entering post_install hook ...'
 
 # Create the build directory for package
 $(_PACKAGE_BUILD_DIR):
-	mkdir -p "$@"
+	@mkdir -p "$@"
 
 # Create the temp directory
 $(_TEMP_DIR):
-	mkdir -p "$@"
+	@mkdir -p "$@"
 
 # Create directories
 $(_DIRECTORIES): .force
-	mkdir -p -v "$(_PACKAGE_BUILD_DIR)/$@"
+	@mkdir -p -v "$(_PACKAGE_BUILD_DIR)/$@"
 
 # Copy files
 $(_FILES): .force
-	cp -v -p "$@" "$(_PACKAGE_BUILD_DIR)/$@"
+	@cp -v -p "$@" "$(_PACKAGE_BUILD_DIR)/$@"
 
 # Generate files 
 $(_PP_FILES): .force
 	@echo ">> Preprocessing $@ ..."
-	$(FILEPP) \
-		$(_FILEPP_DEFINES) \
-		$(_FILEPP_MODULES) \
+	@$(FILEPP) \
+		$(_FILEPP_MODULE_DIRS) $(_FILEPP_MODULES) \
 		$(_FILEPP_INCLUDE) \
+		$(_FILEPP_DEFINES) \
 		-kc "$(FILEPP_PREFIX)" \
 		$(FILEPP_FLAGS) "$@" -o "$(_PACKAGE_BUILD_DIR)/$(subst .pp,,$@)"
 
@@ -243,12 +253,16 @@ check_dependencies: .check_dependencies
 .check_dependencies::
 	echo -n "Checking for filepp ... "
 	which filepp
-	#echo -n "Checking for filepp module 'testfile' ... "
-	#filepp -m testfile.pm /dev/null && echo OK
+	for M in $(FILEPP_MODULES); do \
+		echo -n "Checking for filepp module $$M ... "; \
+		echo OK | filepp -c $(_FILEPP_MODULE_DIRS) -m $$M || exit 1; \
+	done
 
 #! install
 #!  Copy files from build-dir to root-dir
-install:: .pre_install
+install: .pre_install .install .post_install
+
+.install::
 	mkdir -p "$(ROOT_DIR)/$(PREFIX_DIR)"
 	
 	cd "$(_PACKAGE_BUILD_DIR)" || { \
@@ -256,90 +270,69 @@ install:: .pre_install
 		exit 1; \
 	}; \
 	\
-	find . -mindepth 1 -type d | sed 's|^./||g' | while read -r D; do \
+	find . -mindepth 1 -type d | sed 's|^./||' | while read -r D; do \
 		mkdir -p "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$D"; \
 	done; \
 	\
-	find . -mindepth 1 -type f -not -name .diff | sed 's|^./||g' | while read -r F; do \
-		cp -v -p "$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
+	find . -mindepth 1 -type f | sed 's|^./||' | while read -r F; do \
+		if ! cmp --quiet -- \
+			"$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
+		then \
+			cp -v -p "$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
+		fi; \
 	done;
 	
-	cd "$(_PACKAGE_PATH)"; \
-	$(MAKE) .post_install
+# Call 'diff' on files that would be modified
+_DIFF_PROGRAM = diff --color=always
 
-# Create a list of files that differ, used by diff and update
-.SILENT:
-$(_PACKAGE_BUILD_DIR)/.diff:
+#! diff
+#!  Show the difference between newly generated files in the build directory
+#!  and the old files in the root directory.
+diff: .force
 	cd "$(_PACKAGE_BUILD_DIR)" || { \
 		echo "Did you run 'make build' yet?"; \
 		exit 1; \
 	}; \
-	find . -mindepth 1 -type f -not -name .diff | sed 's|^./||g' | while read -r FILE; do \
-		cmp --quiet "$$FILE" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" || echo "$$FILE"; \
-	done > "$(_PACKAGE_BUILD_DIR)/.diff"
-
-# Force to regenerate .diff-file 
-rediff: clean-diff $(_PACKAGE_BUILD_DIR)/.diff
-
-# Call 'diff' on files that would be modified
-_DIFF_PROGRAM = diff
-
-#! diff
-#!  Show the difference between newly generated files in the build directory
-#! and the old files in the root directory.
-diff: .force $(_PACKAGE_BUILD_DIR)/.diff
-	exec 9<"$(_PACKAGE_BUILD_DIR)/.diff"; \
-	while read -u 9 -r F; do \
-		$(_DIFF_PROGRAM) -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
-	done; \
-	exec 9<&-
-
-#! vimdiff
-#!  Same as diff, but use 'vimdiff' as diff program.
-vimdiff:
-	$(MAKE) _DIFF_PROGRAM=vimdiff diff
+	find . -mindepth 1 -type f | sed 's|^./||' | while read -r FILE; do \
+		if [[ -e "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" ]]; then \
+			$(_DIFF_PROGRAM) -- \
+			"$$FILE" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" || \
+				echo "... in $$FILE"; \
+		else \
+			echo "$$FILE missing in $(ROOT_DIR)"; \
+		fi; \
+	done
 
 #! info
-#!  Show a list of configurable variables in Makefile
+#!  Show a list of configuration variables in Makefile
 info:
-	$(foreach VAR, $(_CONFIG_VARS), \
-		$(info $(VAR) = $(value $(VAR)) ) \
+	$(foreach V, $(_CONFIG_VARS), \
+		$(info $V = $(value $V)) \
 	)
-
-#! update
-#!  Update only new files
-update: $(_PACKAGE_BUILD_DIR)/.diff
-	while read -r F; do \
-		cp -p -v -- "$(_PACKAGE_BUILD_DIR)/$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
-	done < "$(_PACKAGE_BUILD_DIR)/.diff"
 
 #! help
 #!  Show help summary
-.SILENT:
 help:
-	cat << EOF
-	Usage: make clean|build|info|install|update|diff|rediff|template
-	
-	Type 'make help-variables' or 'make help-commands'
-	EOF
+	@echo "Usage: make build|clean|diff|info|install"
+	@echo	
+	@echo "Type 'make help-variables' or 'make help-commands' for more help."
 
 #! help-variables
 #!  Show help for variables
 help-variables:
-	@grep -h '^#\$$' $(MAKEFILE_LIST) | sed -r -e 's/^#.//g' -e 's/^ ([^ ])/\n\1/g'
+	@grep -h '^#\$$' $(_DOTFILE_MK) | \
+		sed -r -e 's/^#.//' -e 's/^ ([^ ])/\n\1/g'
 
 #! help-commands
 #!  Show help for commands
 help-commands:
-	@grep -h '^#!' $(MAKEFILE_LIST) | sed -r -e 's/^#.//g' -e 's/^ ([^ ])/\n\1/g'
+	@grep -h '^#!' $(_DOTFILE_MK) | \
+		sed -r -e 's/^#.//' -e 's/^ ([^ ])/\n\1/g'
 
 #! clean
 #!  Remove the build dir
 clean: clean-temp
 	rm -rf "$(_PACKAGE_BUILD_DIR)"
-
-clean-diff:
-	rm -f "$(_PACKAGE_BUILD_DIR)/.diff"
 
 clean-build-dir:
 	rmdir "$(BUILD_DIR)"
@@ -347,4 +340,7 @@ clean-build-dir:
 clean-temp:
 	rm -rf "$(_TEMP_DIR)"
 
-.force: # we use this to force building a target
+.force:
+	# we use this to force building a target
+	
+# vim: noexpandtab:shiftwidth=3:tabstop=3:softtabstop=3:textwidth=80
