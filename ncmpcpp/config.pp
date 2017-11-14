@@ -268,7 +268,7 @@ alternative_header_second_line_format = {{$5%a$9}{$8 - $2%b$9}{ ($4%y$9)}}|{%D}
 ##   not available.
 ##
 #song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
-song_columns_list_format = (5f)[magenta]{nE:#} (20)[blue]{a} (20)[red]{b} (50)[yellow]{t|f:Title} (7f)[green]{lr}
+song_columns_list_format = "(5f)[magenta]{nE:#} (20)[blue]{a} (20)[red]{b} (50)[yellow]{t|f:Title} (7f)[green]{lr}"
 #
 ##### various settings #####
 #
@@ -468,9 +468,9 @@ use_console_editor = yes
 #
 colors_enabled = yes
 #
-empty_tag_color = blue
+empty_tag_color = THEME_COLOR
 #
-header_window_color = blue
+header_window_color = THEME_COLOR
 #
 volume_color = default
 #
@@ -484,21 +484,27 @@ color1 = white
 #
 color2 = THEME_COLOR
 #
+#> if "NCMPCPP_VERSION" < "0.9"
+# WARNING: Variable 'main_window_highlight_color' is deprecated and will be removed in 0.9 (set current_item_prefix = "$(default)$r" and current_item_suffix = "$/r$(end)" to preserve current behavior).
 main_window_highlight_color = default
+#> endif
 #
 progressbar_color = black
 #
 progressbar_elapsed_color = THEME_COLOR
 #
-statusbar_color = blue
+statusbar_color = THEME_COLOR
 #
-statusbar_time_color = blue
+statusbar_time_color = THEME_COLOR
 #
-player_state_color = blue
+player_state_color = THEME_COLOR
 #
 alternative_ui_separator_color = black:b
 #
+#> if "NCMPCPP_VERSION" < "0.9"
+# WARNING: Variable 'active_column_color' is deprecated and will be removed in 0.9 (replaced by current_item_inactive_column_prefix and current_item_inactive_column_suffix).
 active_column_color = red
+#> endif
 #
 #visualizer_color = blue, cyan, green, yellow, magenta, red
 visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
@@ -507,3 +513,6 @@ window_border_color = green
 #
 active_window_border = red
 #
+
+
+
