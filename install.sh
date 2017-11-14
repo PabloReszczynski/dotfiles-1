@@ -4,8 +4,8 @@ unset CDPATH
 set -u +o histexpand
 
 LOG_DIR="/tmp/dotfiles-$USER.logs"
-VARIABLES=''
 CURRENT_DIR=$(pwd)
+declare -a VARIABLES=()
 declare -a FILES=()
 declare -a FAILED=()
 
@@ -17,14 +17,15 @@ mkdir -p "$LOG_DIR" || {
 
 ACTION=$1; shift
 if [[ "$ACTION" != "diff" ]] && \
+   [[ "$ACTION" != "info" ]] && \
    [[ "$ACTION" != "build" ]] && \
    [[ "$ACTION" != "install" ]]; then
-   echo "Wrong first argument"
+   echo "Unknown command: $ACTION"
 fi
 
 for arg; do
    if [[ "$arg" != "${arg/=/}" ]]; then
-      VARIABLES+=" $arg"
+      VARIABLES+=($arg)
    elif [[ -d "$arg" ]]; then
       FILES+=($arg)
    else
@@ -42,13 +43,17 @@ for file in "${FILES[@]}"; do
    fi
 
    echo "> ${ACTION}ing $file"
-   if ! make $ACTION $VARIABLES &> "$LOG_DIR/$file"; then
+   if ! make $ACTION "${VARIABLES[@]}" &> "$LOG_DIR/$file"; then
       FAILED+=($file)
       continue
    fi
 done
 
 printf "> Done\n\n"
+
+if [[ "$ACTION" == info ]] || [[ "$ACTION" == diff ]]; then
+   cat "$LOG_DIR"/*
+fi
 
 if [[ -n "${FAILED[@]}" ]]; then
    if [[ "$ACTION" == 'diff' ]]; then
