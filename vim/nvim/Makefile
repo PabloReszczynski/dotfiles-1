@@ -4,9 +4,8 @@ BASE_DIR = ~/.config/nvim
 .pre_build::
 	cp -rp ../_shared/* "$(_PACKAGE_BUILD_DIR)"
 
-.ONESHELL:
 .post_build::
-	cd "$(_PACKAGE_BUILD_DIR)/bundle" || exit 1
+	cd "$(_PACKAGE_BUILD_DIR)/bundle" || exit 1; \
 	git clone https://github.com/VundleVim/Vundle.vim
 
 .post_install::
