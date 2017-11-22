@@ -284,7 +284,11 @@ install: .pre_install .install .post_install
 	done;
 	
 # Call 'diff' on files that would be modified
+ifeq ($(OPERATING_SYSTEM), FreeBSD)
+_DIFF_PROGRAM = diff 
+else
 _DIFF_PROGRAM = diff --color=always
+endif
 
 #! diff
 #!  Show the difference between newly generated files in the build directory
@@ -295,7 +299,7 @@ diff: .force
 		exit 1; \
 	}; \
 	find . -mindepth 1 -type f | sed 's|^./||' | while read -r F; do \
-		if [[ -e "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" ]]; then \
+		if [ -e "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" ]; then \
 			$(_DIFF_PROGRAM) -- \
 			"$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" || \
 				echo "... in $$F"; \
