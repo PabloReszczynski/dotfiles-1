@@ -109,6 +109,7 @@ endif
 # prefixed with an underscore.
 # =============================================================================
 
+_MAKE_PROG := $(notdir $(MAKE))
 _DOTFILE_MK = $(realpath $(filter %dotfile.mk, $(MAKEFILE_LIST)))
 _PACKAGES_ROOT = $(dir $(_DOTFILE_MK))
 _PACKAGE_PATH := $(realpath .)
@@ -266,7 +267,7 @@ install: .pre_install .install .post_install
 	mkdir -p -- "$(ROOT_DIR)/$(PREFIX_DIR)"
 	
 	cd "$(_PACKAGE_BUILD_DIR)" || { \
-		echo "Did you run 'make build' yet?"; \
+		echo "Did you run '$(_MAKE_PROG) build' yet?"; \
 		exit 1; \
 	}; \
 	\
@@ -290,7 +291,7 @@ _DIFF_PROGRAM = diff --color=always
 #!  and the old files in the root directory.
 diff: .force
 	cd "$(_PACKAGE_BUILD_DIR)" || { \
-		echo "Did you run 'make build' yet?"; \
+		echo "Did you run '$(_MAKE_PROG) build' yet?"; \
 		exit 1; \
 	}; \
 	find . -mindepth 1 -type f | sed 's|^./||' | while read -r F; do \
@@ -313,9 +314,9 @@ info:
 #! help
 #!  Show help summary
 help:
-	@echo "Usage: make build|clean|diff|info|install"
+	@echo "Usage: $(_MAKE_PROG) build|clean|diff|info|install"
 	@echo	
-	@echo "Type 'make help-variables' or 'make help-commands' for more help."
+	@echo "Type '$(_MAKE_PROG) help-variables' or '$(_MAKE_PROG) help-commands' for more help."
 
 #! help-variables
 #!  Show help for variables
