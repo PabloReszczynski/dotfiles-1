@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 unset CDPATH
 set -u +o histexpand
@@ -8,6 +8,12 @@ CURRENT_DIR=$(pwd)
 declare -a VARIABLES=()
 declare -a FILES=()
 declare -a FAILED=()
+
+if which gmake; then
+	MAKE=gmake
+else
+	MAKE=make
+fi
 
 rm -rf "$LOG_DIR"
 mkdir -p "$LOG_DIR" || {
@@ -43,7 +49,7 @@ for file in "${FILES[@]}"; do
    fi
 
    echo "> ${ACTION}ing $file"
-   if ! make $ACTION "${VARIABLES[@]}" &> "$LOG_DIR/$file"; then
+   if ! $MAKE $ACTION "${VARIABLES[@]}" &> "$LOG_DIR/$file"; then
       FAILED+=($file)
       continue
    fi
