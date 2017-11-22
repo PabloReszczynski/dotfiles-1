@@ -6,7 +6,7 @@
 #
 #> define TMUX_DAEMON_BIN tmux_daemon.pl
 #> define TMUX_DAEMON_BIN_DIR ~/.tmux/bin
-#> define TMUX_DAEMON_FIFO /dev/shm/$USER-tmux-daemon.fifo
+#> define TMUX_DAEMON_FIFO /tmp/.$USER-tmux-daemon.fifo
 #> define TMUX_DAEMON(_ACTION_) run -b 'echo _ACTION_ > TMUX_DAEMON_FIFO ;:'
 #
 # Also ensure that our demon is running:
