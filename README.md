@@ -3,7 +3,13 @@
 dotfile.mk is a Makefile for creating and installing dotfiles.
 
 The dotfiles can be customized with the help of the powerful `filepp` preprocessor, which provides
-also macros such as `#for`, `#foreach`, `#substr` or even plain perl code.
+also macros such as `#for`, `#foreach`, `#substr` and much more.
+
+## How does it work?
+A dotfile package is a directory that contains a Makefile and the configuration files.
+The dotfile.mk collects #defines out of the Makefile, runs the preprocessor over the dotfiles and copies them to your $HOME.
+
+The parameters can be used to customize the dotfiles by platform, hostname, username or other things...
 
 ## Requirements
 - make
@@ -20,8 +26,8 @@ Copies the generated files into your `ROOT_DIR`, which defaults to `$HOME`.
 #### `make diff`
 Shows the difference between the new generated dotfiles in `BUILD_DIR` and the existing ones in `ROOT_DIR`.
 
-#### `make show`
-Shows the variables that can be used to customize the dotfiles.
+#### `make info`
+Shows the variables that can be used to customize the dotfile.
 
 #### `make check_dependencies`
 Check if all dependencies are met to build the dotfiles.
@@ -37,15 +43,19 @@ The last line of the `Makefile` must include the `package.mk` file.
 ### Package Variables
 
 #### `FILEPP_PREFIX`
-By default, macros are recognized by the hash sign (`#ifdef ... #endif`).
+By default, macros are recognized by `#>` (`#>ifndef, #>include, #>endif, ...`).
 Using this variable you can change the prefix to something else, for example
-when you are generating shell scripts. (see also the `-kc` option in `filepp(1)`)
+if you are generating dotfiles for vim (vim uses the doublequote `"` for comments).
+See also the `-kc` option in `filepp(1)`.
 
 #### `FILEPP_INCLUDE`
 A list of include dirs for `filepp`.
 
 #### `FILEPP_MODULES`
 A list of modules that `filepp` should also load.
+
+#### `FILEPP_MODULE_DIRS`
+A list of directories to search filepp modules for.
 
 #### `FILEPP_FLAGS`
 Custom flags that should be passed to `filepp`
@@ -76,31 +86,26 @@ config.pp   -> $ROOT_DIR/.config/ncmpcpp/config
 
 ### Helper variables
 
-The following variables are also available in the Makefile and are exported into the environment:
+The following variables are also available inside the Makefile and are passed to the preprocessor.
 
-#### `OPERATING_SYSTEM`
-Output of `uname -o`.
-
-### `HOST`
-Hostname, retrieved with `hostname`.
-
-#### `_PACKAGE_NAME`
-This variable holds the name of the package, which is the directory name.
-
-#### `_PACKAGE_BUILD_DIR`
-This variable points to the package build dir (which is `BUILD_DIR/_PACKAGE_NAME`).
-
-#### `_TEMP_DIR`
-Use this directory if your package needs to deal with temporary files.
+| Variable | Description |
+| -------- | ----------- |
+| `OPERATING_SYSTEM` | Output of `uname -o`. |
+| `HOST` | Hostname, retrieved with `hostname`. |
+| `USERNAME` | The username, retrieved form the `$USER` environment variable. |
+| `_PACKAGE_NAME` | This variable holds the name of the package, which is the directory name. |
+| `_PACKAGE_BUILD_DIR` | This variable points to the package build dir (which is `BUILD_DIR/_PACKAGE_NAME`). |
+| `_TEMP_DIR` | Use this directory if your package needs to deal with temporary files. |
 
 ### Package Rules/Hooks:
 
 **NOTE**: By the nature of `make`, the first rule without a leading dot is used as the default if you type `make` without a target.
 If you introduce own rules, make sure that these rules begin with a dot. This ensures that `build` remains the default target.
+Or, alternativly, you can place `build::` on top of the Makefile.
 
 #### `.check_dependencies::`
 Code for testing if all dependencies, e.g. external programs, are met
-to build this dotfile package. Make sure that a failed check returns a non-zero exit value,
+for building this dotfile package. Make sure that a failed check returns a non-zero exit value,
 so `make` will abort on that point.
 
 #### `.pre_build::`
@@ -153,3 +158,13 @@ PREFIX_DIR = .config/ncmpcpp
 include ../dotfile.mk
 ```
 
+### Filepp modules
+
+dotfile.mk is also ships it's own filepp modules residing in `.filepp_modules`
+See this for a documentation:
+- remove-empty-lines.pm
+- try\_include.pm
+- testfile.pm
+
+### See also
+yadm

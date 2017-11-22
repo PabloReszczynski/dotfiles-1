@@ -15,7 +15,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # =============================================================================
-# Dotfile Makefile
+# Dotfile Makefile v. 0.1
 # =============================================================================
 
 # Variables that should not be used outside this Makefile should be
@@ -129,8 +129,8 @@ _ADDITIONAL_DEFINES = USERNAME HOST OPERATING_SYSTEM PRIVATE_DIR _TEMP_DIR \
 _IGNORE_VARS := FILES PP_FILES IGNORE_FILES \
 	ROOT_DIR BUILD_DIR PRIVATE_DIR PREFIX_DIR FILE_PREFIX \
 	FILEPP FILEPP_PREFIX FILEPP_MODULES FILEPP_INCLUDE FILEPP_FLAGS
-_CONFIG_VARS := $(shell \
-	sed -nr 's/^([a-zA-Z0-9][a-zA-Z0-9_]+)[[:space:]]*[:\+\?]?=.*/\1/p' 'Makefile')
+_CONFIG_VARS := $(shell sed -nr \
+	's/^([a-zA-Z0-9][a-zA-Z0-9_]+)[[:space:]]*[:\+\?]?=.*/\1/p' 'Makefile')
 _CONFIG_VARS := $(sort $(_CONFIG_VARS)) # deduplicate variables
 _CONFIG_VARS := $(filter-out $(_IGNORE_VARS), $(_CONFIG_VARS))
 _DEFINED_VARS := $(_CONFIG_VARS) $(_ADDITIONAL_DEFINES)
@@ -221,19 +221,19 @@ build:: .check_dependencies clean $(_PACKAGE_BUILD_DIR) $(_TEMP_DIR) \
 
 # Create the build directory for package
 $(_PACKAGE_BUILD_DIR):
-	@mkdir -p "$@"
+	@mkdir -p -- "$@"
 
 # Create the temp directory
 $(_TEMP_DIR):
-	@mkdir -p "$@"
+	@mkdir -p -- "$@"
 
 # Create directories
 $(_DIRECTORIES): .force
-	@mkdir -p -v "$(_PACKAGE_BUILD_DIR)/$@"
+	@mkdir -p -v -- "$(_PACKAGE_BUILD_DIR)/$@"
 
 # Copy files
 $(_FILES): .force
-	@cp -v -p "$@" "$(_PACKAGE_BUILD_DIR)/$@"
+	@cp -v -p -- "$@" "$(_PACKAGE_BUILD_DIR)/$@"
 
 # Generate files 
 $(_PP_FILES): .force
@@ -263,7 +263,7 @@ check_dependencies: .check_dependencies
 install: .pre_install .install .post_install
 
 .install::
-	mkdir -p "$(ROOT_DIR)/$(PREFIX_DIR)"
+	mkdir -p -- "$(ROOT_DIR)/$(PREFIX_DIR)"
 	
 	cd "$(_PACKAGE_BUILD_DIR)" || { \
 		echo "Did you run 'make build' yet?"; \
@@ -271,14 +271,14 @@ install: .pre_install .install .post_install
 	}; \
 	\
 	find . -mindepth 1 -type d | sed 's|^./||' | while read -r D; do \
-		mkdir -p "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$D"; \
+		mkdir -p -- "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$D"; \
 	done; \
 	\
 	find . -mindepth 1 -type f | sed 's|^./||' | while read -r F; do \
 		if ! cmp --quiet -- \
 			"$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
 		then \
-			cp -v -p "$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
+			cp -v -p -- "$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
 		fi; \
 	done;
 	
@@ -293,13 +293,13 @@ diff: .force
 		echo "Did you run 'make build' yet?"; \
 		exit 1; \
 	}; \
-	find . -mindepth 1 -type f | sed 's|^./||' | while read -r FILE; do \
-		if [[ -e "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" ]]; then \
+	find . -mindepth 1 -type f | sed 's|^./||' | while read -r F; do \
+		if [[ -e "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" ]]; then \
 			$(_DIFF_PROGRAM) -- \
-			"$$FILE" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$FILE" || \
-				echo "... in $$FILE"; \
+			"$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" || \
+				echo "... in $$F"; \
 		else \
-			echo "$$FILE missing in $(ROOT_DIR)"; \
+			echo "$$F missing in $(ROOT_DIR)"; \
 		fi; \
 	done
 
@@ -320,25 +320,25 @@ help:
 #! help-variables
 #!  Show help for variables
 help-variables:
-	@grep -h '^#\$$' $(_DOTFILE_MK) | \
+	@grep -h '^#\$$' -- $(_DOTFILE_MK) | \
 		sed -r -e 's/^#.//' -e 's/^ ([^ ])/\n\1/g'
 
 #! help-commands
 #!  Show help for commands
 help-commands:
-	@grep -h '^#!' $(_DOTFILE_MK) | \
+	@grep -h '^#!' -- $(_DOTFILE_MK) | \
 		sed -r -e 's/^#.//' -e 's/^ ([^ ])/\n\1/g'
 
 #! clean
 #!  Remove the build dir
 clean: clean-temp
-	rm -rf "$(_PACKAGE_BUILD_DIR)"
+	rm -rf -- "$(_PACKAGE_BUILD_DIR)"
 
 clean-build-dir:
-	rmdir "$(BUILD_DIR)"
+	rmdir -- "$(BUILD_DIR)"
 
 clean-temp:
-	rm -rf "$(_TEMP_DIR)"
+	rm -rf -- "$(_TEMP_DIR)"
 
 .force:
 	# we use this to force building a target
