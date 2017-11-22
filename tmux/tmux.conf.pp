@@ -29,7 +29,11 @@ set -g prefix '^a'
 bind 'a' send-prefix
 
 ###
+#> if "OPERATING_SYSTEM" eq "FreeBSD"
+set -g default-shell '/usr/local/bin/zsh'
+#> else
 set -g default-shell '/bin/zsh'
+#> endif
 set -g automatic-rename on
 
 ### keys ###
