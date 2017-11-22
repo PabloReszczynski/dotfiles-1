@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/env python2
 
 # zsh_generate_options.py - extract default zsh config from manpage
 # Copyright (C) 2015 Benjamin Abendroth
