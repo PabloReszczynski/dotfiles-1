@@ -29,7 +29,11 @@ getAliasArgs() {
 }
 
 # ls ##########################################################################
-#> define LS_OPTS --color=auto
+#> if "OPERATING_SYSTEM" eq "FreeBSD"
+#>    define LS_OPTS -G
+#> else
+#>    define LS_OPTS --color=auto
+#> endif
 alias \
 ls='ls LS_OPTS' \
  l='ls LS_OPTS -la' \
