@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 example='/usr/share/doc/ncmpcpp/bindings'
 
