@@ -62,13 +62,18 @@ alias -- \
 
 # "Core Utils" ################################################################
 # Be Verbose/Interactive/Safe #################################################
+#> if "OPERATING_SYSTEM" eq "FreeBSD"
+#>    define PRESERVE_ROOT
+#> else
+#>    define PRESERVE_ROOT --preserve-root
+#> endif
 alias cp='cp -v -p -i'
-alias rm='rm -v --preserve-root'
+alias rm='rm -v PRESERVE_ROOT'
 alias mv='mv -v -i'
 alias mkdir='mkdir -v'
 alias rmdir='rmdir -v'
-alias chmod='chmod -v --preserve-root'
-alias chown='chown -v --preserve-root'
+alias chmod='chmod -v PRESERVE_ROOT'
+alias chown='chown -v PRESERVE_ROOT'
 alias ln='ln -v -i'
 
 # Don't create the annoying ~/.xsel.log file ##################################
