@@ -16,7 +16,7 @@ RPROMPT="\
  [%(?.%F{green}.%F{red})%?%k%f]\
  [%l]"
 #> elif "PROMPT_STYLE" eq "MOSTLY_RIGHT"
-PROMPT=' %3~ > '                                                        
+PROMPT=' %3~ %(!.F{red}.%F{green})>%f '                                                        
 RPROMPT='%F{white}%U%n@%m%u%f [%*] [%(?.%F{green}.%F{red})%?%k%f] [%l]'
 #> else
 #> error "Unknown parameter for PROMPT_STYLE"
