@@ -6,6 +6,6 @@ FILEPP_INCLUDE = themes
 IGNORE_FILES = themes/%
 
 .post_install::
-	which xrdb && xrdb ~/.Xresources
+	-xrdb ~/.Xresources
 
 include ../dotfile.mk
