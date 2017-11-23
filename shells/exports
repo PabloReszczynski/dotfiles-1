@@ -42,8 +42,12 @@ export LESS='-QiMR'
 # Set default editor ##########################################################
 #> if "HAVE_NVIM" eq "1"
 export EDITOR=nvim
+export SUDO_EDITOR=nvim
+export VISUAL=nvim
 #> else
 export EDITOR=vim
+export SUDO_EDITOR=vim
+export VISUAL=vim
 #> endif
 
 # Yaourt: build PKGBUILDS on arm devices ######################################
