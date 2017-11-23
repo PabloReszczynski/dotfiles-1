@@ -127,7 +127,8 @@ _IGNORE_VARS := FILES PP_FILES IGNORE_FILES \
 	ROOT_DIR BUILD_DIR PRIVATE_DIR PREFIX_DIR FILE_PREFIX \
 	FILEPP FILEPP_PREFIX FILEPP_MODULES FILEPP_INCLUDE FILEPP_FLAGS
 _CONFIG_VARS := $(shell sed -nr \
-	's/^([a-zA-Z0-9][a-zA-Z0-9_]+)[[:space:]]*[:\+\?]?=.*/\1/p' 'Makefile')
+	's/^([a-zA-Z0-9][a-zA-Z0-9_]+)[[:space:]]*[:\+\?]?=.*/\1/p' \
+	$(filter-out %dotfile.mk, $(MAKEFILE_LIST)) )
 _CONFIG_VARS := $(sort $(_CONFIG_VARS)) # deduplicate variables
 _CONFIG_VARS := $(filter-out $(_IGNORE_VARS), $(_CONFIG_VARS))
 _DEFINED_VARS := $(_CONFIG_VARS) $(_ADDITIONAL_DEFINES)
