@@ -6,13 +6,16 @@
 #
 #> define TMUX_DAEMON_BIN tmux_daemon.pl
 #> define TMUX_DAEMON_BIN_DIR ~/.tmux/bin
-#> define TMUX_DAEMON_FIFO /tmp/.$USER-tmux-daemon.fifo
+#> if "HAVE_DEV_SHM" eq "1"
+	#> define TMUX_DAEMON_FIFO /dev/shm/$USER-tmux-daemon.fifo
+#> else
+	#> define TMUX_DAEMON_FIFO /tmp/.$USER-tmux-daemon.fifo
+#> endif
 #> define TMUX_DAEMON(_ACTION_) run -b 'echo _ACTION_ > TMUX_DAEMON_FIFO ;:'
 #
 # Also ensure that our demon is running:
 run 'pkill -U $USER -f TMUX_DAEMON_BIN &>/dev/null;:'
 run -b "TMUX_DAEMON_BIN_DIR/TMUX_DAEMON_BIN TMUX_DAEMON_FIFO &>/dev/null;:"
-
 
 
 # delete all keybindings
@@ -29,11 +32,7 @@ set -g prefix '^a'
 bind 'a' send-prefix
 
 ###
-#> if "OPERATING_SYSTEM" eq "FreeBSD"
-set -g default-shell '/usr/local/bin/zsh'
-#> else
-set -g default-shell '/bin/zsh'
-#> endif
+set -g default-shell 'DEFAULT_SHELL'
 set -g automatic-rename on
 
 ### keys ###
