@@ -9,7 +9,7 @@ BASE_DIR = ~/.config/nvim
 	git clone https://github.com/VundleVim/Vundle.vim
 
 .post_install::
-	nvim +PluginInstall +quitall
+	-nvim +PluginInstall +quitall
 
 PREFIX_DIR = .config/nvim
 FILEPP_PREFIX = \">

@@ -9,7 +9,7 @@ BASE_DIR = ~/.vim
 	git clone https://github.com/VundleVim/Vundle.vim
 
 .post_install::
-	vim +PluginInstall +quitall
+	-vim +PluginInstall +quitall
 
 FILEPP_PREFIX = \">
 PP_FILES = vimrc.pp
