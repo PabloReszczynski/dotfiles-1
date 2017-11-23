@@ -19,3 +19,9 @@ LS_COLOR = $(shell if ls --help 2>&1 | grep -q -- --color; then \
 				fi)
 
 HAVE_NVIM = $(shell which nvim >/dev/null 2>/dev/null && echo 1 || echo 0)
+
+HAVE_MAN_PROMPT = $(shell if man --help 2>&1 | grep -q -- --prompt; then \
+		  					echo 1; \
+						else \
+							echo 0; \
+						fi)

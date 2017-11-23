@@ -71,18 +71,21 @@ alias xsel='xsel -l /dev/null'
 
 # vi aliases ##################################################################
 #> if "HAVE_NVIM" eq "1"
-   alias    v='nvim'
-   alias   vi='nvim'
-   alias  vim='nvim'
+alias    v='nvim'
+alias   vi='nvim'
+alias  vim='nvim'
 #> else
-   alias    v='vim'
-   alias   vi='vim'
+alias    v='vim'
+alias   vi='vim'
 #> endif
 
 # misc aliases ################################################################
 alias more='less'
 alias info='info --vi-keys'
+
+#> if "HAVE_MAN_PROMPT" eq "1"
 alias man="man -r ' Manual page \$MAN_PN line %lt?L/%L.:byte %bB?s/%s..? (END):?pB %pB\\%.. '"
+#> endif
 
 alias openports='netstat --all --numeric --programs --inet'
 alias killflash='pkill -f flash'
