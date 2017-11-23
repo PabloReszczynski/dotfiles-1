@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 unset CDPATH
-set -u +o histexpand
+set +o histexpand # -u
 
 LOG_DIR="/tmp/dotfiles-$USER.logs"
 CURRENT_DIR=$(pwd)
@@ -9,9 +9,9 @@ declare -a VARIABLES=()
 declare -a FILES=()
 declare -a FAILED=()
 
-if which gmake; then
+if which gmake &>/dev/null; then
 	MAKE=gmake
-elif which make && make --version | grep -q 'GNU'; then
+elif which make &>/dev/null && make --version | grep -q 'GNU'; then
 	MAKE=make
 else
 	echo "Could not find GNU make"
