@@ -281,10 +281,10 @@ install: .pre_install .install .post_install
 	done;
 	
 # Call 'diff' on files that would be modified
-ifeq ($(OPERATING_SYSTEM), FreeBSD)
-_DIFF_PROGRAM = diff 
-else
+ifeq ($(shell diff --help | grep -q -- --color && echo 1 || echo 0), 1)
 _DIFF_PROGRAM = diff --color=always
+else
+_DIFF_PROGRAM = diff 
 endif
 
 #! diff
