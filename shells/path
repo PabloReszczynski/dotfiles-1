@@ -8,22 +8,15 @@
 #> define PREPEND_IF(_DIR_) IF_DIR(_DIR_, PATH_PREPEND(_DIR_))
 #> define APPEND_IF(_DIR_)  IF_DIR(_DIR_, PATH_APPEND(_DIR_))
 
-# TODO: export path by checking OS name
-
-# normal distros:
-#export PATH='/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/opt'
+export PATH='/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/games:/opt'
 
 # arch linux
-export PATH='/bin:/usr/local/bin:/usr/local/sbin'
-
-#> if "OPERATING_SYSTEM" eq "FreeBSD"
-PATH_APPEND(/usr/bin:/usr/sbin)
-#> endif
+#  export PATH='/bin:/usr/local/bin:/usr/local/sbin'
 
 PATH_PREPEND($HOME/bin)
 PATH_PREPEND($HOME/scripts)
 PATH_PREPEND(/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/share/perl5/vendor_perl)
 PATH_PREPEND($HOME/.gem/ruby/2.4.0/bin)
-PATH_APPEND(/opt:/opt/vc/bin)
+PATH_APPEND(/opt/vc/bin)
 
 # vim: ft=sh

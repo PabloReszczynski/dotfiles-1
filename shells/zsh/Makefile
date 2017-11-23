@@ -1,4 +1,4 @@
-SHELL = zsh
+SHELL_NAME = zsh
 
 LANGUAGE = en_US.UTF-8
 SLOW_SYSTEM = 0

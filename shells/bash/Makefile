@@ -1,4 +1,4 @@
-SHELL = bash
+SHELL_NAME = bash
 
 LANGUAGE = en_US.UTF-8
 SLOW_SYSTEM = 0

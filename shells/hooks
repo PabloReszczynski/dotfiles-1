@@ -1,7 +1,7 @@
 #!/bin/bash
 
 set_title() {
-#> if "SHELL" eq "zsh"
+#> if "SHELL_NAME" eq "zsh"
    print -Pn "\e]0;$TITLE_PROMPT $1\a"
 #> else
    echo -en "\033]2;$1\007"
@@ -20,7 +20,7 @@ chpwd() {
 # ==============================================================================
 
 # === emulate chpwd() on BASH ==================================================
-#> if "SHELL" eq "bash"
+#> if "SHELL_NAME" eq "bash"
 cd() {
    builtin CD_COMMAND "${@:-$HOME}" || return;
    chpwd
@@ -45,7 +45,7 @@ preexec() {
 	esac
 }
 
-#> if "SHELL" eq "bash"
+#> if "SHELL_NAME" eq "bash"
 #preexec_bash_trap()
 #{
 #   [[ -n "$COMP_LINE" ]] && return # do nothing if completing

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-#> if "SHELL" eq "zsh"
+#> if "SHELL_NAME" eq "zsh"
 autoload -U colors && colors;
 #> else
 declare -A color=(
