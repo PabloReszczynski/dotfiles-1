@@ -8,7 +8,10 @@ TMUX_VERSION = $(shell if which tmux 1>/dev/null; then \
 						tmux -V | sed 's/tmux //'; \
 					else \
 						echo 0.0; \
-					fi ))
+					fi )
+GEMPATH = $(shell if which gem >/dev/null 2>/dev/null; then \
+			 				gem env gempath; \
+						fi )
 
 COLORIZE_COPE = 1
 COLORIZE_GRC = 1

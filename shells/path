@@ -16,7 +16,7 @@ export PATH='/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/local/sbin:/usr/g
 PATH_PREPEND($HOME/bin)
 PATH_PREPEND($HOME/scripts)
 PATH_PREPEND(/usr/bin/core_perl:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/share/perl5/vendor_perl)
-PATH_PREPEND($HOME/.gem/ruby/2.4.0/bin)
+PATH_PREPEND(GEMPATH)
 PATH_APPEND(/opt/vc/bin)
 
 # vim: ft=sh
