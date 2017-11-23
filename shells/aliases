@@ -116,7 +116,7 @@ __colorize_cope() {
       if pushd "$COPE_PATH" &>/dev/null; then
          local BIN
          printf "%s\n" * | grep -v -E "^(COLORIZE_EXCLUDE|COPE_EXCLUDE)$" | while read -r BIN; do
-            [[ "$BIN" ]] || continue
+            [[ -n "$BIN" ]] || continue
             __colorize_alias "$BIN" "$COPE_PATH/$BIN $(getAliasArgs $BIN)"
          done
 
@@ -129,7 +129,7 @@ __colorize_grc() {
    if pushd /usr/share/grc &>/dev/null; then
       local BIN
       printf "%s\n" * | sed 's/^conf.//g' | grep -v -E "^(COLORIZE_EXCLUDE)$" | while read -r BIN; do
-         [[ "$BIN" ]] || continue
+         [[ -n "$BIN" ]] || continue
          __colorize_alias "$BIN" "grc $(getAlias $BIN)"
       done
 
@@ -143,7 +143,7 @@ __colorize_cw() {
    if pushd /usr/lib/cw &>/dev/null; then
       local BIN
       printf "%s\n" * | grep -v -F '@' | grep -v -E "^(COLORIZE_EXCLUDE|CW_EXCLUDE)$" | while read -r BIN; do
-         [[ "$BIN" ]] || continue
+         [[ -n "$BIN" ]] || continue
          __colorize_alias "$BIN" "/usr/lib/cw/$BIN $(getAliasArgs $BIN)"
       done
 
