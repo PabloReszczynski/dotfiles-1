@@ -241,7 +241,7 @@ $(_PP_FILES): .force
 		$(_FILEPP_INCLUDE) \
 		$(_FILEPP_DEFINES) \
 		-kc "$(FILEPP_PREFIX)" \
-		-ec "ENVIRONMENT_" -e \
+		-ec "ENVIRONMENT." -e \
 		$(FILEPP_FLAGS) "$@" -o "$(_PACKAGE_BUILD_DIR)/$(subst .pp,,$@)"
 
 #! check_dependencies
