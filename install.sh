@@ -11,8 +11,10 @@ declare -a FAILED=()
 
 if which gmake; then
 	MAKE=gmake
-else
+elif which make && make --version | grep -q 'GNU'; then
 	MAKE=make
+else
+	echo "Could not find GNU make"
 fi
 
 rm -rf "$LOG_DIR"
