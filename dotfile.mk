@@ -101,10 +101,6 @@ ifeq ($(OPERATING_SYSTEM), )
 OPERATING_SYSTEM := $(shell uname -o)
 endif
 
-ifeq ($(USERNAME), )
-USERNAME := $(USER)
-endif
-
 # Parameters end here, new variables below this line should be
 # prefixed with an underscore.
 # =============================================================================
@@ -123,7 +119,7 @@ _TEMP_DIR = $(BUILD_DIR)/$(_PACKAGE_NAME)-temp
 # =============================================================================
 
 # Additional variables that should be passed to preprocessor
-_ADDITIONAL_DEFINES = USERNAME HOST OPERATING_SYSTEM PRIVATE_DIR _TEMP_DIR \
+_ADDITIONAL_DEFINES = HOST OPERATING_SYSTEM PRIVATE_DIR _TEMP_DIR \
 								_PACKAGE_NAME _PACKAGE_PATH _PACKAGE_BUILD_DIR
 
 # Ignore these variables found in Makfile
@@ -244,6 +240,7 @@ $(_PP_FILES): .force
 		$(_FILEPP_INCLUDE) \
 		$(_FILEPP_DEFINES) \
 		-kc "$(FILEPP_PREFIX)" \
+		-ec "ENVIRONMENT_" -e \
 		$(FILEPP_FLAGS) "$@" -o "$(_PACKAGE_BUILD_DIR)/$(subst .pp,,$@)"
 
 #! check_dependencies

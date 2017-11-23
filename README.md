@@ -92,7 +92,7 @@ The following variables are also available inside the Makefile and are passed to
 | -------- | ----------- |
 | `OPERATING_SYSTEM` | Output of `uname -o`. |
 | `HOST` | Hostname, retrieved with `hostname`. |
-| `USERNAME` | The username, retrieved form the `$USER` environment variable. |
+| `ENVIRONMENT.*` | Enviroment variables are prefixed with `ENVIRONMENT.` |
 | `_PACKAGE_NAME` | This variable holds the name of the package, which is the directory name. |
 | `_PACKAGE_BUILD_DIR` | This variable points to the package build dir (which is `BUILD_DIR/_PACKAGE_NAME`). |
 | `_TEMP_DIR` | Use this directory if your package needs to deal with temporary files. |
