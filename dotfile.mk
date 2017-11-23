@@ -277,7 +277,7 @@ install: .pre_install .install .post_install
 	\
 	find . -mindepth 1 -type f | sed 's|^./||' | while read -r F; do \
 		if ! cmp -- \
-			"$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" >/dev/null; \
+			"$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F" &>/dev/null; \
 		then \
 			cp -v -p -- "$$F" "$(ROOT_DIR)/$(PREFIX_DIR)/$(FILE_PREFIX)$$F"; \
 		fi; \
