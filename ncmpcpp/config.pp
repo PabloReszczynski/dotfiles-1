@@ -484,7 +484,7 @@ color1 = white
 #
 color2 = THEME_COLOR
 #
-#> if "NCMPCPP_VERSION" < "0.9"
+#> if "NCMPCPP_VERSION" lt "0.9"
 # WARNING: Variable 'main_window_highlight_color' is deprecated and will be removed in 0.9 (set current_item_prefix = "$(default)$r" and current_item_suffix = "$/r$(end)" to preserve current behavior).
 main_window_highlight_color = default
 #> endif
