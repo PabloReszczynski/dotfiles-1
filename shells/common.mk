@@ -8,11 +8,11 @@ GEMPATH = $(shell if which gem >/dev/null 2>/dev/null; then \
 			 				gem env gempath; \
 				fi )
 
-PRESERVE_ROOT = $(shell if cp --help | grep -q -- --preserve-root; then \
+PRESERVE_ROOT = $(shell if cp --help 2>&1 | grep -q -- --preserve-root; then \
 					 		echo --preserve-root; \
 						fi)
 
-LS_COLOR = $(shell if ls --help | grep -q -- --color; then \
+LS_COLOR = $(shell if ls --help 2>&1 | grep -q -- --color; then \
 			  		echo --color=auto; \
 				else \
 					echo -G; \
