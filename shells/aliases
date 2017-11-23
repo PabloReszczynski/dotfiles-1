@@ -3,7 +3,7 @@
 # ALIASES_ARRAY
 # Macro for getting the accurate array for aliases
 #
-#> if "SHELL" eq "zsh"
+#> if "SHELL_NAME" eq "zsh"
 #>    define ALIASES_ARRAY aliases
 #> else
 #>    define ALIASES_ARRAY BASH_ALIASES
@@ -29,16 +29,11 @@ getAliasArgs() {
 }
 
 # ls ##########################################################################
-#> if "OPERATING_SYSTEM" eq "FreeBSD"
-#>    define LS_OPTS -G
-#> else
-#>    define LS_OPTS --color=auto
-#> endif
 alias \
-ls='ls LS_OPTS' \
- l='ls LS_OPTS -la' \
-ll='ls LS_OPTS -l' \
-la='ls LS_OPTS -A'
+ls='ls LS_COLOR' \
+ l='ls LS_COLOR -la' \
+ll='ls LS_COLOR -l' \
+la='ls LS_COLOR -A'
 
 # grep ########################################################################
 #> define GREP_OPTS --color=auto
@@ -62,11 +57,6 @@ alias -- \
 
 # "Core Utils" ################################################################
 # Be Verbose/Interactive/Safe #################################################
-#> if "OPERATING_SYSTEM" eq "FreeBSD"
-#>    define PRESERVE_ROOT
-#> else
-#>    define PRESERVE_ROOT --preserve-root
-#> endif
 alias cp='cp -v -p -i'
 alias rm='rm -v PRESERVE_ROOT'
 alias mv='mv -v -i'
@@ -80,14 +70,14 @@ alias ln='ln -v -i'
 alias xsel='xsel -l /dev/null'
 
 # vi aliases ##################################################################
-if which nvim &>/dev/null; then
+#> if "HAVE_NVIM" eq "1"
    alias    v='nvim'
    alias   vi='nvim'
    alias  vim='nvim'
-else
+#> else
    alias    v='vim'
    alias   vi='vim'
-fi
+#> endif
 
 # misc aliases ################################################################
 alias more='less'

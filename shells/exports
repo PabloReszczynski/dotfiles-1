@@ -40,11 +40,11 @@ export LESS='-QiMR'
 [[ -z "$DISPLAY" ]] && export DISPLAY=:0
 
 # Set default editor ##########################################################
-if which nvim &>/dev/null; then
-   export EDITOR=nvim
-else
-   export EDITOR=vim
-fi
+#> if "HAVE_NVIM" eq "1"
+export EDITOR=nvim
+#> else
+export EDITOR=vim
+#> endif
 
 # Yaourt: build PKGBUILDS on arm devices ######################################
 #export MAKEPKG=makepkg_pre.sh

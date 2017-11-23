@@ -4,14 +4,8 @@ LANGUAGE = en_US.UTF-8
 SLOW_SYSTEM = 0
 PROMPT_STYLE = MOSTLY_RIGHT
 USE_FORTUNE = 0
-TMUX_VERSION = $(shell if which tmux 1>/dev/null; then \
-						tmux -V | sed 's/tmux //'; \
-					else \
-						echo 0.0; \
-					fi )
-GEMPATH = $(shell if which gem >/dev/null 2>/dev/null; then \
-			 				gem env gempath; \
-						fi )
+
+include ../common.mk
 
 COLORIZE_COPE = 1
 COLORIZE_GRC = 1
