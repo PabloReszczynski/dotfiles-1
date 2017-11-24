@@ -14,7 +14,8 @@ if which gmake &>/dev/null; then
 elif which make &>/dev/null && make --version | grep -q 'GNU'; then
 	MAKE=make
 else
-	echo "Could not find GNU make"
+	echo "Could not find GNU make" >&2
+   exit 1;
 fi
 
 rm -rf "$LOG_DIR"
