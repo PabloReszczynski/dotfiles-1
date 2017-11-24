@@ -69,6 +69,9 @@ alias ln='ln -v -i'
 # Don't create the annoying ~/.xsel.log file ##################################
 alias xsel='xsel -l /dev/null'
 
+# Start tmux with 256 colors ##################################################
+alias tmux='tmux -2'
+
 # vi aliases ##################################################################
 #> if "HAVE_NVIM" eq "1"
 alias    v='nvim'
