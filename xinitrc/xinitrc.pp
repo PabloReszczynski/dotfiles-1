@@ -1,4 +1,8 @@
-#!/bin/SHELL_NAME
+#!/bin/bash
+
+if [ "x$BASH_VERSION" == x ]; then
+   exec /usr/bin/env bash $0
+fi
 
 #> define LOG_FILE "/dev/null"
 #> define LOG_FILE "/tmp/xinitrc.$USER.$$.WINDOW_MANAGER.log"
